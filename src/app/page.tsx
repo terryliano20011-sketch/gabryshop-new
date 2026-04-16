@@ -50,11 +50,17 @@ export default function Home() {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
             {CATEGORIES.map((cat, i) => (
-              <Link key={cat.id} href={`/categoria/${cat.slug}`} className="luxury-card rounded-2xl p-6 group animate-fade-up" style={{animationDelay:`${i*80}ms`}}>
-                <div className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl mb-4 transition-transform duration-300 group-hover:scale-110" style={{background:`${cat.color}15`}}>{cat.icon}</div>
-                <h3 className="text-white font-semibold mb-2" style={{fontFamily:'Playfair Display,serif'}}>{cat.name}</h3>
-                <p className="text-[#8888aa] text-xs leading-relaxed mb-3">{cat.description}</p>
-                <div className="text-xs font-medium flex items-center gap-1" style={{color:cat.color}}>{cat.product_count} prodotti <ArrowRight className="w-3 h-3" /></div>
+              <Link key={cat.id} href={`/categoria/${cat.slug}`} className="luxury-card rounded-2xl overflow-hidden group animate-fade-up" style={{animationDelay:`${i*80}ms`}}>
+                <div className="relative h-32 overflow-hidden" style={{background:'#1a1a24'}}>
+                  {cat.image && <img src={cat.image} alt={cat.name} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 opacity-60" />}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
+                  <div className="absolute bottom-3 left-3 text-2xl">{cat.icon}</div>
+                </div>
+                <div className="p-4">
+                  <h3 className="text-white font-semibold mb-1" style={{fontFamily:'Playfair Display,serif'}}>{cat.name}</h3>
+                  <p className="text-[#8888aa] text-xs leading-relaxed mb-2">{cat.description}</p>
+                  <div className="text-xs font-medium flex items-center gap-1" style={{color:cat.color}}>{cat.product_count} prodotti <ArrowRight className="w-3 h-3" /></div>
+                </div>
               </Link>
             ))}
           </div>

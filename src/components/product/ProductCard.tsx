@@ -1,7 +1,8 @@
-'use client'
+"use client"
 
 import Link from 'next/link'
-import { Star, Clock, Zap, Award, Pencil } from 'lucide-react'
+import Image from 'next/image'
+import { Star, Clock, Award, Zap, Pencil } from 'lucide-react'
 import { Product } from '@/types'
 import { useCart } from '@/hooks/useCart'
 
@@ -21,23 +22,32 @@ export default function ProductCard({ product, delay = 0 }: Props) {
   const { addItem, items } = useCart()
   const inCart = items.some(i => i.product.id === product.id)
   const badge = product.badge ? BADGE_CONFIG[product.badge] : null
+  const img = product.images?.[0]
 
   return (
     <div
       className="luxury-card rounded-2xl overflow-hidden group animate-fade-up"
       style={{ animationDelay: `${delay}ms` }}
     >
-      {/* Image / Preview area */}
-      <div className="relative h-48 bg-gradient-to-br from-[#1a1a24] to-[#111118] flex items-center justify-center overflow-hidden">
-        <span className="text-6xl opacity-30 group-hover:opacity-50 transition-opacity duration-300">
-          {product.category?.icon || '📦'}
-        </span>
-        <div className="absolute inset-0 bg-gradient-to-t from-[#111118]/60 to-transparent" />
-        
+      {/* Image */}
+      <div className="relative h-48 overflow-hidden" style={{background:'#1a1a24'}}>
+        {img ? (
+          <img
+            src={img}
+            alt={product.name}
+            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+          />
+        ) : (
+          <div className="w-full h-full flex items-center justify-center text-6xl opacity-30">
+            {product.category?.icon || '📦'}
+          </div>
+        )}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+
         {badge && (
           <div
-            className="absolute top-3 left-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold"
-            style={{ background: `${badge.color}20`, color: badge.color, border: `1px solid ${badge.color}40` }}
+            className="absolute top-3 left-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold backdrop-blur-sm"
+            style={{ background: `${badge.color}25`, color: badge.color, border: `1px solid ${badge.color}50` }}
           >
             <badge.icon className="w-3 h-3" />
             {badge.label}
@@ -45,7 +55,7 @@ export default function ProductCard({ product, delay = 0 }: Props) {
         )}
 
         {product.original_price && (
-          <div className="absolute top-3 right-3 bg-red-500/20 text-red-400 border border-red-500/30 text-xs px-2 py-1 rounded-full font-semibold">
+          <div className="absolute top-3 right-3 bg-red-500/80 backdrop-blur-sm text-white text-xs px-2 py-1 rounded-full font-bold">
             -{Math.round((1 - product.price / product.original_price) * 100)}%
           </div>
         )}
@@ -53,17 +63,13 @@ export default function ProductCard({ product, delay = 0 }: Props) {
 
       {/* Content */}
       <div className="p-5">
-        <div className="flex items-start justify-between gap-2 mb-2">
-          <h3 className="font-semibold text-white text-lg leading-tight line-clamp-1" style={{ fontFamily: 'Playfair Display, serif' }}>
-            {product.name}
-          </h3>
-        </div>
-
+        <h3 className="font-semibold text-white text-lg leading-tight mb-2" style={{fontFamily:'Playfair Display,serif'}}>
+          {product.name}
+        </h3>
         <p className="text-sm text-[#8888aa] line-clamp-2 mb-4 leading-relaxed">
           {product.description}
         </p>
 
-        {/* Meta */}
         <div className="flex items-center gap-3 mb-4">
           <div className="flex items-center gap-1">
             <Star className="w-3.5 h-3.5 text-[#c9a96e] fill-[#c9a96e]" />
@@ -75,15 +81,12 @@ export default function ProductCard({ product, delay = 0 }: Props) {
           </div>
         </div>
 
-        {/* Price & CTA */}
         <div className="flex items-center justify-between gap-3">
-          <div>
-            <div className="flex items-baseline gap-2">
-              <span className="text-2xl font-bold text-white">€{product.price}</span>
-              {product.original_price && (
-                <span className="text-sm text-[#8888aa] line-through">€{product.original_price}</span>
-              )}
-            </div>
+          <div className="flex items-baseline gap-2">
+            <span className="text-2xl font-bold text-white">€{product.price}</span>
+            {product.original_price && (
+              <span className="text-sm text-[#8888aa] line-through">€{product.original_price}</span>
+            )}
           </div>
           <div className="flex gap-2">
             <Link

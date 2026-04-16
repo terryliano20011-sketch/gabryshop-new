@@ -30,6 +30,7 @@ export interface Category {
   icon: string
   color: string
   product_count: number
+  image?: string
 }
 
 export interface Order {
@@ -77,17 +78,6 @@ export interface Download {
   download_count: number
   expires_at: string
   created_at: string
-}
-
-export interface Coupon {
-  id: string
-  code: string
-  discount_type: 'percentage' | 'fixed'
-  discount_value: number
-  max_uses: number
-  used_count: number
-  expires_at: string
-  is_active: boolean
 }
 
 export interface CartItem {
