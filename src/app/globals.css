@@ -1,11 +1,8 @@
+@import "tailwindcss";
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-:root {
-  --font-display: 'Playfair Display', Georgia, serif;
-  --font-body: 'DM Sans', system-ui, sans-serif;
+@theme {
+  --font-display: "Playfair Display", Georgia, serif;
+  --font-body: "DM Sans", system-ui, sans-serif;
   --color-bg: #0a0a0f;
   --color-surface: #111118;
   --color-surface-2: #1a1a24;
@@ -21,15 +18,15 @@ html { scroll-behavior: smooth; }
 
 body {
   font-family: var(--font-body);
-  background-color: var(--color-bg);
-  color: var(--color-text);
+  background-color: #0a0a0f;
+  color: #f0f0f8;
   -webkit-font-smoothing: antialiased;
 }
 
 h1, h2, h3, h4, h5, h6 { font-family: var(--font-display); }
 
 ::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: var(--color-surface); }
+::-webkit-scrollbar-track { background: #111118; }
 ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
 ::selection { background: rgba(201,169,110,0.3); }
 
@@ -40,10 +37,6 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-display); }
 @keyframes float {
   0%,100% { transform: translateY(0); }
   50% { transform: translateY(-10px); }
-}
-@keyframes shimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
 }
 
 .animate-fade-up { animation: fadeUp 0.6s ease both; }
@@ -63,8 +56,8 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-display); }
 }
 
 .luxury-card {
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
+  background: #111118;
+  border: 1px solid rgba(255,255,255,0.08);
   transition: all 0.3s ease;
 }
 
@@ -79,6 +72,7 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-display); }
   color: #0a0a0f;
   font-weight: 600;
   transition: all 0.3s ease;
+  cursor: pointer;
 }
 
 .btn-gold:hover {
@@ -89,14 +83,14 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-display); }
 
 .divider-gold {
   height: 1px;
-  background: linear-gradient(to right, transparent, var(--color-accent), transparent);
+  background: linear-gradient(to right, transparent, #c9a96e, transparent);
   opacity: 0.4;
 }
 
 .input-luxury {
-  background: var(--color-surface-2);
-  border: 1px solid var(--color-border);
-  color: var(--color-text);
+  background: #1a1a24;
+  border: 1px solid rgba(255,255,255,0.08);
+  color: #f0f0f8;
   padding: 12px 16px;
   border-radius: 8px;
   font-family: var(--font-body);
@@ -109,4 +103,4 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-display); }
   border-color: rgba(201,169,110,0.5);
 }
 
-.input-luxury::placeholder { color: var(--color-muted); }
+.input-luxury::placeholder { color: #8888aa; }
