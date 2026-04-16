@@ -14,6 +14,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
   const product = PRODUCTS.find(p => p.slug === slug)
   if (!product) notFound()
   const category = CATEGORIES.find(c => c.id === product.category_id)
+  const img = product.images?.[0]
 
   return (
     <div className="pt-28 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
@@ -22,15 +23,27 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
       </Link>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-        {/* Left: visual */}
+        {/* Left: immagine */}
         <div>
-          <div className="luxury-card rounded-3xl h-80 flex items-center justify-center text-8xl mb-6" style={{background:`${category?.color}08`}}>
-            {category?.icon}
+          <div className="luxury-card rounded-3xl overflow-hidden h-80 mb-6 relative" style={{background:'#1a1a24'}}>
+            {img ? (
+              <img
+                src={img}
+                alt={product.name}
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              <div className="w-full h-full flex items-center justify-center text-8xl opacity-30">
+                {category?.icon}
+              </div>
+            )}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
           </div>
-          {/* Cosa è incluso */}
+
+          {/* Cosa e incluso */}
           <div className="luxury-card rounded-2xl p-6">
             <h3 className="text-white font-semibold mb-4 flex items-center gap-2" style={{fontFamily:'Playfair Display,serif'}}>
-              <CheckCircle className="w-5 h-5 text-[#c9a96e]" /> Cosa è incluso
+              <CheckCircle className="w-5 h-5 text-[#c9a96e]" /> Cosa e incluso
             </h3>
             <ul className="space-y-3">
               {product.includes.map((item, i) => (
@@ -45,9 +58,9 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
 
         {/* Right: info */}
         <div>
-          <div className="flex items-center gap-3 mb-3">
+          <div className="flex items-center gap-3 mb-3 flex-wrap">
             {product.badge === 'bestseller' && (
-              <span className="px-3 py-1 rounded-full text-xs font-semibold bg-[#c9a96e]/15 text-[#c9a96e] border border-[#c9a96e]/30">⭐ Più Venduto</span>
+              <span className="px-3 py-1 rounded-full text-xs font-semibold bg-[#c9a96e]/15 text-[#c9a96e] border border-[#c9a96e]/30">⭐ Piu Venduto</span>
             )}
             {product.badge === '24h' && (
               <span className="px-3 py-1 rounded-full text-xs font-semibold bg-[#ec4899]/15 text-[#ec4899] border border-[#ec4899]/30">⚡ Consegna 24h</span>
@@ -70,19 +83,19 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
 
           <p className="text-[#8888aa] leading-relaxed mb-8">{product.long_description}</p>
 
-          <div className="flex items-center gap-3 mb-8 text-sm text-[#8888aa]">
-            <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5">
+          <div className="flex items-center gap-3 mb-8 flex-wrap">
+            <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5 text-sm text-[#8888aa]">
               <Clock className="w-4 h-4 text-[#c9a96e]" /> {product.delivery_time}
             </div>
-            <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5">
+            <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5 text-sm text-[#8888aa]">
               <Download className="w-4 h-4 text-[#c9a96e]" /> Digitale
             </div>
-            <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5">
+            <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5 text-sm text-[#8888aa]">
               <Shield className="w-4 h-4 text-[#c9a96e]" /> Garantito
             </div>
           </div>
 
-          {/* Price */}
+          {/* Prezzo e CTA */}
           <div className="luxury-card rounded-2xl p-6 mb-6">
             <div className="flex items-baseline gap-3 mb-4">
               <span className="text-4xl font-bold text-white">€{product.price}</span>
@@ -95,9 +108,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                 </span>
               )}
             </div>
-
-            {product.is_customizable && <BriefingForm product={product} />}
-            {!product.is_customizable && <AddToCartButton product={product} />}
+            {product.is_customizable ? <BriefingForm product={product} /> : <AddToCartButton product={product} />}
           </div>
 
           <p className="text-xs text-[#8888aa] flex items-center gap-2">
