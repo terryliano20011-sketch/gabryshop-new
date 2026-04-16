@@ -1,0 +1,17 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": ".next",
+  "framework": "nextjs",
+  "regions": ["fra1"],
+  "env": {
+    "NEXT_PUBLIC_SUPABASE_URL": "@supabase_url",
+    "NEXT_PUBLIC_SUPABASE_ANON_KEY": "@supabase_anon_key",
+    "SUPABASE_SERVICE_ROLE_KEY": "@supabase_service_role_key",
+    "NEXT_PUBLIC_PAYPAL_CLIENT_ID": "@paypal_client_id",
+    "PAYPAL_CLIENT_SECRET": "@paypal_client_secret",
+    "RESEND_API_KEY": "@resend_api_key",
+    "RESEND_FROM_EMAIL": "@resend_from_email",
+    "NEXT_PUBLIC_SITE_URL": "@site_url",
+    "NEXT_PUBLIC_WHATSAPP_NUMBER": "@whatsapp_number"
+  }
+}
