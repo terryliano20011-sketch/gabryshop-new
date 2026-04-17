@@ -9,193 +9,189 @@ const STEPS = ['Riepilogo', 'I tuoi dati', 'Pagamento']
 export default function CheckoutPage() {
   const { items, removeItem, total } = useCart()
   const [step, setStep] = useState(0)
-  const [form, setForm] = useState({ name: '', email: '', vat: '', coupon: '' })
+  const [form, setForm] = useState({ name:'', email:'', vat:'', coupon:'' })
   const [discount, setDiscount] = useState(0)
-  const [couponApplied, setCouponApplied] = useState(false)
+  const [couponOk, setCouponOk] = useState(false)
   const [loading, setLoading] = useState(false)
-
-  const finalTotal = Math.max(0, total - discount)
+  const final = Math.max(0, total - discount)
 
   const applyCoupon = () => {
-    if (form.coupon.toUpperCase() === 'GABRY10') {
-      setDiscount(total * 0.1)
-      setCouponApplied(true)
-    } else {
-      alert('Coupon non valido')
-    }
+    if (form.coupon.toUpperCase() === 'GABRY10') { setDiscount(total * 0.1); setCouponOk(true) }
+    else alert('Coupon non valido')
   }
 
   const handlePayPal = async () => {
     setLoading(true)
     try {
-      const res = await fetch('/api/checkout/create-order', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ items, form, total: finalTotal }),
-      })
+      const res = await fetch('/api/checkout/create-order', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ items, form, total: final }) })
       const data = await res.json()
       if (data.approveUrl) window.location.href = data.approveUrl
-      else alert('Errore creazione ordine')
-    } catch {
-      alert('Errore nel pagamento. Riprova.')
-    } finally {
-      setLoading(false)
-    }
+      else alert(data.error || 'Errore nel pagamento')
+    } catch { alert('Errore nel pagamento. Riprova.') }
+    finally { setLoading(false) }
   }
 
   if (items.length === 0) return (
-    <div className="pt-28 pb-20 flex flex-col items-center justify-center min-h-[60vh] px-4 text-center">
-      <ShoppingCart className="w-16 h-16 text-[#8888aa] mb-4" />
-      <h2 className="text-2xl font-bold text-white mb-2" style={{fontFamily:'Playfair Display,serif'}}>Carrello vuoto</h2>
-      <p className="text-[#8888aa] mb-8">Non hai ancora aggiunto prodotti.</p>
-      <Link href="/" className="btn-gold px-6 py-3 rounded-xl font-semibold">Scopri i prodotti</Link>
+    <div style={{minHeight:'100vh',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',gap:'16px',background:'#05050a',paddingTop:'80px'}}>
+      <ShoppingCart size={48} style={{color:'rgba(120,120,155,0.4)'}}/>
+      <h2 style={{fontFamily:'Cormorant Garamond,serif',color:'white',fontSize:'2rem',fontWeight:600}}>Carrello vuoto</h2>
+      <p style={{color:'rgba(120,120,155,0.7)',fontFamily:'Outfit,system-ui,sans-serif',fontSize:'15px'}}>Non hai ancora aggiunto prodotti.</p>
+      <Link href="/" className="g-btn g-btn-gold" style={{marginTop:'8px',borderRadius:'12px'}}>Scopri i prodotti</Link>
     </div>
   )
 
   return (
-    <div className="pt-28 pb-20 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
-      <Link href="/" className="inline-flex items-center gap-2 text-sm text-[#8888aa] hover:text-white mb-8 transition-colors">
-        <ArrowLeft className="w-4 h-4" /> Continua lo shopping
-      </Link>
+    <div style={{minHeight:'100vh',background:'#05050a',paddingTop:'100px',paddingBottom:'80px'}}>
+      <div style={{maxWidth:'1100px',margin:'0 auto',padding:'0 5%'}}>
 
-      <h1 className="text-3xl font-bold text-white mb-8" style={{fontFamily:'Playfair Display,serif'}}>Checkout</h1>
+        <Link href="/" style={{display:'inline-flex',alignItems:'center',gap:'8px',color:'rgba(120,120,155,0.7)',textDecoration:'none',fontSize:'13px',fontFamily:'Outfit,system-ui,sans-serif',marginBottom:'40px',transition:'color 0.2s'}}>
+          <ArrowLeft size={15}/> Continua lo shopping
+        </Link>
 
-      {/* Stepper */}
-      <div className="flex items-center gap-2 mb-10 flex-wrap">
-        {STEPS.map((s, i) => (
-          <div key={s} className="flex items-center gap-2">
-            <div className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all ${i === step ? 'bg-[#c9a96e] text-[#0a0a0f]' : i < step ? 'bg-[#c9a96e]/20 text-[#c9a96e]' : 'bg-white/5 text-[#8888aa]'}`}>
-              <span>{i < step ? '✓' : i + 1}</span> {s}
+        <h1 style={{fontFamily:'Cormorant Garamond,serif',color:'white',fontSize:'3rem',fontWeight:600,marginBottom:'40px',lineHeight:1}}>Checkout</h1>
+
+        {/* Stepper */}
+        <div style={{display:'flex',alignItems:'center',gap:'8px',marginBottom:'48px'}}>
+          {STEPS.map((s,i) => (
+            <div key={s} style={{display:'flex',alignItems:'center',gap:'8px'}}>
+              <div style={{display:'flex',alignItems:'center',gap:'8px',padding:'8px 18px',borderRadius:'100px',fontFamily:'Outfit,system-ui,sans-serif',fontSize:'13px',fontWeight:600,transition:'all 0.3s',background:i===step?'#c9a96e':i<step?'rgba(201,169,110,0.12)':'rgba(255,255,255,0.04)',color:i===step?'#08060a':i<step?'#c9a96e':'rgba(120,120,155,0.6)',border:i<step?'1px solid rgba(201,169,110,0.25)':'1px solid transparent'}}>
+                <span>{i<step?'✓':i+1}</span> {s}
+              </div>
+              {i < STEPS.length-1 && <div style={{width:'24px',height:'1px',background:'rgba(255,255,255,0.07)'}}/>}
             </div>
-            {i < STEPS.length - 1 && <div className="w-6 h-px bg-white/10" />}
-          </div>
-        ))}
-      </div>
-
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <div className="lg:col-span-2">
-
-          {step === 0 && (
-            <div className="luxury-card rounded-2xl p-6">
-              <h2 className="text-xl font-bold text-white mb-6 flex items-center gap-2" style={{fontFamily:'Playfair Display,serif'}}>
-                <ShoppingCart className="w-5 h-5 text-[#c9a96e]" /> Il tuo ordine
-              </h2>
-              <div className="space-y-4">
-                {items.map(item => (
-                  <div key={item.product.id} className="flex items-center gap-4 p-4 bg-white/3 rounded-xl">
-                    <div className="w-12 h-12 rounded-lg bg-white/5 flex items-center justify-center text-2xl shrink-0">{item.product.category?.icon || '📦'}</div>
-                    <div className="flex-1 min-w-0">
-                      <div className="text-white font-medium text-sm truncate">{item.product.name}</div>
-                      <div className="text-[#8888aa] text-xs">{item.product.delivery_time}</div>
-                      {item.briefing && Object.keys(item.briefing).length > 0 && (
-                        <div className="text-xs text-[#c9a96e] mt-1">✏️ Personalizzato</div>
-                      )}
-                    </div>
-                    <div className="text-white font-bold shrink-0">€{item.product.price}</div>
-                    <button onClick={() => removeItem(item.product.id)} className="text-[#8888aa] hover:text-red-400 transition-colors p-1">
-                      <Trash2 className="w-4 h-4" />
-                    </button>
-                  </div>
-                ))}
-              </div>
-              <div className="mt-6 flex gap-2">
-                <div className="flex-1 relative">
-                  <Tag className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#8888aa]" />
-                  <input className="input-luxury pl-9 text-sm" placeholder="Codice coupon (prova: GABRY10)" value={form.coupon} onChange={e => setForm(f => ({...f, coupon: e.target.value}))} disabled={couponApplied} />
-                </div>
-                <button onClick={applyCoupon} disabled={couponApplied} className="px-4 py-2 rounded-lg border border-[#c9a96e]/40 text-[#c9a96e] text-sm hover:bg-[#c9a96e]/10 transition-colors disabled:opacity-50">
-                  {couponApplied ? '✓ Applicato' : 'Applica'}
-                </button>
-              </div>
-              <button onClick={() => setStep(1)} className="btn-gold w-full py-4 rounded-xl font-semibold mt-6 flex items-center justify-center gap-2">
-                Continua <ArrowRight className="w-5 h-5" />
-              </button>
-            </div>
-          )}
-
-          {step === 1 && (
-            <div className="luxury-card rounded-2xl p-6">
-              <h2 className="text-xl font-bold text-white mb-6 flex items-center gap-2" style={{fontFamily:'Playfair Display,serif'}}>
-                <User className="w-5 h-5 text-[#c9a96e]" /> I tuoi dati
-              </h2>
-              <div className="space-y-4">
-                <div>
-                  <label className="text-sm text-[#8888aa] mb-1 block">Nome e cognome *</label>
-                  <input className="input-luxury" placeholder="Mario Rossi" value={form.name} onChange={e => setForm(f => ({...f, name: e.target.value}))} />
-                </div>
-                <div>
-                  <label className="text-sm text-[#8888aa] mb-1 block">Email *</label>
-                  <input className="input-luxury" type="email" placeholder="mario@email.it" value={form.email} onChange={e => setForm(f => ({...f, email: e.target.value}))} />
-                </div>
-                <div>
-                  <label className="text-sm text-[#8888aa] mb-1 block">Partita IVA <span className="text-xs opacity-60">(opzionale)</span></label>
-                  <input className="input-luxury" placeholder="IT12345678901" value={form.vat} onChange={e => setForm(f => ({...f, vat: e.target.value}))} />
-                </div>
-              </div>
-              <div className="flex gap-3 mt-6">
-                <button onClick={() => setStep(0)} className="px-6 py-4 rounded-xl border border-white/10 text-[#8888aa] hover:text-white hover:border-white/20 transition-all flex items-center gap-2">
-                  <ArrowLeft className="w-4 h-4" /> Indietro
-                </button>
-                <button onClick={() => setStep(2)} disabled={!form.name || !form.email} className="btn-gold flex-1 py-4 rounded-xl font-semibold flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed">
-                  Continua <ArrowRight className="w-5 h-5" />
-                </button>
-              </div>
-            </div>
-          )}
-
-          {step === 2 && (
-            <div className="luxury-card rounded-2xl p-6">
-              <h2 className="text-xl font-bold text-white mb-6 flex items-center gap-2" style={{fontFamily:'Playfair Display,serif'}}>
-                <CreditCard className="w-5 h-5 text-[#c9a96e]" /> Pagamento
-              </h2>
-              <div className="bg-[#003087]/20 border border-[#003087]/40 rounded-xl p-4 mb-6 flex items-center gap-3">
-                <span className="text-2xl">🅿️</span>
-                <div>
-                  <div className="text-white text-sm font-medium">PayPal</div>
-                  <div className="text-[#8888aa] text-xs">Carte di credito, debito e saldo PayPal. 100% sicuro.</div>
-                </div>
-              </div>
-              <div className="text-sm text-[#8888aa] mb-6 space-y-1 bg-white/3 rounded-xl p-4">
-                <div>Ordine per: <span className="text-white">{form.name}</span></div>
-                <div>Email conferma: <span className="text-white">{form.email}</span></div>
-                <div className="pt-2 border-t border-white/5 mt-2">Totale: <span className="text-[#c9a96e] font-bold text-xl ml-2">€{finalTotal.toFixed(2)}</span></div>
-              </div>
-              <div className="flex gap-3">
-                <button onClick={() => setStep(1)} className="px-6 py-4 rounded-xl border border-white/10 text-[#8888aa] hover:text-white hover:border-white/20 transition-all flex items-center gap-2">
-                  <ArrowLeft className="w-4 h-4" /> Indietro
-                </button>
-                <button onClick={handlePayPal} disabled={loading} className="btn-gold flex-1 py-4 rounded-xl font-semibold flex items-center justify-center gap-2 disabled:opacity-70">
-                  {loading ? '⏳ Caricamento...' : `🅿️ Paga €${finalTotal.toFixed(2)} con PayPal`}
-                </button>
-              </div>
-              <p className="text-xs text-[#8888aa] mt-4 text-center">🔒 Transazione protetta SSL · Rimborso garantito 7 giorni</p>
-            </div>
-          )}
+          ))}
         </div>
 
-        {/* Sidebar */}
-        <div className="luxury-card rounded-2xl p-6 h-fit">
-          <h3 className="text-white font-semibold mb-4" style={{fontFamily:'Playfair Display,serif'}}>Riepilogo</h3>
-          <div className="space-y-2 text-sm mb-4">
-            {items.map(item => (
-              <div key={item.product.id} className="flex justify-between text-[#8888aa]">
-                <span className="truncate mr-2">{item.product.name}</span>
-                <span className="text-white shrink-0">€{item.product.price}</span>
+        <div style={{display:'grid',gridTemplateColumns:'1fr 340px',gap:'24px',alignItems:'start'}}>
+          <div>
+            {/* Step 0 */}
+            {step === 0 && (
+              <div className="g-card" style={{padding:'32px'}}>
+                <h2 style={{fontFamily:'Cormorant Garamond,serif',color:'white',fontSize:'1.6rem',fontWeight:600,marginBottom:'24px',display:'flex',alignItems:'center',gap:'10px'}}>
+                  <ShoppingCart size={20} style={{color:'#c9a96e'}}/> Il tuo ordine
+                </h2>
+                <div style={{display:'flex',flexDirection:'column',gap:'12px',marginBottom:'28px'}}>
+                  {items.map(item=>(
+                    <div key={item.product.id} style={{display:'flex',alignItems:'center',gap:'14px',padding:'16px',background:'rgba(255,255,255,0.025)',borderRadius:'14px',border:'1px solid rgba(255,255,255,0.05)'}}>
+                      <div style={{width:'44px',height:'44px',borderRadius:'10px',background:'rgba(255,255,255,0.05)',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'20px',flexShrink:0}}>{item.product.category?.icon||'📦'}</div>
+                      <div style={{flex:1,minWidth:0}}>
+                        <div style={{color:'white',fontFamily:'Outfit,system-ui,sans-serif',fontSize:'14px',fontWeight:600,marginBottom:'3px',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{item.product.name}</div>
+                        <div style={{color:'rgba(120,120,155,0.65)',fontFamily:'Outfit,system-ui,sans-serif',fontSize:'12px'}}>{item.product.delivery_time}</div>
+                        {item.briefing && Object.keys(item.briefing).length>0 && <div style={{color:'#c9a96e',fontSize:'11px',marginTop:'3px'}}>✏️ Personalizzato</div>}
+                      </div>
+                      <div style={{fontFamily:'Cormorant Garamond,serif',color:'white',fontSize:'1.4rem',fontWeight:600,flexShrink:0}}>€{item.product.price}</div>
+                      <button onClick={()=>removeItem(item.product.id)} style={{background:'transparent',border:'none',cursor:'pointer',padding:'6px',borderRadius:'8px',color:'rgba(120,120,155,0.5)',transition:'color 0.2s',flexShrink:0}}>
+                        <Trash2 size={15}/>
+                      </button>
+                    </div>
+                  ))}
+                </div>
+                {/* Coupon */}
+                <div style={{display:'flex',gap:'10px',marginBottom:'24px'}}>
+                  <div style={{flex:1,position:'relative'}}>
+                    <Tag size={15} style={{position:'absolute',left:'14px',top:'50%',transform:'translateY(-50%)',color:'rgba(120,120,155,0.5)'}}/>
+                    <input className="g-input" placeholder="Codice coupon (prova: GABRY10)" style={{paddingLeft:'40px'}} value={form.coupon} onChange={e=>setForm(f=>({...f,coupon:e.target.value}))} disabled={couponOk}/>
+                  </div>
+                  <button onClick={applyCoupon} disabled={couponOk} style={{padding:'12px 20px',borderRadius:'12px',border:'1px solid rgba(201,169,110,0.3)',color:'#c9a96e',background:'rgba(201,169,110,0.06)',fontFamily:'Outfit,system-ui,sans-serif',fontSize:'13px',fontWeight:600,cursor:'pointer',whiteSpace:'nowrap',opacity:couponOk?0.5:1}}>
+                    {couponOk?'✓ Applicato':'Applica'}
+                  </button>
+                </div>
+                <button onClick={()=>setStep(1)} className="g-btn g-btn-gold" style={{width:'100%',justifyContent:'center',borderRadius:'14px',padding:'16px',fontSize:'15px'}}>
+                  Continua <ArrowRight size={17}/>
+                </button>
               </div>
-            ))}
+            )}
+
+            {/* Step 1 */}
+            {step === 1 && (
+              <div className="g-card" style={{padding:'32px'}}>
+                <h2 style={{fontFamily:'Cormorant Garamond,serif',color:'white',fontSize:'1.6rem',fontWeight:600,marginBottom:'24px',display:'flex',alignItems:'center',gap:'10px'}}>
+                  <User size={20} style={{color:'#c9a96e'}}/> I tuoi dati
+                </h2>
+                <div style={{display:'flex',flexDirection:'column',gap:'16px',marginBottom:'28px'}}>
+                  <div>
+                    <label style={{fontFamily:'Outfit,system-ui,sans-serif',fontSize:'12px',color:'rgba(120,120,155,0.7)',letterSpacing:'0.05em',display:'block',marginBottom:'8px'}}>NOME E COGNOME *</label>
+                    <input className="g-input" placeholder="Mario Rossi" value={form.name} onChange={e=>setForm(f=>({...f,name:e.target.value}))}/>
+                  </div>
+                  <div>
+                    <label style={{fontFamily:'Outfit,system-ui,sans-serif',fontSize:'12px',color:'rgba(120,120,155,0.7)',letterSpacing:'0.05em',display:'block',marginBottom:'8px'}}>EMAIL *</label>
+                    <input className="g-input" type="email" placeholder="mario@email.it" value={form.email} onChange={e=>setForm(f=>({...f,email:e.target.value}))}/>
+                  </div>
+                  <div>
+                    <label style={{fontFamily:'Outfit,system-ui,sans-serif',fontSize:'12px',color:'rgba(120,120,155,0.7)',letterSpacing:'0.05em',display:'block',marginBottom:'8px'}}>PARTITA IVA <span style={{fontWeight:300,letterSpacing:0}}>(opzionale)</span></label>
+                    <input className="g-input" placeholder="IT12345678901" value={form.vat} onChange={e=>setForm(f=>({...f,vat:e.target.value}))}/>
+                  </div>
+                </div>
+                <div style={{display:'flex',gap:'12px'}}>
+                  <button onClick={()=>setStep(0)} className="g-btn g-btn-ghost" style={{borderRadius:'14px',padding:'14px 24px'}}>
+                    <ArrowLeft size={16}/> Indietro
+                  </button>
+                  <button onClick={()=>setStep(2)} disabled={!form.name||!form.email} className="g-btn g-btn-gold" style={{flex:1,justifyContent:'center',borderRadius:'14px',padding:'16px',fontSize:'15px',opacity:(!form.name||!form.email)?0.5:1}}>
+                    Continua <ArrowRight size={17}/>
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {/* Step 2 */}
+            {step === 2 && (
+              <div className="g-card" style={{padding:'32px'}}>
+                <h2 style={{fontFamily:'Cormorant Garamond,serif',color:'white',fontSize:'1.6rem',fontWeight:600,marginBottom:'24px',display:'flex',alignItems:'center',gap:'10px'}}>
+                  <CreditCard size={20} style={{color:'#c9a96e'}}/> Pagamento
+                </h2>
+                <div style={{display:'flex',alignItems:'center',gap:'16px',padding:'20px',background:'rgba(0,48,135,0.12)',border:'1px solid rgba(0,48,135,0.25)',borderRadius:'14px',marginBottom:'24px'}}>
+                  <div style={{fontSize:'32px'}}>🅿️</div>
+                  <div>
+                    <div style={{color:'white',fontFamily:'Outfit,system-ui,sans-serif',fontSize:'14px',fontWeight:600,marginBottom:'3px'}}>PayPal</div>
+                    <div style={{color:'rgba(120,120,155,0.7)',fontFamily:'Outfit,system-ui,sans-serif',fontSize:'12px'}}>Carte di credito, debito e saldo PayPal. 100% sicuro.</div>
+                  </div>
+                </div>
+                <div style={{padding:'20px',background:'rgba(255,255,255,0.025)',borderRadius:'14px',marginBottom:'24px',fontFamily:'Outfit,system-ui,sans-serif',fontSize:'14px'}}>
+                  <div style={{color:'rgba(120,120,155,0.7)',marginBottom:'6px'}}>Ordine per: <span style={{color:'white',fontWeight:600}}>{form.name}</span></div>
+                  <div style={{color:'rgba(120,120,155,0.7)',marginBottom:'16px'}}>Email: <span style={{color:'white'}}>{form.email}</span></div>
+                  <div style={{height:'1px',background:'rgba(255,255,255,0.05)',marginBottom:'16px'}}/>
+                  <div style={{display:'flex',justifyContent:'space-between',alignItems:'baseline'}}>
+                    <span style={{color:'rgba(120,120,155,0.7)'}}>Totale da pagare</span>
+                    <span style={{fontFamily:'Cormorant Garamond,serif',fontSize:'2rem',fontWeight:600,color:'white'}}>€{final.toFixed(2)}</span>
+                  </div>
+                </div>
+                <div style={{display:'flex',gap:'12px'}}>
+                  <button onClick={()=>setStep(1)} className="g-btn g-btn-ghost" style={{borderRadius:'14px',padding:'14px 24px'}}>
+                    <ArrowLeft size={16}/> Indietro
+                  </button>
+                  <button onClick={handlePayPal} disabled={loading} className="g-btn g-btn-gold" style={{flex:1,justifyContent:'center',borderRadius:'14px',padding:'16px',fontSize:'15px',opacity:loading?0.7:1}}>
+                    {loading ? '⏳ Caricamento...' : `🅿️ Paga €${final.toFixed(2)} con PayPal`}
+                  </button>
+                </div>
+                <p style={{textAlign:'center',fontFamily:'Outfit,system-ui,sans-serif',fontSize:'12px',color:'rgba(90,90,120,0.7)',marginTop:'16px'}}>🔒 Transazione SSL protetta · Rimborso garantito 7 giorni</p>
+              </div>
+            )}
           </div>
-          <div className="divider-gold mb-4" />
-          {discount > 0 && (
-            <div className="flex justify-between text-sm mb-2">
-              <span className="text-[#8888aa]">Sconto coupon</span>
-              <span className="text-[#22c55e]">-€{discount.toFixed(2)}</span>
+
+          {/* Sidebar */}
+          <div className="g-card" style={{padding:'24px',position:'sticky',top:'100px'}}>
+            <h3 style={{fontFamily:'Cormorant Garamond,serif',color:'white',fontSize:'1.3rem',fontWeight:600,marginBottom:'20px'}}>Riepilogo</h3>
+            <div style={{display:'flex',flexDirection:'column',gap:'10px',marginBottom:'20px'}}>
+              {items.map(item=>(
+                <div key={item.product.id} style={{display:'flex',justifyContent:'space-between',gap:'12px'}}>
+                  <span style={{color:'rgba(120,120,155,0.75)',fontFamily:'Outfit,system-ui,sans-serif',fontSize:'13px',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{item.product.name}</span>
+                  <span style={{color:'white',fontFamily:'Outfit,system-ui,sans-serif',fontSize:'13px',fontWeight:600,flexShrink:0}}>€{item.product.price}</span>
+                </div>
+              ))}
             </div>
-          )}
-          <div className="flex justify-between font-bold">
-            <span className="text-white">Totale</span>
-            <span className="text-[#c9a96e] text-xl">€{finalTotal.toFixed(2)}</span>
+            <div style={{height:'1px',background:'rgba(255,255,255,0.05)',marginBottom:'16px'}}/>
+            {discount > 0 && (
+              <div style={{display:'flex',justifyContent:'space-between',marginBottom:'10px'}}>
+                <span style={{color:'rgba(120,120,155,0.7)',fontFamily:'Outfit,system-ui,sans-serif',fontSize:'13px'}}>Sconto coupon</span>
+                <span style={{color:'#4ade80',fontFamily:'Outfit,system-ui,sans-serif',fontSize:'13px',fontWeight:600}}>-€{discount.toFixed(2)}</span>
+              </div>
+            )}
+            <div style={{display:'flex',justifyContent:'space-between',alignItems:'baseline'}}>
+              <span style={{color:'white',fontFamily:'Outfit,system-ui,sans-serif',fontSize:'14px',fontWeight:600}}>Totale</span>
+              <span style={{fontFamily:'Cormorant Garamond,serif',fontSize:'1.8rem',fontWeight:600,color:'#c9a96e'}}>€{final.toFixed(2)}</span>
+            </div>
+            <div style={{color:'rgba(90,90,120,0.65)',fontFamily:'Outfit,system-ui,sans-serif',fontSize:'11px',marginTop:'6px'}}>IVA inclusa · Tutto digitale</div>
           </div>
-          <div className="text-xs text-[#8888aa] mt-2">IVA inclusa · Tutto digitale</div>
         </div>
       </div>
     </div>
