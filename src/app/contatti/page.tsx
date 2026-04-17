@@ -28,7 +28,7 @@ export default function ContattiPage() {
           <div style={{display:'flex',flexDirection:'column',gap:'12px'}}>
             {[
               {icon:<MessageCircle size={18}/>, label:'WhatsApp', value:'Risposta entro 1 ora', href:`https://wa.me/393401234567`, color:'#25D366'},
-              {icon:<Mail size={18}/>,          label:'Email',    value:'info@gabryshop.it',  href:'mailto:info@gabryshop.it', color:'#c9a96e'},
+              {icon:<Mail size={18}/>,          label:'Email',    value:'terryliano20011@gmail.com',  href:'mailto:terryliano20011@gmail.com', color:'#c9a96e'},
               {icon:<Clock size={18}/>,         label:'Orari',   value:'Lun–Ven 9:00–18:00', href:'#', color:'#7c6af0'},
             ].map(item => (
               <a key={item.label} href={item.href} target="_blank" rel="noopener noreferrer"

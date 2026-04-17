@@ -19,8 +19,8 @@ export default function Footer() {
               Servizi e prodotti digitali professionali per privati e aziende. Qualità garantita, consegna rapida.
             </p>
             <div style={{display:'flex',flexDirection:'column',gap:'10px'}}>
-              <a href="mailto:info@gabryshop.it" style={{display:'flex',alignItems:'center',gap:'8px',color:'rgba(120,120,150,0.7)',fontSize:'13px',textDecoration:'none',fontFamily:'DM Sans,system-ui,sans-serif'}}>
-                <Mail size={14} style={{color:'#c9a96e'}} /> info@gabryshop.it
+              <a href="mailto:terryliano20011@gmail.com" style={{display:'flex',alignItems:'center',gap:'8px',color:'rgba(120,120,150,0.7)',fontSize:'13px',textDecoration:'none',fontFamily:'DM Sans,system-ui,sans-serif'}}>
+                <Mail size={14} style={{color:'#c9a96e'}} /> terryliano20011@gmail.com
               </a>
               <div style={{display:'flex',alignItems:'center',gap:'8px',color:'rgba(120,120,150,0.7)',fontSize:'13px',fontFamily:'DM Sans,system-ui,sans-serif'}}>
                 <MapPin size={14} style={{color:'#c9a96e'}} /> Italia 🇮🇹
