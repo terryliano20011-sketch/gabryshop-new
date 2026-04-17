@@ -25,7 +25,7 @@ export default function ChiSiamoPage() {
           </div>
         </div>
 
-        <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:'12px',marginBottom:'48px'}}>
+        <div className="grid-3col" style={{marginBottom:'48px'}}>
           {[
             {icon:Code, title:'Expertise tecnica', desc:'Anni di esperienza in sviluppo web, automazioni e soluzioni digitali enterprise.', color:'#7c6af0'},
             {icon:Zap,  title:'Consegna rapida',   desc:'Processi ottimizzati per garantire consegna in 24-48 ore senza compromessi sulla qualità.', color:'#c9a96e'},

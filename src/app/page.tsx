@@ -37,7 +37,7 @@ export default function Home() {
           </h1>
 
           {/* Bottom row: 3 colonne */}
-          <div className="hero-bottom-row" style={{display:'grid',gridTemplateColumns:'1fr 300px 260px',gap:'40px',alignItems:'flex-end'}}>
+          <div className="grid-hero-bottom">
 
             {/* Copy */}
             <p className="hero-copy" style={{fontFamily:'Outfit,system-ui,sans-serif',fontSize:'16px',lineHeight:1.8,color:'rgba(145,145,178,0.85)',maxWidth:'400px'}}>
@@ -74,7 +74,7 @@ export default function Home() {
           </div>
 
           {/* Trust row */}
-          <div style={{display:'flex',flexWrap:'wrap',gap:'28px',marginTop:'48px',paddingTop:'36px',borderTop:'1px solid rgba(255,255,255,0.04)'}}>
+          <div className="hero-trust-row">
             {[
               {icon:<Shield size={13}/>, label:'Pagamenti sicuri PayPal'},
               {icon:<Zap size={13}/>,    label:'Consegna 24-48 ore'},
@@ -91,7 +91,7 @@ export default function Home() {
 
       {/* ── SERVIZI ── */}
       <section id="servizi" style={{padding:'100px 6%',maxWidth:'1300px',margin:'0 auto'}}>
-        <div style={{display:'flex',alignItems:'flex-end',justifyContent:'space-between',marginBottom:'56px',flexWrap:'wrap',gap:'24px'}}>
+        <div className="section-header-row" style={{display:'flex',alignItems:'flex-end',justifyContent:'space-between',marginBottom:'56px',flexWrap:'wrap',gap:'24px'}}>
           <div>
             <span className="overline" style={{marginBottom:'14px'}}>Categorie</span>
             <h2 style={{fontFamily:'Cormorant Garamond,serif',fontSize:'clamp(2.8rem,5vw,4.8rem)',fontWeight:600,color:'white',lineHeight:0.93,letterSpacing:'-0.025em'}}>
@@ -105,7 +105,7 @@ export default function Home() {
 
         {/* Grid asimmetrica */}
         <div style={{display:'flex',flexDirection:'column',gap:'10px'}}>
-          <div style={{display:'grid',gridTemplateColumns:'1.6fr 1fr',gap:'10px'}}>
+          <div className="grid-services-top">
             {CATEGORIES.slice(0,2).map(cat => (
               <Link key={cat.id} href={`/categoria/${cat.slug}`} className="g-card" style={{display:'block',textDecoration:'none',borderRadius:'20px',overflow:'hidden'}}>
                 <div style={{position:'relative',height:'300px',overflow:'hidden'}}>
@@ -124,7 +124,7 @@ export default function Home() {
               </Link>
             ))}
           </div>
-          <div style={{display:'grid',gridTemplateColumns:'1fr 1fr 1fr',gap:'10px'}}>
+          <div className="grid-services-bottom">
             {CATEGORIES.slice(2).map(cat => (
               <Link key={cat.id} href={`/categoria/${cat.slug}`} className="g-card" style={{display:'block',textDecoration:'none',borderRadius:'20px',overflow:'hidden'}}>
                 <div style={{position:'relative',height:'200px',overflow:'hidden'}}>
@@ -147,7 +147,7 @@ export default function Home() {
 
       {/* ── PROCESSO ── */}
       <section style={{background:'#080810',borderTop:'1px solid rgba(255,255,255,0.04)',borderBottom:'1px solid rgba(255,255,255,0.04)',padding:'100px 6%'}}>
-        <div style={{maxWidth:'1300px',margin:'0 auto',display:'grid',gridTemplateColumns:'1fr 2fr',gap:'80px',alignItems:'start'}}>
+        <div className="grid-process" style={{maxWidth:'1300px',margin:'0 auto'}}>
           <div>
             <span className="overline" style={{marginBottom:'18px'}}>Come funziona</span>
             <h2 style={{fontFamily:'Cormorant Garamond,serif',fontSize:'clamp(2.5rem,4.5vw,4rem)',fontWeight:600,color:'white',lineHeight:0.95,letterSpacing:'-0.025em'}}>
@@ -174,7 +174,7 @@ export default function Home() {
 
       {/* ── PRODOTTI ── */}
       <section style={{padding:'100px 6%',maxWidth:'1300px',margin:'0 auto'}}>
-        <div style={{display:'flex',alignItems:'flex-end',justifyContent:'space-between',marginBottom:'56px',flexWrap:'wrap',gap:'16px'}}>
+        <div className="section-header-row" style={{display:'flex',alignItems:'flex-end',justifyContent:'space-between',marginBottom:'56px',flexWrap:'wrap',gap:'16px'}}>
           <div>
             <span className="overline" style={{marginBottom:'14px'}}>Più venduti</span>
             <h2 style={{fontFamily:'Cormorant Garamond,serif',fontSize:'clamp(2.8rem,5vw,4.2rem)',fontWeight:600,color:'white',lineHeight:0.93,letterSpacing:'-0.025em'}}>
@@ -185,7 +185,7 @@ export default function Home() {
             Catalogo completo <ArrowRight size={14}/>
           </Link>
         </div>
-        <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(280px,1fr))',gap:'14px'}}>
+        <div className="grid-products">
           {featured.map((p,i) => (
             <ProductCard key={p.id} product={{...p,category:CATEGORIES.find(c=>c.id===p.category_id)}} delay={i*80}/>
           ))}
@@ -194,7 +194,7 @@ export default function Home() {
 
       {/* ── CTA ── */}
       <section style={{padding:'0 6% 100px',maxWidth:'1300px',margin:'0 auto'}}>
-        <div style={{position:'relative',overflow:'hidden',border:'1px solid rgba(255,255,255,0.065)',borderRadius:'24px',background:'linear-gradient(135deg,rgba(255,255,255,0.024) 0%,rgba(255,255,255,0.008) 100%)',padding:'clamp(56px,8vw,88px)',display:'grid',gridTemplateColumns:'1fr auto',gap:'56px',alignItems:'center'}}>
+        <div className="grid-cta" style={{position:'relative',overflow:'hidden',border:'1px solid rgba(255,255,255,0.065)',borderRadius:'24px',background:'linear-gradient(135deg,rgba(255,255,255,0.024) 0%,rgba(255,255,255,0.008) 100%)',padding:'clamp(56px,8vw,88px)'}}>
           <div style={{position:'absolute',top:'-30%',right:'-3%',width:'520px',height:'520px',borderRadius:'50%',background:'radial-gradient(circle,rgba(201,169,110,0.05) 0%,transparent 65%)',filter:'blur(55px)',pointerEvents:'none'}}/>
           <div style={{position:'relative'}}>
             <span className="overline" style={{marginBottom:'20px'}}>Inizia oggi</span>
@@ -208,7 +208,7 @@ export default function Home() {
               Rimborso 7 giorni &nbsp;·&nbsp; Nessun abbonamento &nbsp;·&nbsp; Tutto digitale
             </div>
           </div>
-          <div style={{display:'flex',flexDirection:'column',gap:'10px',minWidth:'210px',position:'relative'}}>
+          <div className="cta-btns" style={{display:'flex',flexDirection:'column',gap:'10px',minWidth:'210px',position:'relative'}}>
             <Link href="#servizi" className="g-btn g-btn-gold" style={{borderRadius:'14px',justifyContent:'center',padding:'16px 28px',fontSize:'15px'}}>
               Scopri i servizi <ArrowRight size={17}/>
             </Link>

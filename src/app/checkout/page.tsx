@@ -62,7 +62,7 @@ export default function CheckoutPage() {
           ))}
         </div>
 
-        <div style={{display:'grid',gridTemplateColumns:'1fr 340px',gap:'24px',alignItems:'start'}}>
+        <div className="grid-checkout">
           <div>
             {/* Step 0 */}
             {step === 0 && (

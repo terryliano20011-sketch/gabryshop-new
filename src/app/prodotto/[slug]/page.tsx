@@ -24,7 +24,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
           <ArrowLeft size={15}/> {category?.name}
         </Link>
 
-        <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'60px',alignItems:'start'}}>
+        <div className="grid-product-detail">
 
           {/* Sinistra */}
           <div>

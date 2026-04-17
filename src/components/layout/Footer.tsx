@@ -7,7 +7,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-5 lg:px-8" style={{padding:'72px 20px 48px'}}>
         <div style={{display:'grid',gridTemplateColumns:'1fr 1fr 1fr 1fr',gap:'48px',marginBottom:'64px',flexWrap:'wrap'}}>
 
-          <div style={{gridColumn:'span 2'}}>
+          <div className="footer-brand-col">
             <div style={{display:'flex',alignItems:'center',gap:'12px',marginBottom:'20px'}}>
               <div style={{width:'36px',height:'36px',borderRadius:'10px',background:'linear-gradient(135deg,#c9a96e,#8b6fd4)',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'16px'}}>✦</div>
               <span style={{fontFamily:'Playfair Display,serif',fontSize:'20px',fontWeight:700}}>

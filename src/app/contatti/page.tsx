@@ -22,7 +22,7 @@ export default function ContattiPage() {
           </p>
         </div>
 
-        <div style={{display:'grid',gridTemplateColumns:'1fr 1.2fr',gap:'48px',alignItems:'start'}}>
+        <div className="grid-contatti">
 
           {/* Colonna sinistra */}
           <div style={{display:'flex',flexDirection:'column',gap:'12px'}}>
