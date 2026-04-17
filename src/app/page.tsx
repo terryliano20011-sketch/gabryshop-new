@@ -9,7 +9,7 @@ export default function Home() {
     <main style={{background:'#05050a'}}>
 
       {/* ── HERO ── */}
-      <section style={{minHeight:'100svh', position:'relative', overflow:'hidden', display:'flex', flexDirection:'column', justifyContent:'center', paddingTop:'100px', paddingBottom:'80px'}}>
+      <section style={{minHeight:'100svh', position:'relative', overflow:'hidden', display:'flex', flexDirection:'column', justifyContent:'center', paddingTop:'140px', paddingBottom:'100px'}}>
 
         {/* Glow ambientale */}
         <div style={{position:'absolute',inset:0,pointerEvents:'none'}}>
@@ -37,7 +37,7 @@ export default function Home() {
           </h1>
 
           {/* Bottom row: 3 colonne */}
-          <div style={{display:'grid',gridTemplateColumns:'1fr 320px 280px',gap:'40px',alignItems:'end'}}>
+          <div style={{display:'grid',gridTemplateColumns:'1fr 300px 260px',gap:'40px',alignItems:'flex-end'}}>
 
             {/* Copy */}
             <p style={{fontFamily:'Outfit,system-ui,sans-serif',fontSize:'16px',lineHeight:1.8,color:'rgba(145,145,178,0.85)',maxWidth:'400px'}}>
