@@ -30,7 +30,7 @@ export default function Home() {
           </div>
 
           {/* Headline */}
-          <h1 style={{fontFamily:'Cormorant Garamond,serif',fontSize:'clamp(3.8rem,9vw,8.5rem)',fontWeight:600,lineHeight:0.92,letterSpacing:'-0.025em',color:'white',marginBottom:'56px'}}>
+          <h1 style={{fontFamily:'Cormorant Garamond,serif',fontSize:'clamp(3.2rem,7.5vw,7rem)',fontWeight:600,lineHeight:0.92,letterSpacing:'-0.025em',color:'white',marginBottom:'48px'}}>
             Il tuo<br/>
             <em className="gold" style={{fontStyle:'italic'}}>business</em><br/>
             digitale.
