@@ -6,97 +6,93 @@ import ProductCard from '@/components/product/ProductCard'
 export default function Home() {
   const featured = PRODUCTS.filter(p => p.is_bestseller).slice(0, 3)
   return (
-    <div className="pt-20">
+    <div style={{background:'#080810'}}>
 
-      {/* ═══ HERO ═══ */}
-      <section className="relative min-h-screen flex items-center overflow-hidden">
-        {/* Background gradient mesh */}
-        <div className="absolute inset-0">
-          <div className="absolute inset-0" style={{background:"radial-gradient(ellipse 80% 60% at 50% 0%, rgba(201,169,110,0.12) 0%, transparent 70%)"}} />
-          <div className="absolute bottom-0 left-0 right-0 h-px" style={{background:"linear-gradient(to right, transparent, rgba(201,169,110,0.3), transparent)"}} />
-        </div>
+      <section className="relative flex items-center justify-center overflow-hidden dot-grid" style={{minHeight:'100svh',paddingTop:'80px'}}>
+        <div className="animate-orb1 absolute" style={{top:'-10%',left:'-5%',width:'600px',height:'600px',background:'radial-gradient(circle, rgba(201,169,110,0.08) 0%, transparent 70%)',borderRadius:'50%',filter:'blur(40px)',pointerEvents:'none'}} />
+        <div className="animate-orb2 absolute" style={{bottom:'-10%',right:'-5%',width:'700px',height:'700px',background:'radial-gradient(circle, rgba(124,106,240,0.07) 0%, transparent 70%)',borderRadius:'50%',filter:'blur(40px)',pointerEvents:'none'}} />
+        <div className="absolute" style={{top:'40%',left:'50%',transform:'translateX(-50%)',width:'900px',height:'300px',background:'radial-gradient(ellipse, rgba(201,169,110,0.05) 0%, transparent 70%)',filter:'blur(60px)',pointerEvents:'none'}} />
+        <div className="absolute inset-x-0" style={{top:'30%',height:'1px',background:'linear-gradient(90deg, transparent 0%, rgba(201,169,110,0.08) 30%, rgba(201,169,110,0.15) 50%, rgba(201,169,110,0.08) 70%, transparent 100%)',pointerEvents:'none'}} />
 
-        {/* Floating orbs */}
-        <div className="absolute top-32 left-16 w-72 h-72 rounded-full opacity-20 blur-3xl" style={{background:"radial-gradient(circle, #c9a96e, transparent)"}} />
-        <div className="absolute bottom-32 right-16 w-96 h-96 rounded-full opacity-10 blur-3xl" style={{background:"radial-gradient(circle, #7c6af0, transparent)"}} />
-
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 w-full">
-          <div className="max-w-5xl mx-auto text-center">
-
-            {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border text-sm font-medium mb-10"
-              style={{borderColor:"rgba(201,169,110,0.3)",background:"rgba(201,169,110,0.06)",color:"#c9a96e"}}>
-              <Zap className="w-4 h-4" />
-              Prodotti digitali · Consegna garantita 24-48h
+        <div className="relative w-full max-w-6xl mx-auto px-5 lg:px-8 py-24" style={{textAlign:'center'}}>
+          <div className="animate-fade-up" style={{display:'inline-flex',alignItems:'center',gap:'8px',marginBottom:'40px',animationDelay:'0ms'}}>
+            <div className="glass-gold" style={{display:'inline-flex',alignItems:'center',gap:'8px',padding:'10px 20px'}}>
+              <span style={{width:'7px',height:'7px',borderRadius:'50%',background:'#c9a96e',boxShadow:'0 0 8px #c9a96e',display:'inline-block'}} />
+              <span style={{color:'#c9a96e',fontSize:'11px',fontWeight:700,letterSpacing:'0.1em',textTransform:'uppercase',fontFamily:'DM Sans,system-ui,sans-serif'}}>
+                Prodotti digitali professionali
+              </span>
             </div>
+          </div>
 
-            {/* Headline */}
-            <h1 className="font-bold text-white leading-[1.1] mb-8"
-              style={{fontFamily:"Playfair Display,serif",fontSize:"clamp(3rem,8vw,6rem)"}}>
-              Il tuo business<br />
-              <span className="text-gold">digitale, subito.</span>
-            </h1>
+          <h1 className="animate-fade-up" style={{fontFamily:'Playfair Display,serif',fontSize:'clamp(3.5rem,9vw,7.5rem)',fontWeight:800,lineHeight:1.02,letterSpacing:'-0.025em',color:'white',marginBottom:'28px',animationDelay:'80ms'}}>
+            Il tuo business<br />
+            <span className="text-gold">digitale, adesso.</span>
+          </h1>
 
-            <p className="text-xl text-[#8888aa] max-w-2xl mx-auto leading-relaxed mb-12">
-              Siti web, menu digitali, automazioni, app mobile e fogli Excel professionali.
-              Tutto ciò di cui hai bisogno per crescere online.
-            </p>
+          <p className="animate-fade-up" style={{fontSize:'clamp(1rem,2.5vw,1.2rem)',color:'rgba(180,180,200,0.75)',maxWidth:'540px',margin:'0 auto 48px',lineHeight:1.75,fontFamily:'DM Sans,system-ui,sans-serif',animationDelay:'160ms'}}>
+            Siti web, menu digitali, automazioni e app mobile.
+            {' '}Qualità da agenzia, consegnato in{' '}
+            <strong style={{color:'rgba(201,169,110,0.9)',fontWeight:600}}>24-48 ore</strong>.
+          </p>
 
-            {/* CTA buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
-              <Link href="#categorie" className="btn-gold px-10 py-4 rounded-xl font-semibold flex items-center justify-center gap-2 text-lg">
-                Scopri i servizi <ArrowRight className="w-5 h-5" />
-              </Link>
-              <Link href="/chi-siamo"
-                className="px-10 py-4 rounded-xl font-semibold flex items-center justify-center text-lg transition-all"
-                style={{border:"1px solid rgba(255,255,255,0.12)",color:"white"}}>
-                Chi siamo
-              </Link>
-            </div>
+          <div className="animate-fade-up" style={{display:'flex',flexWrap:'wrap',gap:'16px',justifyContent:'center',marginBottom:'56px',animationDelay:'240ms'}}>
+            <Link href="#categorie" className="btn-primary" style={{fontSize:'16px',padding:'16px 44px'}}>
+              Scopri i servizi <ArrowRight size={18} />
+            </Link>
+            <Link href="/chi-siamo" className="btn-secondary" style={{fontSize:'16px',padding:'16px 44px'}}>
+              Chi siamo
+            </Link>
+          </div>
 
-            {/* Trust row */}
-            <div className="flex flex-wrap items-center justify-center gap-8 text-sm" style={{color:"#8888aa"}}>
-              <div className="flex items-center gap-2"><Shield className="w-4 h-4" style={{color:"#c9a96e"}} /> Pagamenti sicuri PayPal</div>
-              <div className="flex items-center gap-2"><Zap className="w-4 h-4" style={{color:"#c9a96e"}} /> Consegna 24-48 ore</div>
-              <div className="flex items-center gap-2"><Star className="w-4 h-4" style={{color:"#c9a96e",fill:"#c9a96e"}} /> +200 clienti soddisfatti</div>
-              <div className="flex items-center gap-2"><CheckCircle className="w-4 h-4" style={{color:"#22c55e"}} /> Rimborso 7 giorni</div>
+          <div className="animate-fade-up" style={{display:'flex',flexWrap:'wrap',justifyContent:'center',gap:'32px',animationDelay:'320ms'}}>
+            {[
+              {icon:<Shield size={13}/>, label:'Pagamenti sicuri PayPal'},
+              {icon:<Zap size={13}/>, label:'Consegna 24-48 ore'},
+              {icon:<Star size={13} fill="#c9a96e" />, label:'+200 clienti soddisfatti'},
+              {icon:<CheckCircle size={13}/>, label:'Rimborso 7 giorni'},
+            ].map((b,i)=>(
+              <div key={i} style={{display:'flex',alignItems:'center',gap:'7px',color:'rgba(130,130,155,0.85)',fontSize:'13px',fontFamily:'DM Sans,system-ui,sans-serif'}}>
+                <span style={{color:'#c9a96e'}}>{b.icon}</span>{b.label}
+              </div>
+            ))}
+          </div>
+
+          <div style={{position:'absolute',bottom:'36px',left:'50%',transform:'translateX(-50%)',display:'flex',flexDirection:'column',alignItems:'center',gap:'8px',color:'rgba(100,100,120,0.5)'}}>
+            <span style={{fontSize:'10px',letterSpacing:'0.15em',textTransform:'uppercase',fontFamily:'DM Sans,system-ui,sans-serif'}}>Scorri</span>
+            <div style={{width:'1px',height:'44px',overflow:'hidden',background:'rgba(100,100,120,0.15)'}}>
+              <div style={{width:'100%',height:'50%',background:'linear-gradient(to bottom, #c9a96e, transparent)',animation:'scanLine 1.8s ease-in-out infinite'}} />
             </div>
           </div>
         </div>
       </section>
 
-      {/* ═══ CATEGORIE ═══ */}
-      <section id="categorie" className="py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
-            <p className="text-xs font-bold uppercase tracking-widest mb-3" style={{color:"#c9a96e"}}>I nostri servizi</p>
-            <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4" style={{fontFamily:"Playfair Display,serif"}}>Cosa offriamo</h2>
-            <p className="text-[#8888aa] text-lg max-w-xl mx-auto">Tutto il digitale di cui hai bisogno, in un unico posto.</p>
+      <section id="categorie" style={{padding:'110px 0',background:'#080810'}}>
+        <div className="max-w-7xl mx-auto px-5 lg:px-8">
+          <div style={{textAlign:'center',marginBottom:'72px'}}>
+            <p className="section-label" style={{marginBottom:'18px'}}>I nostri servizi</p>
+            <h2 style={{fontFamily:'Playfair Display,serif',fontSize:'clamp(2.2rem,5vw,3.8rem)',fontWeight:700,color:'white',marginBottom:'18px',lineHeight:1.1}}>Cosa offriamo</h2>
+            <p style={{color:'rgba(155,155,185,0.75)',fontSize:'17px',fontFamily:'DM Sans,system-ui,sans-serif',maxWidth:'460px',margin:'0 auto',lineHeight:1.65}}>
+              Cinque categorie di prodotti digitali, pronti in pochissimo tempo.
+            </p>
           </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5">
-            {CATEGORIES.map((cat, i) => (
-              <Link key={cat.id} href={`/categoria/${cat.slug}`}
-                className="luxury-card rounded-2xl overflow-hidden group"
-                style={{animationDelay:`${i*80}ms`}}>
-                <div className="relative h-36 overflow-hidden" style={{background:"#1a1a24"}}>
-                  {cat.image && (
-                    <img src={cat.image} alt={cat.name}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                      style={{opacity:0.5}} />
-                  )}
-                  <div className="absolute inset-0" style={{background:"linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.2) 100%)"}} />
-                  <div className="absolute bottom-3 left-3 text-2xl">{cat.icon}</div>
-                  <div className="absolute top-3 right-3 text-xs font-semibold px-2 py-1 rounded-full"
-                    style={{background:`${cat.color}20`,color:cat.color,border:`1px solid ${cat.color}40`}}>
+          <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(200px,1fr))',gap:'16px'}}>
+            {CATEGORIES.map((cat,i)=>(
+              <Link key={cat.id} href={`/categoria/${cat.slug}`} className="card" style={{textDecoration:'none',display:'block'}}>
+                <div style={{position:'relative',height:'168px',overflow:'hidden',borderRadius:'12px 12px 0 0'}}>
+                  {cat.image ? (
+                    <img src={cat.image} alt={cat.name} style={{width:'100%',height:'100%',objectFit:'cover',filter:'brightness(0.38) saturate(0.75)',transition:'all 0.6s cubic-bezier(0.16,1,0.3,1)'}} />
+                  ) : <div style={{width:'100%',height:'100%',background:'#111120'}} />}
+                  <div style={{position:'absolute',inset:0,background:'linear-gradient(to top, rgba(8,8,16,0.97) 0%, rgba(8,8,16,0.2) 55%, transparent 100%)'}} />
+                  <div style={{position:'absolute',bottom:'13px',left:'15px',fontSize:'24px'}}>{cat.icon}</div>
+                  <div style={{position:'absolute',top:'11px',right:'11px',background:`${cat.color}16`,border:`1px solid ${cat.color}32`,borderRadius:'20px',padding:'3px 11px',fontSize:'11px',fontWeight:700,color:cat.color,fontFamily:'DM Sans,system-ui,sans-serif'}}>
                     {cat.product_count} prodotti
                   </div>
                 </div>
-                <div className="p-4">
-                  <h3 className="text-white font-semibold mb-1" style={{fontFamily:"Playfair Display,serif"}}>{cat.name}</h3>
-                  <p className="text-[#8888aa] text-xs leading-relaxed mb-3">{cat.description}</p>
-                  <div className="text-xs font-semibold flex items-center gap-1" style={{color:cat.color}}>
-                    Scopri <ArrowRight className="w-3 h-3" />
+                <div style={{padding:'18px 20px 22px'}}>
+                  <h3 style={{fontFamily:'Playfair Display,serif',color:'white',fontSize:'18px',fontWeight:600,marginBottom:'7px'}}>{cat.name}</h3>
+                  <p style={{color:'rgba(130,130,165,0.7)',fontSize:'12px',lineHeight:1.55,fontFamily:'DM Sans,system-ui,sans-serif',marginBottom:'14px'}}>{cat.description}</p>
+                  <div style={{display:'flex',alignItems:'center',gap:'5px',fontSize:'12px',fontWeight:600,color:cat.color,fontFamily:'DM Sans,system-ui,sans-serif'}}>
+                    Scopri <ArrowRight size={12} />
                   </div>
                 </div>
               </Link>
@@ -105,103 +101,90 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ═══ COME FUNZIONA ═══ */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
-            <p className="text-xs font-bold uppercase tracking-widest mb-3" style={{color:"#c9a96e"}}>Processo semplice</p>
-            <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4" style={{fontFamily:"Playfair Display,serif"}}>Come funziona</h2>
-            <p className="text-[#8888aa] text-lg">Semplice come 1, 2, 3.</p>
+      <section style={{padding:'110px 0',background:'linear-gradient(180deg, #080810 0%, #0c0c1a 50%, #080810 100%)'}}>
+        <div className="max-w-5xl mx-auto px-5 lg:px-8">
+          <div style={{textAlign:'center',marginBottom:'72px'}}>
+            <p className="section-label" style={{marginBottom:'18px'}}>Processo semplice</p>
+            <h2 style={{fontFamily:'Playfair Display,serif',fontSize:'clamp(2.2rem,5vw,3.8rem)',fontWeight:700,color:'white',marginBottom:'16px',lineHeight:1.1}}>Come funziona</h2>
+            <p style={{color:'rgba(155,155,185,0.75)',fontSize:'17px',fontFamily:'DM Sans,system-ui,sans-serif'}}>Tre passi e il tuo prodotto digitale è pronto.</p>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 relative">
-            {/* Connector line desktop */}
-            <div className="hidden md:block absolute top-16 left-1/3 right-1/3 h-px" style={{background:"linear-gradient(to right, transparent, rgba(201,169,110,0.4), transparent)"}} />
-
+          <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(260px,1fr))',gap:'20px'}}>
             {[
-              {step:"01",title:"Scegli il servizio",desc:"Esplora le categorie e trova il prodotto digitale perfetto. Ogni prodotto include una lista dettagliata di cosa è incluso.",icon:"🛒",color:"#c9a96e"},
-              {step:"02",title:"Acquista in sicurezza",desc:"Inserisci i tuoi dati e paga tramite PayPal. Carte di credito, debito e saldo PayPal. Transazione 100% sicura.",icon:"💳",color:"#7c6af0"},
-              {step:"03",title:"Ricevi subito",desc:"Ricevi email con link download entro 24-48 ore. Per prodotti personalizzati ti contatteremo direttamente.",icon:"📬",color:"#10b981"},
-            ].map((item, i) => (
-              <div key={item.step} className="luxury-card rounded-2xl p-8 text-center relative">
-                <div className="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-5"
-                  style={{background:`${item.color}12`,border:`1px solid ${item.color}25`}}>
-                  {item.icon}
-                </div>
-                <div className="text-xs font-bold uppercase tracking-widest mb-2" style={{color:item.color}}>Step {item.step}</div>
-                <h3 className="text-xl font-bold text-white mb-3" style={{fontFamily:"Playfair Display,serif"}}>{item.title}</h3>
-                <p className="text-[#8888aa] text-sm leading-relaxed">{item.desc}</p>
+              {n:'01',title:'Scegli',sub:'Esplora le categorie e trova il prodotto perfetto per il tuo business.',icon:'🎯',c:'#c9a96e'},
+              {n:'02',title:'Acquista',sub:'Paga in sicurezza con PayPal. Tutte le carte accettate, zero commissioni.',icon:'🔐',c:'#7c6af0'},
+              {n:'03',title:'Ricevi',sub:'File o contatto entro 24 ore. Revisioni incluse per i prodotti personalizzati.',icon:'📦',c:'#10b981'},
+            ].map((s,i)=>(
+              <div key={s.n} className="card" style={{padding:'40px 34px',position:'relative'}}>
+                <div style={{position:'absolute',top:'18px',right:'22px',fontFamily:'Playfair Display,serif',fontSize:'88px',fontWeight:800,color:`${s.c}04`,lineHeight:1,pointerEvents:'none',userSelect:'none',letterSpacing:'-0.05em'}}>{s.n}</div>
+                <div style={{width:'58px',height:'58px',borderRadius:'16px',background:`${s.c}10`,border:`1px solid ${s.c}22`,display:'flex',alignItems:'center',justifyContent:'center',fontSize:'26px',marginBottom:'22px'}}>{s.icon}</div>
+                <div style={{fontSize:'11px',fontWeight:700,letterSpacing:'0.1em',color:s.c,marginBottom:'10px',fontFamily:'DM Sans,system-ui,sans-serif',textTransform:'uppercase'}}>Step {s.n}</div>
+                <h3 style={{fontFamily:'Playfair Display,serif',color:'white',fontSize:'24px',fontWeight:700,marginBottom:'13px'}}>{s.title}</h3>
+                <p style={{color:'rgba(130,130,165,0.75)',fontSize:'14px',lineHeight:1.7,fontFamily:'DM Sans,system-ui,sans-serif'}}>{s.sub}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ═══ PRODOTTI POPOLARI ═══ */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex items-end justify-between mb-12">
+      <section id="prodotti" style={{padding:'110px 0',background:'#080810'}}>
+        <div className="max-w-7xl mx-auto px-5 lg:px-8">
+          <div style={{display:'flex',alignItems:'flex-end',justifyContent:'space-between',marginBottom:'60px',flexWrap:'wrap',gap:'16px'}}>
             <div>
-              <p className="text-xs font-bold uppercase tracking-widest mb-2" style={{color:"#c9a96e"}}>Top prodotti</p>
-              <h2 className="text-4xl font-bold text-white" style={{fontFamily:"Playfair Display,serif"}}>I più popolari</h2>
-              <p className="text-[#8888aa] mt-2">I prodotti preferiti dai nostri clienti.</p>
+              <p className="section-label" style={{marginBottom:'14px'}}>Più venduti</p>
+              <h2 style={{fontFamily:'Playfair Display,serif',fontSize:'clamp(2.2rem,4vw,3.2rem)',fontWeight:700,color:'white',lineHeight:1.1}}>I più popolari</h2>
             </div>
-            <Link href="/categoria/siti-web" className="hidden sm:flex items-center gap-2 text-sm transition-colors" style={{color:"#c9a96e"}}>
-              Vedi tutti <ArrowRight className="w-4 h-4" />
+            <Link href="/categoria/siti-web" style={{display:'flex',alignItems:'center',gap:'7px',color:'#c9a96e',fontSize:'14px',fontWeight:600,textDecoration:'none',fontFamily:'DM Sans,system-ui,sans-serif'}}>
+              Vedi tutti <ArrowRight size={14} />
             </Link>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {featured.map((p, i) => (
-              <ProductCard key={p.id} product={{...p, category: CATEGORIES.find(c=>c.id===p.category_id)}} delay={i*100} />
+          <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(300px,1fr))',gap:'20px'}}>
+            {featured.map((p,i)=>(
+              <ProductCard key={p.id} product={{...p,category:CATEGORIES.find(c=>c.id===p.category_id)}} delay={i*100} />
             ))}
           </div>
         </div>
       </section>
 
-      {/* ═══ STATS ═══ */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <section style={{padding:'80px 0',background:'#0c0c1a'}}>
+        <div className="max-w-7xl mx-auto px-5 lg:px-8">
+          <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(170px,1fr))',gap:'16px'}}>
             {[
-              {number:"+200",label:"Clienti soddisfatti",icon:"🎯"},
-              {number:"98%",label:"Tasso soddisfazione",icon:"⭐"},
-              {number:"24h",label:"Consegna media",icon:"⚡"},
-              {number:"7gg",label:"Rimborso garantito",icon:"🛡️"},
+              {v:'+200',l:'Clienti soddisfatti',e:'🎯'},
+              {v:'98%',l:'Soddisfazione media',e:'⭐'},
+              {v:'< 24h',l:'Tempo di risposta',e:'⚡'},
+              {v:'7 gg',l:'Rimborso garantito',e:'🛡️'},
             ].map((s,i)=>(
-              <div key={s.label} className="luxury-card rounded-2xl p-6 text-center">
-                <div className="text-3xl mb-2">{s.icon}</div>
-                <div className="text-4xl font-bold text-gold mb-1" style={{fontFamily:"Playfair Display,serif"}}>{s.number}</div>
-                <div className="text-[#8888aa] text-xs">{s.label}</div>
+              <div key={s.l} className="card" style={{padding:'30px 24px',textAlign:'center'}}>
+                <div style={{fontSize:'30px',marginBottom:'10px'}}>{s.e}</div>
+                <div className="stat-number" style={{fontSize:'2.4rem',fontWeight:800,lineHeight:1,marginBottom:'9px'}}>{s.v}</div>
+                <div style={{fontSize:'12px',color:'rgba(120,120,155,0.7)',fontFamily:'DM Sans,system-ui,sans-serif',lineHeight:1.4}}>{s.l}</div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ═══ CTA FINALE ═══ */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto">
-          <div className="luxury-card rounded-3xl p-12 text-center relative overflow-hidden">
-            <div className="absolute inset-0" style={{background:"radial-gradient(ellipse at center, rgba(201,169,110,0.08) 0%, transparent 70%)"}} />
-            <div className="relative">
-              <div className="text-4xl mb-4">🚀</div>
-              <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4" style={{fontFamily:"Playfair Display,serif"}}>Pronto a crescere?</h2>
-              <p className="text-[#8888aa] text-lg mb-10 max-w-xl mx-auto">
-                Inizia oggi con uno dei nostri servizi digitali professionali. Risultati garantiti o rimborso entro 7 giorni.
+      <section style={{padding:'110px 0',background:'#080810'}}>
+        <div className="max-w-4xl mx-auto px-5 lg:px-8">
+          <div className="card" style={{padding:'clamp(52px,9vw,88px)',textAlign:'center',position:'relative',overflow:'hidden'}}>
+            <div style={{position:'absolute',top:'50%',left:'50%',transform:'translate(-50%,-50%)',width:'700px',height:'350px',background:'radial-gradient(ellipse, rgba(201,169,110,0.055) 0%, transparent 65%)',pointerEvents:'none'}} />
+            <div style={{position:'relative'}}>
+              <div style={{fontSize:'52px',marginBottom:'26px',lineHeight:1}}>🚀</div>
+              <h2 style={{fontFamily:'Playfair Display,serif',fontSize:'clamp(2.2rem,5.5vw,3.8rem)',fontWeight:800,color:'white',marginBottom:'22px',lineHeight:1.08}}>Pronto a partire?</h2>
+              <p style={{fontSize:'17px',color:'rgba(155,155,185,0.75)',maxWidth:'440px',margin:'0 auto 52px',lineHeight:1.75,fontFamily:'DM Sans,system-ui,sans-serif'}}>
+                Ogni giorno senza il tuo sito o automazione è un&apos;opportunità persa. Inizia oggi.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link href="#categorie" className="btn-gold px-10 py-4 rounded-xl font-semibold flex items-center justify-center gap-2 text-lg">
-                  Inizia ora <ArrowRight className="w-5 h-5" />
+              <div style={{display:'flex',flexWrap:'wrap',gap:'16px',justifyContent:'center',marginBottom:'36px'}}>
+                <Link href="#categorie" className="btn-primary" style={{fontSize:'16px',padding:'16px 44px'}}>
+                  Inizia ora <ArrowRight size={18} />
                 </Link>
-                <Link href="/contatti"
-                  className="px-10 py-4 rounded-xl font-semibold flex items-center justify-center text-lg transition-all"
-                  style={{border:"1px solid rgba(255,255,255,0.12)",color:"white"}}>
+                <Link href="/contatti" className="btn-secondary" style={{fontSize:'16px',padding:'16px 44px'}}>
                   Hai domande?
                 </Link>
               </div>
-              <div className="flex items-center justify-center gap-2 mt-8 text-sm" style={{color:"#8888aa"}}>
-                <CheckCircle className="w-4 h-4" style={{color:"#22c55e"}} />
-                Rimborso garantito 7 giorni · Nessuna sorpresa · Tutto digitale
+              <div style={{display:'flex',alignItems:'center',justifyContent:'center',gap:'7px',fontSize:'13px',color:'rgba(100,100,120,0.75)',fontFamily:'DM Sans,system-ui,sans-serif'}}>
+                <CheckCircle size={14} style={{color:'#22c55e'}} />
+                Rimborso 7 giorni &nbsp;&middot;&nbsp; Tutto digitale &nbsp;&middot;&nbsp; Nessun abbonamento
               </div>
             </div>
           </div>
