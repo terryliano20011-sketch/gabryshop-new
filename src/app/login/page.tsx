@@ -23,7 +23,7 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="pt-28 pb-20 flex items-center justify-center min-h-screen px-4">
+    <div className="pt-36 pb-20 flex items-center justify-center min-h-screen px-4">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#c9a96e] to-[#8b6fd4] flex items-center justify-center mx-auto mb-4">

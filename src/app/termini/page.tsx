@@ -1,6 +1,6 @@
 export default function TerminiPage() {
   return (
-    <div className="pt-28 pb-20 px-4 sm:px-6 lg:px-8 max-w-3xl mx-auto">
+    <div className="pt-36 pb-20 px-4 sm:px-6 lg:px-8 max-w-3xl mx-auto">
       <h1 className="text-4xl font-bold text-white mb-4" style={{fontFamily:'Playfair Display,serif'}}>Termini di Servizio</h1>
       <p className="text-[#8888aa] text-sm mb-10">Ultimo aggiornamento: Gennaio 2025</p>
       <div className="space-y-8 text-[#8888aa] leading-relaxed">

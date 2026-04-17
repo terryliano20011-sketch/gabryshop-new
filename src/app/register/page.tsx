@@ -23,7 +23,7 @@ export default function RegisterPage() {
   }
 
   if (done) return (
-    <div className="pt-28 pb-20 flex items-center justify-center min-h-screen px-4">
+    <div className="pt-36 pb-20 flex items-center justify-center min-h-screen px-4">
       <div className="max-w-md w-full text-center">
         <div className="text-5xl mb-4">📬</div>
         <h2 className="text-2xl font-bold text-white mb-2" style={{fontFamily:'Playfair Display,serif'}}>Controlla la tua email!</h2>
@@ -34,7 +34,7 @@ export default function RegisterPage() {
   )
 
   return (
-    <div className="pt-28 pb-20 flex items-center justify-center min-h-screen px-4">
+    <div className="pt-36 pb-20 flex items-center justify-center min-h-screen px-4">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#c9a96e] to-[#8b6fd4] flex items-center justify-center mx-auto mb-4">
