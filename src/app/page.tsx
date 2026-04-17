@@ -70,6 +70,7 @@ export default function Home() {
                   <div style={{fontFamily:'Outfit,system-ui,sans-serif',fontSize:'11px',color:'rgba(100,100,135,0.6)',letterSpacing:'0.05em'}}>{s.l}</div>
                 </div>
               ))}
+              </div>
             </div>
           </div>
 
