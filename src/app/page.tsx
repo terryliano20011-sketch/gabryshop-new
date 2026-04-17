@@ -37,10 +37,10 @@ export default function Home() {
           </h1>
 
           {/* Bottom row: 3 colonne */}
-          <div style={{display:'grid',gridTemplateColumns:'1fr 300px 260px',gap:'40px',alignItems:'flex-end'}}>
+          <div className="hero-bottom-row" style={{display:'grid',gridTemplateColumns:'1fr 300px 260px',gap:'40px',alignItems:'flex-end'}}>
 
             {/* Copy */}
-            <p style={{fontFamily:'Outfit,system-ui,sans-serif',fontSize:'16px',lineHeight:1.8,color:'rgba(145,145,178,0.85)',maxWidth:'400px'}}>
+            <p className="hero-copy" style={{fontFamily:'Outfit,system-ui,sans-serif',fontSize:'16px',lineHeight:1.8,color:'rgba(145,145,178,0.85)',maxWidth:'400px'}}>
               Siti web, menu digitali, automazioni, app mobile.{' '}
               Consegnato in{' '}
               <span style={{color:'rgba(201,169,110,0.9)',fontWeight:500}}>24–48 ore</span>,{' '}
@@ -59,6 +59,7 @@ export default function Home() {
 
             {/* Stats */}
             <div>
+              <div className="hero-stats">
               {[
                 {n:'+200', l:'Clienti soddisfatti'},
                 {n:'98%',  l:'Soddisfazione media'},
@@ -184,7 +185,7 @@ export default function Home() {
             Catalogo completo <ArrowRight size={14}/>
           </Link>
         </div>
-        <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:'14px'}}>
+        <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(280px,1fr))',gap:'14px'}}>
           {featured.map((p,i) => (
             <ProductCard key={p.id} product={{...p,category:CATEGORIES.find(c=>c.id===p.category_id)}} delay={i*80}/>
           ))}
