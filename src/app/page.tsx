@@ -1,98 +1,121 @@
 import Link from 'next/link'
-import { ArrowRight, CheckCircle, Shield, Zap, Star } from 'lucide-react'
+import { ArrowRight, ArrowUpRight, CheckCircle } from 'lucide-react'
 import { CATEGORIES, PRODUCTS } from '@/lib/data'
 import ProductCard from '@/components/product/ProductCard'
 
 export default function Home() {
   const featured = PRODUCTS.filter(p => p.is_bestseller).slice(0, 3)
   return (
-    <div style={{background:'#080810'}}>
+    <main style={{background:'#05050a'}}>
 
-      <section className="relative flex items-center justify-center overflow-hidden dot-grid" style={{minHeight:'100svh',paddingTop:'80px'}}>
-        <div className="animate-orb1 absolute" style={{top:'-10%',left:'-5%',width:'600px',height:'600px',background:'radial-gradient(circle, rgba(201,169,110,0.08) 0%, transparent 70%)',borderRadius:'50%',filter:'blur(40px)',pointerEvents:'none'}} />
-        <div className="animate-orb2 absolute" style={{bottom:'-10%',right:'-5%',width:'700px',height:'700px',background:'radial-gradient(circle, rgba(124,106,240,0.07) 0%, transparent 70%)',borderRadius:'50%',filter:'blur(40px)',pointerEvents:'none'}} />
-        <div className="absolute" style={{top:'40%',left:'50%',transform:'translateX(-50%)',width:'900px',height:'300px',background:'radial-gradient(ellipse, rgba(201,169,110,0.05) 0%, transparent 70%)',filter:'blur(60px)',pointerEvents:'none'}} />
-        <div className="absolute inset-x-0" style={{top:'30%',height:'1px',background:'linear-gradient(90deg, transparent 0%, rgba(201,169,110,0.08) 30%, rgba(201,169,110,0.15) 50%, rgba(201,169,110,0.08) 70%, transparent 100%)',pointerEvents:'none'}} />
+      {/* ── HERO ── editorial, asimmetrico */}
+      <section style={{minHeight:'100svh',display:'flex',flexDirection:'column',justifyContent:'flex-end',paddingBottom:'88px',position:'relative',overflow:'hidden',paddingTop:'130px'}}>
+        <div style={{position:'absolute',inset:0,pointerEvents:'none'}}>
+          <div style={{position:'absolute',top:0,left:'8%',width:'1px',height:'100%',background:'linear-gradient(to bottom,transparent,rgba(201,169,110,0.07),transparent)'}}/>
+          <div style={{position:'absolute',top:0,right:'8%',width:'1px',height:'100%',background:'linear-gradient(to bottom,transparent,rgba(201,169,110,0.04),transparent)'}}/>
+          <div style={{position:'absolute',top:'-15%',left:'25%',width:'750px',height:'750px',borderRadius:'50%',background:'radial-gradient(circle,rgba(180,145,80,0.055) 0%,transparent 65%)',filter:'blur(70px)'}}/>
+          <div style={{position:'absolute',bottom:'-15%',right:'5%',width:'600px',height:'600px',borderRadius:'50%',background:'radial-gradient(circle,rgba(90,70,190,0.035) 0%,transparent 65%)',filter:'blur(60px)'}}/>
+        </div>
 
-        <div className="relative w-full max-w-6xl mx-auto px-5 lg:px-8 py-24" style={{textAlign:'center'}}>
-          <div className="animate-fade-up" style={{display:'inline-flex',alignItems:'center',gap:'8px',marginBottom:'40px',animationDelay:'0ms'}}>
-            <div className="glass-gold" style={{display:'inline-flex',alignItems:'center',gap:'8px',padding:'10px 20px'}}>
-              <span style={{width:'7px',height:'7px',borderRadius:'50%',background:'#c9a96e',boxShadow:'0 0 8px #c9a96e',display:'inline-block'}} />
-              <span style={{color:'#c9a96e',fontSize:'11px',fontWeight:700,letterSpacing:'0.1em',textTransform:'uppercase',fontFamily:'DM Sans,system-ui,sans-serif'}}>
-                Prodotti digitali professionali
-              </span>
-            </div>
+        <div style={{maxWidth:'1400px',margin:'0 auto',padding:'0 5%',width:'100%',position:'relative'}}>
+          {/* Riga overline */}
+          <div style={{display:'flex',alignItems:'center',gap:'18px',marginBottom:'56px'}}>
+            <div style={{width:'40px',height:'1px',background:'rgba(201,169,110,0.45)'}}/>
+            <span style={{fontFamily:'Outfit,system-ui,sans-serif',fontSize:'10px',fontWeight:700,letterSpacing:'0.22em',textTransform:'uppercase',color:'rgba(201,169,110,0.75)'}}>Servizi Digitali Professionali</span>
+            <div style={{flex:1,height:'1px',background:'linear-gradient(to right,rgba(201,169,110,0.18),transparent)'}}/>
+            <span style={{fontFamily:'Outfit,system-ui,sans-serif',fontSize:'10px',color:'rgba(100,100,130,0.5)',letterSpacing:'0.12em'}}>EST. 2024</span>
           </div>
 
-          <h1 className="animate-fade-up" style={{fontFamily:'Playfair Display,serif',fontSize:'clamp(3.5rem,9vw,7.5rem)',fontWeight:800,lineHeight:1.02,letterSpacing:'-0.025em',color:'white',marginBottom:'28px',animationDelay:'80ms'}}>
-            Il tuo business<br />
-            <span className="text-gold">digitale, adesso.</span>
+          {/* Headline maximalista */}
+          <h1 style={{fontFamily:'Cormorant Garamond,serif',fontSize:'clamp(4.5rem,12vw,10.5rem)',fontWeight:600,lineHeight:0.88,letterSpacing:'-0.03em',color:'white',marginBottom:'64px'}}>
+            <span style={{display:'block'}}>Il tuo</span>
+            <span style={{display:'block',fontStyle:'italic'}} className="gold">business</span>
+            <span style={{display:'block'}}>digitale.</span>
           </h1>
 
-          <p className="animate-fade-up" style={{fontSize:'clamp(1rem,2.5vw,1.2rem)',color:'rgba(180,180,200,0.75)',maxWidth:'540px',margin:'0 auto 48px',lineHeight:1.75,fontFamily:'DM Sans,system-ui,sans-serif',animationDelay:'160ms'}}>
-            Siti web, menu digitali, automazioni e app mobile.
-            {' '}Qualità da agenzia, consegnato in{' '}
-            <strong style={{color:'rgba(201,169,110,0.9)',fontWeight:600}}>24-48 ore</strong>.
-          </p>
+          {/* 3 colonne: copy | CTA | stats */}
+          <div style={{display:'grid',gridTemplateColumns:'1.1fr 0.9fr 0.9fr',gap:'48px',alignItems:'end'}}>
+            <p style={{fontFamily:'Outfit,system-ui,sans-serif',fontSize:'16px',lineHeight:1.85,color:'rgba(145,145,175,0.85)',maxWidth:'380px'}}>
+              Siti web, menu digitali, automazioni, app mobile.{' '}
+              Consegnato in{' '}
+              <span style={{color:'rgba(201,169,110,0.9)',fontWeight:500}}>24–48 ore</span>,{' '}
+              qualità da studio internazionale.
+            </p>
 
-          <div className="animate-fade-up" style={{display:'flex',flexWrap:'wrap',gap:'16px',justifyContent:'center',marginBottom:'56px',animationDelay:'240ms'}}>
-            <Link href="#categorie" className="btn-primary" style={{fontSize:'16px',padding:'16px 44px'}}>
-              Scopri i servizi <ArrowRight size={18} />
-            </Link>
-            <Link href="/chi-siamo" className="btn-secondary" style={{fontSize:'16px',padding:'16px 44px'}}>
-              Chi siamo
-            </Link>
-          </div>
+            <div style={{display:'flex',flexDirection:'column',gap:'10px'}}>
+              <Link href="#servizi" className="g-btn g-btn-gold" style={{justifyContent:'space-between',padding:'16px 22px',borderRadius:'14px',fontSize:'15px',fontWeight:600}}>
+                Scopri i servizi <ArrowRight size={17}/>
+              </Link>
+              <Link href="/chi-siamo" className="g-btn g-btn-ghost" style={{justifyContent:'center',borderRadius:'14px',fontSize:'14px'}}>
+                Chi siamo
+              </Link>
+            </div>
 
-          <div className="animate-fade-up" style={{display:'flex',flexWrap:'wrap',justifyContent:'center',gap:'32px',animationDelay:'320ms'}}>
-            {[
-              {icon:<Shield size={13}/>, label:'Pagamenti sicuri PayPal'},
-              {icon:<Zap size={13}/>, label:'Consegna 24-48 ore'},
-              {icon:<Star size={13} fill="#c9a96e" />, label:'+200 clienti soddisfatti'},
-              {icon:<CheckCircle size={13}/>, label:'Rimborso 7 giorni'},
-            ].map((b,i)=>(
-              <div key={i} style={{display:'flex',alignItems:'center',gap:'7px',color:'rgba(130,130,155,0.85)',fontSize:'13px',fontFamily:'DM Sans,system-ui,sans-serif'}}>
-                <span style={{color:'#c9a96e'}}>{b.icon}</span>{b.label}
-              </div>
-            ))}
-          </div>
-
-          <div style={{position:'absolute',bottom:'36px',left:'50%',transform:'translateX(-50%)',display:'flex',flexDirection:'column',alignItems:'center',gap:'8px',color:'rgba(100,100,120,0.5)'}}>
-            <span style={{fontSize:'10px',letterSpacing:'0.15em',textTransform:'uppercase',fontFamily:'DM Sans,system-ui,sans-serif'}}>Scorri</span>
-            <div style={{width:'1px',height:'44px',overflow:'hidden',background:'rgba(100,100,120,0.15)'}}>
-              <div style={{width:'100%',height:'50%',background:'linear-gradient(to bottom, #c9a96e, transparent)',animation:'scanLine 1.8s ease-in-out infinite'}} />
+            <div>
+              {[
+                {n:'+200',l:'Clienti soddisfatti'},
+                {n:'98%',l:'Soddisfazione media'},
+                {n:'< 24h',l:'Consegna media'},
+              ].map(s=>(
+                <div key={s.l} style={{borderTop:'1px solid rgba(255,255,255,0.055)',padding:'16px 0'}}>
+                  <div style={{fontFamily:'Cormorant Garamond,serif',fontSize:'2.8rem',fontWeight:500,lineHeight:1,color:'white',marginBottom:'5px'}}>{s.n}</div>
+                  <div style={{fontFamily:'Outfit,system-ui,sans-serif',fontSize:'11px',color:'rgba(100,100,135,0.65)',letterSpacing:'0.06em'}}>{s.l}</div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
-      <section id="categorie" style={{padding:'110px 0',background:'#080810'}}>
-        <div className="max-w-7xl mx-auto px-5 lg:px-8">
-          <div style={{textAlign:'center',marginBottom:'72px'}}>
-            <p className="section-label" style={{marginBottom:'18px'}}>I nostri servizi</p>
-            <h2 style={{fontFamily:'Playfair Display,serif',fontSize:'clamp(2.2rem,5vw,3.8rem)',fontWeight:700,color:'white',marginBottom:'18px',lineHeight:1.1}}>Cosa offriamo</h2>
-            <p style={{color:'rgba(155,155,185,0.75)',fontSize:'17px',fontFamily:'DM Sans,system-ui,sans-serif',maxWidth:'460px',margin:'0 auto',lineHeight:1.65}}>
-              Cinque categorie di prodotti digitali, pronti in pochissimo tempo.
-            </p>
+      {/* ── SERVIZI grid asimmetrica ── */}
+      <section id="servizi" style={{padding:'120px 5%',maxWidth:'1400px',margin:'0 auto'}}>
+        <div style={{display:'flex',alignItems:'flex-end',justifyContent:'space-between',marginBottom:'64px',flexWrap:'wrap',gap:'24px'}}>
+          <div>
+            <span className="overline" style={{marginBottom:'16px'}}>Categorie</span>
+            <h2 style={{fontFamily:'Cormorant Garamond,serif',fontSize:'clamp(3rem,6vw,5.5rem)',fontWeight:600,color:'white',lineHeight:0.9,letterSpacing:'-0.025em'}}>
+              Cosa<br/><em className="gold" style={{fontStyle:'italic'}}>offriamo</em>
+            </h2>
           </div>
-          <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(200px,1fr))',gap:'16px'}}>
-            {CATEGORIES.map((cat,i)=>(
-              <Link key={cat.id} href={`/categoria/${cat.slug}`} className="card" style={{textDecoration:'none',display:'block'}}>
-                <div style={{position:'relative',height:'168px',overflow:'hidden',borderRadius:'12px 12px 0 0'}}>
-                  {cat.image ? (
-                    <img src={cat.image} alt={cat.name} style={{width:'100%',height:'100%',objectFit:'cover',filter:'brightness(0.38) saturate(0.75)',transition:'all 0.6s cubic-bezier(0.16,1,0.3,1)'}} />
-                  ) : <div style={{width:'100%',height:'100%',background:'#111120'}} />}
-                  <div style={{position:'absolute',inset:0,background:'linear-gradient(to top, rgba(8,8,16,0.97) 0%, rgba(8,8,16,0.2) 55%, transparent 100%)'}} />
-                  <div style={{position:'absolute',bottom:'13px',left:'15px',fontSize:'24px'}}>{cat.icon}</div>
-                  <div style={{position:'absolute',top:'11px',right:'11px',background:`${cat.color}16`,border:`1px solid ${cat.color}32`,borderRadius:'20px',padding:'3px 11px',fontSize:'11px',fontWeight:700,color:cat.color,fontFamily:'DM Sans,system-ui,sans-serif'}}>
-                    {cat.product_count} prodotti
+          <p style={{fontFamily:'Outfit,system-ui,sans-serif',fontSize:'15px',color:'rgba(125,125,160,0.8)',maxWidth:'280px',lineHeight:1.75}}>
+            Cinque aree di competenza. Dalla presenza web alle automazioni avanzate.
+          </p>
+        </div>
+
+        <div style={{display:'flex',flexDirection:'column',gap:'10px'}}>
+          {/* Riga 1: 2 card grandi asimmetriche */}
+          <div style={{display:'grid',gridTemplateColumns:'1.55fr 1fr',gap:'10px'}}>
+            {CATEGORIES.slice(0,2).map(cat=>(
+              <Link key={cat.id} href={`/categoria/${cat.slug}`} className="g-card" style={{display:'block',textDecoration:'none',borderRadius:'20px',overflow:'hidden'}}>
+                <div style={{position:'relative',height:'310px',overflow:'hidden'}}>
+                  {cat.image&&<img src={cat.image} alt={cat.name} style={{width:'100%',height:'100%',objectFit:'cover',filter:'brightness(0.27) saturate(0.5)',transition:'filter 0.7s ease,transform 0.8s cubic-bezier(0.16,1,0.3,1)'}}/>}
+                  <div style={{position:'absolute',inset:0,background:'linear-gradient(to top,rgba(5,5,10,0.98) 0%,rgba(5,5,10,0.3) 55%,transparent 100%)'}}/>
+                  <div style={{position:'absolute',top:'18px',left:'18px'}}>
+                    <span style={{fontFamily:'Outfit,system-ui,sans-serif',fontSize:'9px',fontWeight:700,letterSpacing:'0.18em',textTransform:'uppercase',color:'rgba(201,169,110,0.7)',background:'rgba(201,169,110,0.07)',border:'1px solid rgba(201,169,110,0.13)',borderRadius:'100px',padding:'4px 12px'}}>{cat.product_count} prodotti</span>
+                  </div>
+                  <div style={{position:'absolute',bottom:'26px',left:'26px',right:'26px'}}>
+                    <div style={{fontSize:'26px',marginBottom:'10px'}}>{cat.icon}</div>
+                    <h3 style={{fontFamily:'Cormorant Garamond,serif',color:'white',fontSize:'2rem',fontWeight:600,lineHeight:1.1,marginBottom:'8px'}}>{cat.name}</h3>
+                    <p style={{fontFamily:'Outfit,system-ui,sans-serif',color:'rgba(125,125,160,0.72)',fontSize:'12.5px',lineHeight:1.6,marginBottom:'16px'}}>{cat.description}</p>
+                    <div style={{display:'flex',alignItems:'center',gap:'5px',color:'#c9a96e',fontSize:'12px',fontWeight:600,fontFamily:'Outfit,system-ui,sans-serif'}}>Esplora <ArrowUpRight size={13}/></div>
                   </div>
                 </div>
-                <div style={{padding:'18px 20px 22px'}}>
-                  <h3 style={{fontFamily:'Playfair Display,serif',color:'white',fontSize:'18px',fontWeight:600,marginBottom:'7px'}}>{cat.name}</h3>
-                  <p style={{color:'rgba(130,130,165,0.7)',fontSize:'12px',lineHeight:1.55,fontFamily:'DM Sans,system-ui,sans-serif',marginBottom:'14px'}}>{cat.description}</p>
-                  <div style={{display:'flex',alignItems:'center',gap:'5px',fontSize:'12px',fontWeight:600,color:cat.color,fontFamily:'DM Sans,system-ui,sans-serif'}}>
-                    Scopri <ArrowRight size={12} />
+              </Link>
+            ))}
+          </div>
+          {/* Riga 2: 3 card piccole */}
+          <div style={{display:'grid',gridTemplateColumns:'1fr 1fr 1fr',gap:'10px'}}>
+            {CATEGORIES.slice(2).map(cat=>(
+              <Link key={cat.id} href={`/categoria/${cat.slug}`} className="g-card" style={{display:'block',textDecoration:'none',borderRadius:'20px',overflow:'hidden'}}>
+                <div style={{position:'relative',height:'210px',overflow:'hidden'}}>
+                  {cat.image&&<img src={cat.image} alt={cat.name} style={{width:'100%',height:'100%',objectFit:'cover',filter:'brightness(0.24) saturate(0.45)',transition:'filter 0.7s ease,transform 0.8s ease'}}/>}
+                  <div style={{position:'absolute',inset:0,background:'linear-gradient(to top,rgba(5,5,10,0.97) 0%,rgba(5,5,10,0.2) 55%,transparent 100%)'}}/>
+                  <div style={{position:'absolute',bottom:'18px',left:'18px',right:'18px'}}>
+                    <div style={{fontSize:'20px',marginBottom:'8px'}}>{cat.icon}</div>
+                    <h3 style={{fontFamily:'Cormorant Garamond,serif',color:'white',fontSize:'1.4rem',fontWeight:600,lineHeight:1.1,marginBottom:'6px'}}>{cat.name}</h3>
+                    <div style={{display:'flex',alignItems:'center',justifyContent:'space-between'}}>
+                      <span style={{fontFamily:'Outfit,system-ui,sans-serif',color:'rgba(100,100,135,0.65)',fontSize:'11px'}}>{cat.product_count} prodotti</span>
+                      <ArrowUpRight size={13} style={{color:'rgba(201,169,110,0.5)'}}/>
+                    </div>
                   </div>
                 </div>
               </Link>
@@ -101,96 +124,80 @@ export default function Home() {
         </div>
       </section>
 
-      <section style={{padding:'110px 0',background:'linear-gradient(180deg, #080810 0%, #0c0c1a 50%, #080810 100%)'}}>
-        <div className="max-w-5xl mx-auto px-5 lg:px-8">
-          <div style={{textAlign:'center',marginBottom:'72px'}}>
-            <p className="section-label" style={{marginBottom:'18px'}}>Processo semplice</p>
-            <h2 style={{fontFamily:'Playfair Display,serif',fontSize:'clamp(2.2rem,5vw,3.8rem)',fontWeight:700,color:'white',marginBottom:'16px',lineHeight:1.1}}>Come funziona</h2>
-            <p style={{color:'rgba(155,155,185,0.75)',fontSize:'17px',fontFamily:'DM Sans,system-ui,sans-serif'}}>Tre passi e il tuo prodotto digitale è pronto.</p>
+      {/* ── PROCESSO layout orizzontale ── */}
+      <section style={{background:'#090910',borderTop:'1px solid rgba(255,255,255,0.04)',borderBottom:'1px solid rgba(255,255,255,0.04)',padding:'100px 5%'}}>
+        <div style={{maxWidth:'1400px',margin:'0 auto',display:'grid',gridTemplateColumns:'1fr 2fr',gap:'80px',alignItems:'start'}}>
+          <div style={{position:'sticky',top:'120px'}}>
+            <span className="overline" style={{marginBottom:'18px'}}>Come funziona</span>
+            <h2 style={{fontFamily:'Cormorant Garamond,serif',fontSize:'clamp(2.8rem,5vw,4.5rem)',fontWeight:600,color:'white',lineHeight:0.95,letterSpacing:'-0.025em'}}>
+              Tre<br/><em className="gold" style={{fontStyle:'italic'}}>semplici</em><br/>passi.
+            </h2>
           </div>
-          <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(260px,1fr))',gap:'20px'}}>
+          <div>
             {[
-              {n:'01',title:'Scegli',sub:'Esplora le categorie e trova il prodotto perfetto per il tuo business.',icon:'🎯',c:'#c9a96e'},
-              {n:'02',title:'Acquista',sub:'Paga in sicurezza con PayPal. Tutte le carte accettate, zero commissioni.',icon:'🔐',c:'#7c6af0'},
-              {n:'03',title:'Ricevi',sub:'File o contatto entro 24 ore. Revisioni incluse per i prodotti personalizzati.',icon:'📦',c:'#10b981'},
-            ].map((s,i)=>(
-              <div key={s.n} className="card" style={{padding:'40px 34px',position:'relative'}}>
-                <div style={{position:'absolute',top:'18px',right:'22px',fontFamily:'Playfair Display,serif',fontSize:'88px',fontWeight:800,color:`${s.c}04`,lineHeight:1,pointerEvents:'none',userSelect:'none',letterSpacing:'-0.05em'}}>{s.n}</div>
-                <div style={{width:'58px',height:'58px',borderRadius:'16px',background:`${s.c}10`,border:`1px solid ${s.c}22`,display:'flex',alignItems:'center',justifyContent:'center',fontSize:'26px',marginBottom:'22px'}}>{s.icon}</div>
-                <div style={{fontSize:'11px',fontWeight:700,letterSpacing:'0.1em',color:s.c,marginBottom:'10px',fontFamily:'DM Sans,system-ui,sans-serif',textTransform:'uppercase'}}>Step {s.n}</div>
-                <h3 style={{fontFamily:'Playfair Display,serif',color:'white',fontSize:'24px',fontWeight:700,marginBottom:'13px'}}>{s.title}</h3>
-                <p style={{color:'rgba(130,130,165,0.75)',fontSize:'14px',lineHeight:1.7,fontFamily:'DM Sans,system-ui,sans-serif'}}>{s.sub}</p>
+              {n:'01',t:'Scegli il servizio',d:'Esplora il catalogo. Ogni prodotto ha descrizione dettagliata, tempi chiari e lista esatta di cosa include. Nessuna sorpresa.'},
+              {n:'02',t:'Acquista con PayPal',d:'Tutte le carte accettate. Transazione 100% protetta. Rimborso completo entro 7 giorni, senza domande o spiegazioni.'},
+              {n:'03',t:'Ricevi in 24 ore',d:'File digitale direttamente in email. Per i prodotti personalizzati ti contattiamo entro poche ore. Revisioni sempre incluse.'},
+            ].map((s,i,arr)=>(
+              <div key={s.n} style={{display:'grid',gridTemplateColumns:'72px 1fr',gap:'20px',padding:'36px 0',borderBottom:i<arr.length-1?'1px solid rgba(255,255,255,0.045)':'none',alignItems:'start'}}>
+                <div style={{fontFamily:'Cormorant Garamond,serif',fontSize:'3.5rem',fontWeight:300,lineHeight:1,color:'rgba(201,169,110,0.16)',letterSpacing:'-0.05em'}}>{s.n}</div>
+                <div>
+                  <h3 style={{fontFamily:'Cormorant Garamond,serif',color:'white',fontSize:'1.65rem',fontWeight:600,marginBottom:'11px',lineHeight:1.15}}>{s.t}</h3>
+                  <p style={{fontFamily:'Outfit,system-ui,sans-serif',color:'rgba(115,115,150,0.8)',fontSize:'14px',lineHeight:1.75}}>{s.d}</p>
+                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section id="prodotti" style={{padding:'110px 0',background:'#080810'}}>
-        <div className="max-w-7xl mx-auto px-5 lg:px-8">
-          <div style={{display:'flex',alignItems:'flex-end',justifyContent:'space-between',marginBottom:'60px',flexWrap:'wrap',gap:'16px'}}>
-            <div>
-              <p className="section-label" style={{marginBottom:'14px'}}>Più venduti</p>
-              <h2 style={{fontFamily:'Playfair Display,serif',fontSize:'clamp(2.2rem,4vw,3.2rem)',fontWeight:700,color:'white',lineHeight:1.1}}>I più popolari</h2>
+      {/* ── PRODOTTI ── */}
+      <section style={{padding:'120px 5%',maxWidth:'1400px',margin:'0 auto'}}>
+        <div style={{display:'flex',alignItems:'flex-end',justifyContent:'space-between',marginBottom:'60px',flexWrap:'wrap',gap:'16px'}}>
+          <div>
+            <span className="overline" style={{marginBottom:'14px'}}>Più venduti</span>
+            <h2 style={{fontFamily:'Cormorant Garamond,serif',fontSize:'clamp(2.8rem,5.5vw,4.5rem)',fontWeight:600,color:'white',lineHeight:0.9,letterSpacing:'-0.025em'}}>
+              I più<br/><em className="gold" style={{fontStyle:'italic'}}>popolari</em>
+            </h2>
+          </div>
+          <Link href="/categoria/siti-web" className="g-btn g-btn-ghost" style={{borderRadius:'100px'}}>
+            Catalogo completo <ArrowRight size={14}/>
+          </Link>
+        </div>
+        <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:'14px'}}>
+          {featured.map((p,i)=>(
+            <ProductCard key={p.id} product={{...p,category:CATEGORIES.find(c=>c.id===p.category_id)}} delay={i*80}/>
+          ))}
+        </div>
+      </section>
+
+      {/* ── CTA banner editoriale ── */}
+      <section style={{padding:'0 5% 120px',maxWidth:'1400px',margin:'0 auto'}}>
+        <div style={{position:'relative',overflow:'hidden',border:'1px solid rgba(255,255,255,0.065)',borderRadius:'24px',background:'linear-gradient(135deg,rgba(255,255,255,0.024) 0%,rgba(255,255,255,0.008) 100%)',padding:'clamp(60px,9vw,100px)',display:'grid',gridTemplateColumns:'1fr auto',gap:'60px',alignItems:'center'}}>
+          <div style={{position:'absolute',top:'-25%',right:'-3%',width:'550px',height:'550px',borderRadius:'50%',background:'radial-gradient(circle,rgba(201,169,110,0.048) 0%,transparent 65%)',filter:'blur(55px)',pointerEvents:'none'}}/>
+          <div style={{position:'relative'}}>
+            <span className="overline" style={{marginBottom:'22px'}}>Inizia oggi</span>
+            <h2 style={{fontFamily:'Cormorant Garamond,serif',fontSize:'clamp(2.5rem,5.5vw,4.5rem)',fontWeight:600,color:'white',lineHeight:1.02,letterSpacing:'-0.025em',marginBottom:'22px'}}>
+              Ogni giorno senza<br/>
+              <em className="gold" style={{fontStyle:'italic'}}>presenza digitale</em><br/>
+              è un&apos;opportunità persa.
+            </h2>
+            <div style={{display:'flex',alignItems:'center',gap:'8px',fontFamily:'Outfit,system-ui,sans-serif',fontSize:'13px',color:'rgba(95,95,125,0.85)'}}>
+              <CheckCircle size={13} style={{color:'#4ade80',flexShrink:0}}/>
+              Rimborso 7 giorni &nbsp;·&nbsp; Nessun abbonamento &nbsp;·&nbsp; Tutto digitale
             </div>
-            <Link href="/categoria/siti-web" style={{display:'flex',alignItems:'center',gap:'7px',color:'#c9a96e',fontSize:'14px',fontWeight:600,textDecoration:'none',fontFamily:'DM Sans,system-ui,sans-serif'}}>
-              Vedi tutti <ArrowRight size={14} />
+          </div>
+          <div style={{display:'flex',flexDirection:'column',gap:'10px',minWidth:'215px',position:'relative'}}>
+            <Link href="#servizi" className="g-btn g-btn-gold" style={{borderRadius:'14px',justifyContent:'center',padding:'17px 28px',fontSize:'15px'}}>
+              Scopri i servizi <ArrowRight size={17}/>
+            </Link>
+            <Link href="/contatti" className="g-btn g-btn-ghost" style={{borderRadius:'14px',justifyContent:'center',fontSize:'14px'}}>
+              Hai domande?
             </Link>
           </div>
-          <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(300px,1fr))',gap:'20px'}}>
-            {featured.map((p,i)=>(
-              <ProductCard key={p.id} product={{...p,category:CATEGORIES.find(c=>c.id===p.category_id)}} delay={i*100} />
-            ))}
-          </div>
         </div>
       </section>
 
-      <section style={{padding:'80px 0',background:'#0c0c1a'}}>
-        <div className="max-w-7xl mx-auto px-5 lg:px-8">
-          <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(170px,1fr))',gap:'16px'}}>
-            {[
-              {v:'+200',l:'Clienti soddisfatti',e:'🎯'},
-              {v:'98%',l:'Soddisfazione media',e:'⭐'},
-              {v:'< 24h',l:'Tempo di risposta',e:'⚡'},
-              {v:'7 gg',l:'Rimborso garantito',e:'🛡️'},
-            ].map((s,i)=>(
-              <div key={s.l} className="card" style={{padding:'30px 24px',textAlign:'center'}}>
-                <div style={{fontSize:'30px',marginBottom:'10px'}}>{s.e}</div>
-                <div className="stat-number" style={{fontSize:'2.4rem',fontWeight:800,lineHeight:1,marginBottom:'9px'}}>{s.v}</div>
-                <div style={{fontSize:'12px',color:'rgba(120,120,155,0.7)',fontFamily:'DM Sans,system-ui,sans-serif',lineHeight:1.4}}>{s.l}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section style={{padding:'110px 0',background:'#080810'}}>
-        <div className="max-w-4xl mx-auto px-5 lg:px-8">
-          <div className="card" style={{padding:'clamp(52px,9vw,88px)',textAlign:'center',position:'relative',overflow:'hidden'}}>
-            <div style={{position:'absolute',top:'50%',left:'50%',transform:'translate(-50%,-50%)',width:'700px',height:'350px',background:'radial-gradient(ellipse, rgba(201,169,110,0.055) 0%, transparent 65%)',pointerEvents:'none'}} />
-            <div style={{position:'relative'}}>
-              <div style={{fontSize:'52px',marginBottom:'26px',lineHeight:1}}>🚀</div>
-              <h2 style={{fontFamily:'Playfair Display,serif',fontSize:'clamp(2.2rem,5.5vw,3.8rem)',fontWeight:800,color:'white',marginBottom:'22px',lineHeight:1.08}}>Pronto a partire?</h2>
-              <p style={{fontSize:'17px',color:'rgba(155,155,185,0.75)',maxWidth:'440px',margin:'0 auto 52px',lineHeight:1.75,fontFamily:'DM Sans,system-ui,sans-serif'}}>
-                Ogni giorno senza il tuo sito o automazione è un&apos;opportunità persa. Inizia oggi.
-              </p>
-              <div style={{display:'flex',flexWrap:'wrap',gap:'16px',justifyContent:'center',marginBottom:'36px'}}>
-                <Link href="#categorie" className="btn-primary" style={{fontSize:'16px',padding:'16px 44px'}}>
-                  Inizia ora <ArrowRight size={18} />
-                </Link>
-                <Link href="/contatti" className="btn-secondary" style={{fontSize:'16px',padding:'16px 44px'}}>
-                  Hai domande?
-                </Link>
-              </div>
-              <div style={{display:'flex',alignItems:'center',justifyContent:'center',gap:'7px',fontSize:'13px',color:'rgba(100,100,120,0.75)',fontFamily:'DM Sans,system-ui,sans-serif'}}>
-                <CheckCircle size={14} style={{color:'#22c55e'}} />
-                Rimborso 7 giorni &nbsp;&middot;&nbsp; Tutto digitale &nbsp;&middot;&nbsp; Nessun abbonamento
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-    </div>
+    </main>
   )
 }
