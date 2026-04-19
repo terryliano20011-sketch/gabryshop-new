@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import ParticlesHero from '@/components/ui/ParticlesHero'
 import { ArrowRight, ArrowUpRight, CheckCircle } from 'lucide-react'
 import { CATEGORIES, PRODUCTS } from '@/lib/data'
 import ProductCard from '@/components/product/ProductCard'
@@ -11,6 +12,8 @@ export default function Home() {
 
       {/* ══ HERO ══ */}
       <section style={{minHeight:'100svh', position:'relative', overflow:'hidden', display:'flex', flexDirection:'column', justifyContent:'center', paddingTop:'100px', paddingBottom:'80px'}}>
+
+        <ParticlesHero />
 
         {/* Glow */}
         <div style={{position:'absolute',inset:0,pointerEvents:'none'}}>

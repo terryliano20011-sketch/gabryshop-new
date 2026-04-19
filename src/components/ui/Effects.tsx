@@ -4,7 +4,6 @@ import { useEffect, useRef } from 'react'
 export default function Effects() {
   const cursorDotRef  = useRef<HTMLDivElement>(null)
   const cursorRingRef = useRef<HTMLDivElement>(null)
-  const canvasRef     = useRef<HTMLCanvasElement>(null)
 
   /* ── 1. CUSTOM CURSOR ── */
   useEffect(() => {
@@ -32,68 +31,6 @@ export default function Effects() {
     document.querySelectorAll('a,button,[role=button]').forEach(el => { el.addEventListener('mouseenter', over); el.addEventListener('mouseleave', out) })
     raf = requestAnimationFrame(tick)
     return () => { document.removeEventListener('mousemove', move); cancelAnimationFrame(raf) }
-  }, [])
-
-  /* ── 2. PARTICLES CANVAS ── */
-  useEffect(() => {
-    const canvas = canvasRef.current
-    if (!canvas) return
-    const ctx = canvas.getContext('2d')!
-    let W = canvas.width  = window.innerWidth
-    let H = canvas.height = window.innerHeight
-    let raf: number
-
-    const particles = Array.from({ length: 55 }, () => ({
-      x: Math.random() * W, y: Math.random() * H,
-      vx: (Math.random() - 0.5) * 0.3,
-      vy: (Math.random() - 0.5) * 0.3,
-      r: Math.random() * 1.5 + 0.3,
-      a: Math.random(),
-    }))
-
-    let mouseX = W / 2, mouseY = H / 2
-    const onMouse = (e: MouseEvent) => { mouseX = e.clientX; mouseY = e.clientY }
-    document.addEventListener('mousemove', onMouse)
-
-    const draw = () => {
-      ctx.clearRect(0, 0, W, H)
-      particles.forEach(p => {
-        // Leggera attrazione verso il mouse
-        const dx = mouseX - p.x, dy = mouseY - p.y
-        const dist = Math.sqrt(dx * dx + dy * dy)
-        if (dist < 200) { p.vx += dx / dist * 0.012; p.vy += dy / dist * 0.012 }
-        p.vx *= 0.98; p.vy *= 0.98
-        p.x += p.vx; p.y += p.vy
-        if (p.x < 0) p.x = W; if (p.x > W) p.x = 0
-        if (p.y < 0) p.y = H; if (p.y > H) p.y = 0
-        ctx.beginPath()
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2)
-        ctx.fillStyle = `rgba(201,169,110,${p.a * 0.35})`
-        ctx.fill()
-      })
-      // Connessioni tra particelle vicine
-      for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
-          const dx = particles[i].x - particles[j].x
-          const dy = particles[i].y - particles[j].y
-          const d  = Math.sqrt(dx * dx + dy * dy)
-          if (d < 120) {
-            ctx.beginPath()
-            ctx.moveTo(particles[i].x, particles[i].y)
-            ctx.lineTo(particles[j].x, particles[j].y)
-            ctx.strokeStyle = `rgba(201,169,110,${(1 - d / 120) * 0.08})`
-            ctx.lineWidth = 0.5
-            ctx.stroke()
-          }
-        }
-      }
-      raf = requestAnimationFrame(draw)
-    }
-    draw()
-
-    const resize = () => { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight }
-    window.addEventListener('resize', resize)
-    return () => { cancelAnimationFrame(raf); document.removeEventListener('mousemove', onMouse); window.removeEventListener('resize', resize) }
   }, [])
 
   /* ── 3. SCROLL REVEAL ── */
@@ -234,9 +171,6 @@ export default function Effects() {
 
   return (
     <>
-      {/* Canvas particelle — solo nel hero */}
-      <canvas ref={canvasRef} style={{ position:'fixed', top:0, left:0, width:'100%', height:'100vh', pointerEvents:'none', zIndex:1, opacity:0.45 }}/>
-
       {/* Cursor dot */}
       <div ref={cursorDotRef}  style={{ position:'fixed', top:0, left:0, zIndex:99999, pointerEvents:'none', width:'6px', height:'6px', borderRadius:'50%', background:'#c9a96e', opacity:0, transition:'opacity 0.3s' }} className="hidden-mobile"/>
       {/* Cursor ring */}
