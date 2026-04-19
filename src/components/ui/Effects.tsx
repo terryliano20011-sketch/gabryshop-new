@@ -235,7 +235,7 @@ export default function Effects() {
   return (
     <>
       {/* Canvas particelle — solo nel hero */}
-      <canvas ref={canvasRef} style={{ position:'fixed', top:0, left:0, width:'100%', height:'100vh', pointerEvents:'none', zIndex:0, opacity:0.6 }}/>
+      <canvas ref={canvasRef} style={{ position:'fixed', top:0, left:0, width:'100%', height:'100vh', pointerEvents:'none', zIndex:1, opacity:0.45 }}/>
 
       {/* Cursor dot */}
       <div ref={cursorDotRef}  style={{ position:'fixed', top:0, left:0, zIndex:99999, pointerEvents:'none', width:'6px', height:'6px', borderRadius:'50%', background:'#c9a96e', opacity:0, transition:'opacity 0.3s' }} className="hidden-mobile"/>
