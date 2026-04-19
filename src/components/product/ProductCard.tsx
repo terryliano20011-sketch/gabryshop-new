@@ -68,13 +68,18 @@ export default function ProductCard({ product, delay=0 }: { product:Product; del
               style={{ padding:'9px 14px', borderRadius:'10px', border:'1px solid rgba(255,255,255,0.09)', color:'rgba(145,145,180,0.8)', fontSize:'12px', fontWeight:600, textDecoration:'none', fontFamily:'Outfit,system-ui,sans-serif', transition:'all 0.2s' }}>
               Dettagli
             </Link>
-            <button onClick={() => addItem(product)} disabled={inCart}
-              className={inCart ? '' : 'g-btn g-btn-gold'}
-              style={inCart
-                ? { padding:'9px 14px', borderRadius:'10px', background:'rgba(201,169,110,0.1)', color:'#c9a96e', border:'1px solid rgba(201,169,110,0.22)', fontSize:'12px', fontWeight:700, cursor:'default', fontFamily:'Outfit,system-ui,sans-serif' }
-                : { padding:'9px 14px', borderRadius:'10px', fontSize:'12px' }}>
-              {inCart ? '✓ Aggiunto' : 'Acquista'}
-            </button>
+            {inCart ? (
+              <Link href="/checkout"
+                style={{ padding:'9px 14px', borderRadius:'10px', background:'rgba(201,169,110,0.1)', color:'#c9a96e', border:'1px solid rgba(201,169,110,0.22)', fontSize:'12px', fontWeight:700, fontFamily:'Outfit,system-ui,sans-serif', textDecoration:'none', display:'inline-flex', alignItems:'center' }}>
+                ✓ Checkout
+              </Link>
+            ) : (
+              <Link href={`/prodotto/${product.slug}`}
+                className="g-btn g-btn-gold"
+                style={{ padding:'9px 14px', borderRadius:'10px', fontSize:'12px', textDecoration:'none' }}>
+                Acquista
+              </Link>
+            )}
           </div>
         </div>
       </div>
