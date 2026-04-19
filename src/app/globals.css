@@ -637,3 +637,38 @@ html, body { overflow-x: hidden; max-width: 100vw; }
     width: 100% !important;
   }
 }
+
+/* ── RIPPLE ── */
+@keyframes ripple {
+  to { transform: scale(1); opacity: 0; }
+}
+
+/* ── TYPEWRITER cursor blink ── */
+[data-typewriter]::after {
+  content: '|';
+  color: #c9a96e;
+  animation: blink 0.75s step-end infinite;
+  margin-left: 2px;
+}
+@keyframes blink {
+  0%,100% { opacity: 1; }
+  50%      { opacity: 0; }
+}
+
+/* ── TILT card no transition durante hover ── */
+.g-card { transform-style: preserve-3d; will-change: transform; }
+
+/* ── SCROLL REVEAL init ── */
+.sr {
+  opacity: 0;
+  transform: translateY(28px) scale(0.98);
+  transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1);
+}
+
+/* ── CURSOR ── */
+@media (hover: hover) and (min-width: 1025px) {
+  * { cursor: none !important; }
+}
+@media (hover: none), (max-width: 1024px) {
+  .hidden-mobile { display: none !important; }
+}

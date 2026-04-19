@@ -34,7 +34,7 @@ export default function Home() {
           {/* Titolo centrato */}
           <h1 className="hero-parallax" style={{fontFamily:'Cormorant Garamond,serif',fontSize:'clamp(3.5rem,8vw,8rem)',fontWeight:600,lineHeight:0.92,letterSpacing:'-0.025em',color:'white',marginBottom:'64px',textAlign:'center'}}>
             Il tuo<br/>
-            <em className="gold" style={{fontStyle:'italic'}}>business</em><br/>
+            <em className="gold" data-typewriter="business,digitale,futuro,successo" style={{fontStyle:'italic'}}>business</em><br/>
             digitale.
           </h1>
 

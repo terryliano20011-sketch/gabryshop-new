@@ -2,165 +2,245 @@
 import { useEffect, useRef } from 'react'
 
 export default function Effects() {
-  const cursorDotRef = useRef<HTMLDivElement>(null)
+  const cursorDotRef  = useRef<HTMLDivElement>(null)
   const cursorRingRef = useRef<HTMLDivElement>(null)
+  const canvasRef     = useRef<HTMLCanvasElement>(null)
 
+  /* ── 1. CUSTOM CURSOR ── */
   useEffect(() => {
-    const dot = cursorDotRef.current
+    const dot  = cursorDotRef.current
     const ring = cursorRingRef.current
     if (!dot || !ring) return
+    if (window.matchMedia('(hover:none)').matches) return
 
-    let mouseX = 0, mouseY = 0
-    let ringX = 0, ringY = 0
+    let mx = 0, my = 0, rx = 0, ry = 0, raf: number
+    const move = (e: MouseEvent) => {
+      mx = e.clientX; my = e.clientY
+      dot.style.transform  = `translate(${mx - 3}px,${my - 3}px)`
+      dot.style.opacity    = '1'
+      ring.style.opacity   = '1'
+    }
+    const tick = () => {
+      rx += (mx - rx) * 0.1; ry += (my - ry) * 0.1
+      ring.style.transform = `translate(${rx - 16}px,${ry - 16}px)`
+      raf = requestAnimationFrame(tick)
+    }
+    const over  = () => { ring.style.width='44px'; ring.style.height='44px'; ring.style.borderColor='rgba(201,169,110,0.8)'; ring.style.background='rgba(201,169,110,0.06)' }
+    const out   = () => { ring.style.width='32px'; ring.style.height='32px'; ring.style.borderColor='rgba(201,169,110,0.3)'; ring.style.background='transparent' }
+
+    document.addEventListener('mousemove', move)
+    document.querySelectorAll('a,button,[role=button]').forEach(el => { el.addEventListener('mouseenter', over); el.addEventListener('mouseleave', out) })
+    raf = requestAnimationFrame(tick)
+    return () => { document.removeEventListener('mousemove', move); cancelAnimationFrame(raf) }
+  }, [])
+
+  /* ── 2. PARTICLES CANVAS ── */
+  useEffect(() => {
+    const canvas = canvasRef.current
+    if (!canvas) return
+    const ctx = canvas.getContext('2d')!
+    let W = canvas.width  = window.innerWidth
+    let H = canvas.height = window.innerHeight
     let raf: number
 
-    const onMove = (e: MouseEvent) => {
-      dot.style.opacity = '1'
-      ring.style.opacity = '1'
-      mouseX = e.clientX
-      mouseY = e.clientY
-      dot.style.transform = `translate(${mouseX}px, ${mouseY}px)`
-    }
+    const particles = Array.from({ length: 55 }, () => ({
+      x: Math.random() * W, y: Math.random() * H,
+      vx: (Math.random() - 0.5) * 0.3,
+      vy: (Math.random() - 0.5) * 0.3,
+      r: Math.random() * 1.5 + 0.3,
+      a: Math.random(),
+    }))
 
-    const animate = () => {
-      ringX += (mouseX - ringX) * 0.12
-      ringY += (mouseY - ringY) * 0.12
-      ring.style.transform = `translate(${ringX}px, ${ringY}px)`
-      raf = requestAnimationFrame(animate)
-    }
+    let mouseX = W / 2, mouseY = H / 2
+    const onMouse = (e: MouseEvent) => { mouseX = e.clientX; mouseY = e.clientY }
+    document.addEventListener('mousemove', onMouse)
 
-    const onEnterLink = () => {
-      ring.style.width = '48px'
-      ring.style.height = '48px'
-      ring.style.borderColor = 'rgba(201,169,110,0.8)'
-      ring.style.background = 'rgba(201,169,110,0.06)'
-    }
-    const onLeaveLink = () => {
-      ring.style.width = '32px'
-      ring.style.height = '32px'
-      ring.style.borderColor = 'rgba(201,169,110,0.35)'
-      ring.style.background = 'transparent'
-    }
-
-    document.addEventListener('mousemove', onMove)
-    document.querySelectorAll('a,button').forEach(el => {
-      el.addEventListener('mouseenter', onEnterLink)
-      el.addEventListener('mouseleave', onLeaveLink)
-    })
-
-    raf = requestAnimationFrame(animate)
-    return () => {
-      document.removeEventListener('mousemove', onMove)
-      cancelAnimationFrame(raf)
-    }
-  }, [])
-
-  // ── Scroll reveal ──
-  useEffect(() => {
-    const els = document.querySelectorAll('.sr')
-    if (!els.length) return
-
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          const el = e.target as HTMLElement
-          const delay = el.dataset.delay || '0'
-          setTimeout(() => {
-            el.style.opacity = '1'
-            el.style.transform = 'translateY(0) scale(1)'
-          }, Number(delay))
-          io.unobserve(el)
-        }
+    const draw = () => {
+      ctx.clearRect(0, 0, W, H)
+      particles.forEach(p => {
+        // Leggera attrazione verso il mouse
+        const dx = mouseX - p.x, dy = mouseY - p.y
+        const dist = Math.sqrt(dx * dx + dy * dy)
+        if (dist < 200) { p.vx += dx / dist * 0.012; p.vy += dy / dist * 0.012 }
+        p.vx *= 0.98; p.vy *= 0.98
+        p.x += p.vx; p.y += p.vy
+        if (p.x < 0) p.x = W; if (p.x > W) p.x = 0
+        if (p.y < 0) p.y = H; if (p.y > H) p.y = 0
+        ctx.beginPath()
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2)
+        ctx.fillStyle = `rgba(201,169,110,${p.a * 0.35})`
+        ctx.fill()
       })
-    }, { threshold: 0.12 })
+      // Connessioni tra particelle vicine
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x
+          const dy = particles[i].y - particles[j].y
+          const d  = Math.sqrt(dx * dx + dy * dy)
+          if (d < 120) {
+            ctx.beginPath()
+            ctx.moveTo(particles[i].x, particles[i].y)
+            ctx.lineTo(particles[j].x, particles[j].y)
+            ctx.strokeStyle = `rgba(201,169,110,${(1 - d / 120) * 0.08})`
+            ctx.lineWidth = 0.5
+            ctx.stroke()
+          }
+        }
+      }
+      raf = requestAnimationFrame(draw)
+    }
+    draw()
 
-    els.forEach(el => io.observe(el))
-    return () => io.disconnect()
+    const resize = () => { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight }
+    window.addEventListener('resize', resize)
+    return () => { cancelAnimationFrame(raf); document.removeEventListener('mousemove', onMouse); window.removeEventListener('resize', resize) }
   }, [])
 
-  // ── Counter animation ──
+  /* ── 3. SCROLL REVEAL ── */
   useEffect(() => {
-    const counters = document.querySelectorAll('[data-counter]')
-    if (!counters.length) return
+    const run = () => {
+      document.querySelectorAll<HTMLElement>('.sr:not(.sr-done)').forEach((el, i) => {
+        const delay = Number(el.dataset.delay || i * 60)
+        const io = new IntersectionObserver(([e]) => {
+          if (!e.isIntersecting) return
+          setTimeout(() => { el.style.opacity = '1'; el.style.transform = 'translateY(0) scale(1)' }, delay)
+          el.classList.add('sr-done')
+          io.disconnect()
+        }, { threshold: 0.1 })
+        io.observe(el)
+      })
+    }
+    run()
+    const t = setTimeout(run, 800)
+    return () => clearTimeout(t)
+  }, [])
 
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
+  /* ── 4. COUNTER ANIMATION ── */
+  useEffect(() => {
+    document.querySelectorAll<HTMLElement>('[data-counter]').forEach(el => {
+      const io = new IntersectionObserver(([e]) => {
         if (!e.isIntersecting) return
-        const el = e.target as HTMLElement
         const target = parseFloat(el.dataset.counter || '0')
-        const isPercent = el.dataset.counterSuffix === '%'
-        const isPlus = el.dataset.counterPrefix === '+'
-        const duration = 1800
-        const start = performance.now()
-
+        const suffix = el.dataset.counterSuffix || ''
+        const prefix = el.dataset.counterPrefix || ''
+        const dur = 2000; const start = performance.now()
         const tick = (now: number) => {
-          const p = Math.min((now - start) / duration, 1)
-          const ease = 1 - Math.pow(1 - p, 3)
-          const val = Math.round(target * ease)
-          el.textContent = (isPlus ? '+' : '') + val + (isPercent ? '%' : (el.dataset.counterSuffix || ''))
+          const p = Math.min((now - start) / dur, 1)
+          const ease = 1 - Math.pow(1 - p, 4)
+          el.textContent = prefix + Math.round(target * ease) + suffix
           if (p < 1) requestAnimationFrame(tick)
         }
         requestAnimationFrame(tick)
-        io.unobserve(el)
-      })
-    }, { threshold: 0.5 })
-
-    counters.forEach(el => io.observe(el))
-    return () => io.disconnect()
+        io.disconnect()
+      }, { threshold: 0.5 })
+      io.observe(el)
+    })
   }, [])
 
-  // ── Parallax hero ──
+  /* ── 5. TYPEWRITER sull'headline ── */
   useEffect(() => {
-    const hero = document.querySelector('.hero-parallax') as HTMLElement
-    if (!hero) return
+    const el = document.querySelector<HTMLElement>('[data-typewriter]')
+    if (!el) return
+    const words = el.dataset.typewriter?.split(',') || []
+    if (!words.length) return
+    let wi = 0, ci = 0, deleting = false
+    const type = () => {
+      const word = words[wi]
+      if (!deleting) {
+        el.textContent = word.slice(0, ci + 1)
+        ci++
+        if (ci === word.length) { deleting = true; setTimeout(type, 1800); return }
+      } else {
+        el.textContent = word.slice(0, ci - 1)
+        ci--
+        if (ci === 0) { deleting = false; wi = (wi + 1) % words.length }
+      }
+      setTimeout(type, deleting ? 55 : 110)
+    }
+    setTimeout(type, 1200)
+  }, [])
 
+  /* ── 6. RIPPLE sui bottoni ── */
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      const btn = (e.target as HTMLElement).closest('.g-btn-gold') as HTMLElement
+      if (!btn) return
+      const r   = btn.getBoundingClientRect()
+      const rip = document.createElement('span')
+      const size = Math.max(r.width, r.height) * 2
+      rip.style.cssText = `
+        position:absolute;border-radius:50%;pointer-events:none;
+        width:${size}px;height:${size}px;
+        left:${e.clientX - r.left - size / 2}px;
+        top:${e.clientY - r.top - size / 2}px;
+        background:rgba(255,255,255,0.18);
+        transform:scale(0);animation:ripple .55s ease-out forwards;`
+      btn.style.overflow = 'hidden'
+      btn.appendChild(rip)
+      setTimeout(() => rip.remove(), 600)
+    }
+    document.addEventListener('click', handler)
+    return () => document.removeEventListener('click', handler)
+  }, [])
+
+  /* ── 7. PARALLAX su più elementi ── */
+  useEffect(() => {
     const onScroll = () => {
       const y = window.scrollY
-      hero.style.transform = `translateY(${y * 0.15}px)`
-      hero.style.opacity = String(1 - y / 600)
+      document.querySelectorAll<HTMLElement>('[data-parallax]').forEach(el => {
+        const speed = parseFloat(el.dataset.parallax || '0.1')
+        el.style.transform = `translateY(${y * speed}px)`
+      })
+      // Fade hero
+      const hero = document.querySelector<HTMLElement>('.hero-parallax')
+      if (hero) {
+        hero.style.opacity = String(Math.max(0, 1 - y / 500))
+        hero.style.transform = `translateY(${y * 0.12}px)`
+      }
     }
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  // ── Magnetic buttons ──
+  /* ── 8. MAGNETIC BUTTONS ── */
   useEffect(() => {
-    const btns = document.querySelectorAll('.g-btn-gold')
-    btns.forEach(btn => {
-      const el = btn as HTMLElement
-      el.addEventListener('mousemove', (e: any) => {
-        const r = el.getBoundingClientRect()
-        const x = e.clientX - r.left - r.width / 2
-        const y = e.clientY - r.top - r.height / 2
-        el.style.transform = `translate(${x * 0.18}px, ${y * 0.18}px) translateY(-1px)`
+    document.querySelectorAll<HTMLElement>('.g-btn-gold').forEach(btn => {
+      btn.addEventListener('mousemove', (e: any) => {
+        const r = btn.getBoundingClientRect()
+        const x = (e.clientX - r.left - r.width  / 2) * 0.2
+        const y = (e.clientY - r.top  - r.height / 2) * 0.2
+        btn.style.transform = `translate(${x}px,${y}px) translateY(-1px)`
       })
-      el.addEventListener('mouseleave', () => {
-        el.style.transform = ''
+      btn.addEventListener('mouseleave', () => { btn.style.transform = '' })
+    })
+  }, [])
+
+  /* ── 9. SMOOTH TILT sulle card ── */
+  useEffect(() => {
+    document.querySelectorAll<HTMLElement>('.g-card').forEach(card => {
+      card.addEventListener('mousemove', (e: any) => {
+        const r   = card.getBoundingClientRect()
+        const x   = (e.clientX - r.left) / r.width  - 0.5
+        const y   = (e.clientY - r.top)  / r.height - 0.5
+        card.style.transform = `perspective(600px) rotateY(${x * 6}deg) rotateX(${-y * 6}deg) translateZ(4px)`
+      })
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = ''
+        card.style.transition = 'transform 0.5s cubic-bezier(0.16,1,0.3,1)'
+        setTimeout(() => { card.style.transition = '' }, 500)
       })
     })
   }, [])
 
   return (
     <>
-      {/* Custom cursor — solo desktop */}
-      <div ref={cursorDotRef} style={{
-        position:'fixed', top:0, left:0, zIndex:99999, pointerEvents:'none',
-        width:'6px', height:'6px', borderRadius:'50%',
-        background:'#c9a96e',
-        transform:'translate(-50%,-50%)',
-        transition:'opacity 0.2s',
-        marginLeft:'-3px', marginTop:'-3px',
-        opacity:0,
-      }} className="hidden-mobile"/>
-      <div ref={cursorRingRef} style={{
-        position:'fixed', top:0, left:0, zIndex:99998, pointerEvents:'none',
-        width:'32px', height:'32px', borderRadius:'50%',
-        border:'1px solid rgba(201,169,110,0.35)',
-        transform:'translate(-50%,-50%)',
-        transition:'width 0.3s ease, height 0.3s ease, border-color 0.3s ease, background 0.3s ease',
-        marginLeft:'-16px', marginTop:'-16px',
-        opacity:0,
-      }} className="hidden-mobile"/>
+      {/* Canvas particelle — solo nel hero */}
+      <canvas ref={canvasRef} style={{ position:'fixed', top:0, left:0, width:'100%', height:'100vh', pointerEvents:'none', zIndex:0, opacity:0.6 }}/>
+
+      {/* Cursor dot */}
+      <div ref={cursorDotRef}  style={{ position:'fixed', top:0, left:0, zIndex:99999, pointerEvents:'none', width:'6px', height:'6px', borderRadius:'50%', background:'#c9a96e', opacity:0, transition:'opacity 0.3s' }} className="hidden-mobile"/>
+      {/* Cursor ring */}
+      <div ref={cursorRingRef} style={{ position:'fixed', top:0, left:0, zIndex:99998, pointerEvents:'none', width:'32px', height:'32px', borderRadius:'50%', border:'1px solid rgba(201,169,110,0.3)', opacity:0, transition:'width .3s,height .3s,border-color .3s,background .3s,opacity .3s' }} className="hidden-mobile"/>
     </>
   )
 }
