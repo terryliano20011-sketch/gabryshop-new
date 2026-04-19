@@ -1,30 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { createClient } from '@supabase/supabase-js'
 
 async function getPayPalToken() {
   const clientId = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID!
   const secret = process.env.PAYPAL_CLIENT_SECRET!
   const base64 = Buffer.from(`${clientId}:${secret}`).toString('base64')
-  
-  // Prova prima live, fallback sandbox
-  const urls = [
-    'https://api-m.paypal.com/v1/oauth2/token',
-    'https://api-m.sandbox.paypal.com/v1/oauth2/token'
-  ]
-  
-  for (const url of urls) {
+  for (const url of ['https://api-m.paypal.com/v1/oauth2/token','https://api-m.sandbox.paypal.com/v1/oauth2/token']) {
     try {
-      const res = await fetch(url, {
-        method: 'POST',
-        headers: {
-          Authorization: `Basic ${base64}`,
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: 'grant_type=client_credentials',
-      })
+      const res = await fetch(url, { method:'POST', headers:{ Authorization:`Basic ${base64}`, 'Content-Type':'application/x-www-form-urlencoded' }, body:'grant_type=client_credentials' })
       const data = await res.json()
-      if (data.access_token) {
-        return { token: data.access_token, baseUrl: url.replace('/v1/oauth2/token', '') }
-      }
+      if (data.access_token) return { token: data.access_token, baseUrl: url.replace('/v1/oauth2/token','') }
     } catch {}
   }
   throw new Error('PayPal auth failed')
@@ -36,32 +21,66 @@ export async function POST(req: NextRequest) {
     const { token, baseUrl } = await getPayPalToken()
     const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://gabryshop-digitale.vercel.app'
 
+    // 1. Salva ordine su Supabase PRIMA del pagamento
+    let supabaseOrderId: string | null = null
+    try {
+      const supabase = createClient(
+        process.env.NEXT_PUBLIC_SUPABASE_URL!,
+        process.env.SUPABASE_SERVICE_ROLE_KEY!
+      )
+      const { data: order, error } = await supabase
+        .from('orders')
+        .insert({
+          customer_name: form.name,
+          customer_email: form.email,
+          customer_vat: form.vat || null,
+          items: items.map((item: any) => ({
+            product_id: item.product.id,
+            product_name: item.product.name,
+            price: item.product.price,
+            quantity: item.quantity,
+            briefing: item.briefing || null,
+          })),
+          total: total,
+          discount_amount: 0,
+          coupon_code: form.coupon || null,
+          status: 'pending',
+          briefing: items.reduce((acc: any, item: any) => {
+            if (item.briefing && Object.keys(item.briefing).length > 0) {
+              acc[item.product.name] = item.briefing
+            }
+            return acc
+          }, {}),
+        })
+        .select('id')
+        .single()
+
+      if (!error && order) supabaseOrderId = order.id
+    } catch (e) {
+      console.error('Supabase order save error:', e)
+      // Continua comunque col pagamento
+    }
+
+    // 2. Crea ordine PayPal
     const orderItems = items.map((item: any) => ({
       name: item.product.name.substring(0, 127),
-      unit_amount: { currency_code: 'EUR', value: Number(item.product.price).toFixed(2) },
+      unit_amount: { currency_code:'EUR', value: Number(item.product.price).toFixed(2) },
       quantity: String(item.quantity),
     }))
 
-    const totalFixed = Number(total).toFixed(2)
-
     const res = await fetch(`${baseUrl}/v2/checkout/orders`, {
       method: 'POST',
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json',
-      },
+      headers: { Authorization:`Bearer ${token}`, 'Content-Type':'application/json' },
       body: JSON.stringify({
         intent: 'CAPTURE',
         purchase_units: [{
           amount: {
             currency_code: 'EUR',
-            value: totalFixed,
-            breakdown: {
-              item_total: { currency_code: 'EUR', value: totalFixed },
-            },
+            value: Number(total).toFixed(2),
+            breakdown: { item_total: { currency_code:'EUR', value: Number(total).toFixed(2) } },
           },
           items: orderItems,
-          custom_id: JSON.stringify({ email: form.email, name: form.name }),
+          custom_id: supabaseOrderId || JSON.stringify({ email: form.email }),
         }],
         payment_source: {
           paypal: {
@@ -70,7 +89,6 @@ export async function POST(req: NextRequest) {
               cancel_url: `${siteUrl}/checkout`,
               brand_name: 'GabryShop',
               locale: 'it-IT',
-              landing_page: 'LOGIN',
               user_action: 'PAY_NOW',
             }
           }
@@ -79,18 +97,15 @@ export async function POST(req: NextRequest) {
     })
 
     const order = await res.json()
-    console.log('PayPal response:', JSON.stringify(order))
-    
     const approveUrl = order.links?.find((l: any) => l.rel === 'approve' || l.rel === 'payer-action')?.href
-    
+
     if (!approveUrl) {
-      console.error('No approve URL. Order:', JSON.stringify(order))
-      return NextResponse.json({ error: 'Errore PayPal: ' + (order.message || 'nessun link approvazione') }, { status: 500 })
+      return NextResponse.json({ error: 'Errore PayPal: ' + (order.message || 'no link') }, { status: 500 })
     }
-    
-    return NextResponse.json({ orderId: order.id, approveUrl })
+
+    return NextResponse.json({ orderId: order.id, approveUrl, supabaseOrderId })
   } catch (error: any) {
     console.error('PayPal error:', error)
-    return NextResponse.json({ error: error.message || 'Errore creazione ordine' }, { status: 500 })
+    return NextResponse.json({ error: error.message || 'Errore' }, { status: 500 })
   }
 }
