@@ -15,6 +15,8 @@ export default function Effects() {
     let raf: number
 
     const onMove = (e: MouseEvent) => {
+      dot.style.opacity = '1'
+      ring.style.opacity = '1'
       mouseX = e.clientX
       mouseY = e.clientY
       dot.style.transform = `translate(${mouseX}px, ${mouseY}px)`
@@ -148,6 +150,7 @@ export default function Effects() {
         transform:'translate(-50%,-50%)',
         transition:'opacity 0.2s',
         marginLeft:'-3px', marginTop:'-3px',
+        opacity:0,
       }} className="hidden-mobile"/>
       <div ref={cursorRingRef} style={{
         position:'fixed', top:0, left:0, zIndex:99998, pointerEvents:'none',
@@ -156,6 +159,7 @@ export default function Effects() {
         transform:'translate(-50%,-50%)',
         transition:'width 0.3s ease, height 0.3s ease, border-color 0.3s ease, background 0.3s ease',
         marginLeft:'-16px', marginTop:'-16px',
+        opacity:0,
       }} className="hidden-mobile"/>
     </>
   )
