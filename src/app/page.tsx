@@ -32,7 +32,7 @@ export default function Home() {
           </div>
 
           {/* Titolo centrato */}
-          <h1 style={{fontFamily:'Cormorant Garamond,serif',fontSize:'clamp(3.5rem,8vw,8rem)',fontWeight:600,lineHeight:0.92,letterSpacing:'-0.025em',color:'white',marginBottom:'64px',textAlign:'center'}}>
+          <h1 className="hero-parallax" style={{fontFamily:'Cormorant Garamond,serif',fontSize:'clamp(3.5rem,8vw,8rem)',fontWeight:600,lineHeight:0.92,letterSpacing:'-0.025em',color:'white',marginBottom:'64px',textAlign:'center'}}>
             Il tuo<br/>
             <em className="gold" style={{fontStyle:'italic'}}>business</em><br/>
             digitale.
@@ -60,12 +60,17 @@ export default function Home() {
             {/* Destra: stats orizzontali */}
             <div style={{display:'flex',justifyContent:'flex-end',gap:'32px'}}>
               {[
-                {n:'+200',l:'Clienti'},
-                {n:'98%', l:'Soddisfazione'},
-                {n:'24h', l:'Consegna'},
-              ].map(s => (
+                {n:'+200',l:'Clienti',counter:'200',prefix:'+'},
+                {n:'98%', l:'Soddisfazione',counter:'98',suffix:'%'},
+                {n:'24h', l:'Consegna',counter:'24',suffix:'h'},
+              ].map((s:any) => (
                 <div key={s.l} style={{textAlign:'center'}}>
-                  <div style={{fontFamily:'Cormorant Garamond,serif',fontSize:'2.2rem',fontWeight:600,lineHeight:1,color:'white',marginBottom:'4px'}}>{s.n}</div>
+                  <div
+                    data-counter={s.counter}
+                    data-counter-suffix={s.suffix||''}
+                    data-counter-prefix={s.prefix||''}
+                    style={{fontFamily:'Cormorant Garamond,serif',fontSize:'2.2rem',fontWeight:600,lineHeight:1,color:'white',marginBottom:'4px'}}
+                  >{s.n}</div>
                   <div style={{fontFamily:'Outfit,system-ui,sans-serif',fontSize:'10px',color:'rgba(100,100,135,0.6)',letterSpacing:'0.06em',textTransform:'uppercase'}}>{s.l}</div>
                 </div>
               ))}
@@ -89,7 +94,7 @@ export default function Home() {
 
       {/* ══ SERVIZI ══ */}
       <section id="servizi" style={{padding:'100px 6%',maxWidth:'1200px',margin:'0 auto'}}>
-        <div style={{display:'flex',alignItems:'flex-end',justifyContent:'space-between',marginBottom:'56px',flexWrap:'wrap',gap:'24px'}}>
+        <div className="sr" style={{display:'flex',alignItems:'flex-end',justifyContent:'space-between',marginBottom:'56px',flexWrap:'wrap',gap:'24px'}}>
           <div>
             <span className="overline" style={{marginBottom:'14px'}}>Categorie</span>
             <h2 style={{fontFamily:'Cormorant Garamond,serif',fontSize:'clamp(2.5rem,5vw,4.5rem)',fontWeight:600,color:'white',lineHeight:0.93,letterSpacing:'-0.025em'}}>
@@ -104,7 +109,7 @@ export default function Home() {
         <div style={{display:'flex',flexDirection:'column',gap:'10px'}}>
           <div className="grid-services-top" style={{display:'grid',gridTemplateColumns:'1.6fr 1fr',gap:'10px'}}>
             {CATEGORIES.slice(0,2).map(cat => (
-              <Link key={cat.id} href={`/categoria/${cat.slug}`} className="g-card" style={{display:'block',textDecoration:'none',borderRadius:'20px',overflow:'hidden'}}>
+              <Link key={cat.id} href={`/categoria/${cat.slug}`} className="g-card sr" style={{display:'block',textDecoration:'none',borderRadius:'20px',overflow:'hidden'}}>
                 <div style={{position:'relative',height:'300px',overflow:'hidden'}}>
                   {cat.image && <img src={cat.image} alt={cat.name} style={{width:'100%',height:'100%',objectFit:'cover',filter:'brightness(0.28) saturate(0.55)',transition:'filter 0.6s ease,transform 0.8s cubic-bezier(0.16,1,0.3,1)'}}/>}
                   <div style={{position:'absolute',inset:0,background:'linear-gradient(to top,rgba(5,5,10,0.98) 0%,rgba(5,5,10,0.3) 55%,transparent 100%)'}}/>
@@ -123,7 +128,7 @@ export default function Home() {
           </div>
           <div className="grid-services-bottom" style={{display:'grid',gridTemplateColumns:'1fr 1fr 1fr',gap:'10px'}}>
             {CATEGORIES.slice(2).map(cat => (
-              <Link key={cat.id} href={`/categoria/${cat.slug}`} className="g-card" style={{display:'block',textDecoration:'none',borderRadius:'20px',overflow:'hidden'}}>
+              <Link key={cat.id} href={`/categoria/${cat.slug}`} className="g-card sr" style={{display:'block',textDecoration:'none',borderRadius:'20px',overflow:'hidden'}}>
                 <div style={{position:'relative',height:'200px',overflow:'hidden'}}>
                   {cat.image && <img src={cat.image} alt={cat.name} style={{width:'100%',height:'100%',objectFit:'cover',filter:'brightness(0.25) saturate(0.45)',transition:'all 0.6s ease'}}/>}
                   <div style={{position:'absolute',inset:0,background:'linear-gradient(to top,rgba(5,5,10,0.97) 0%,rgba(5,5,10,0.2) 55%,transparent 100%)'}}/>
@@ -184,7 +189,7 @@ export default function Home() {
         </div>
         <div className="grid-products" style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:'14px'}}>
           {featured.map((p,i) => (
-            <ProductCard key={p.id} product={{...p,category:CATEGORIES.find(c=>c.id===p.category_id)}} delay={i*80}/>
+            <div key={p.id} className="sr" style={{transitionDelay:`${i*120}ms`}}><ProductCard product={{...p,category:CATEGORIES.find(c=>c.id===p.category_id)}} delay={i*80}/></div>
           ))}
         </div>
       </section>
