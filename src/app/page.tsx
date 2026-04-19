@@ -39,7 +39,7 @@ export default function Home() {
           </h1>
 
           {/* Riga info: 3 blocchi orizzontali */}
-          <div style={{display:'grid',gridTemplateColumns:'1fr auto 1fr',gap:'48px',alignItems:'center',marginBottom:'56px'}}>
+          <div className="hero-info-row">
 
             {/* Sinistra: copy */}
             <p style={{fontFamily:'Outfit,system-ui,sans-serif',fontSize:'15px',lineHeight:1.85,color:'rgba(145,145,178,0.85)'}}>
@@ -48,7 +48,7 @@ export default function Home() {
             </p>
 
             {/* Centro: CTA */}
-            <div style={{display:'flex',flexDirection:'column',gap:'10px',minWidth:'240px'}}>
+            <div className="hero-cta-col">
               <Link href="#servizi" className="g-btn g-btn-gold" style={{justifyContent:'space-between',padding:'15px 22px',borderRadius:'14px',fontSize:'15px',fontWeight:600}}>
                 Scopri i servizi <ArrowRight size={17}/>
               </Link>
@@ -58,7 +58,7 @@ export default function Home() {
             </div>
 
             {/* Destra: stats orizzontali */}
-            <div style={{display:'flex',justifyContent:'flex-end',gap:'32px'}}>
+            <div className="hero-stats-row">
               {[
                 {n:'+200',l:'Clienti',counter:'200',prefix:'+'},
                 {n:'98%', l:'Soddisfazione',counter:'98',suffix:'%'},
