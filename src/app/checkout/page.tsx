@@ -133,7 +133,7 @@ export default function CheckoutPage() {
                         value={form.coupon}
                         onChange={e=>{setForm(f=>({...f,coupon:e.target.value}));setCouponError('')}}
                         onKeyDown={e=>e.key==='Enter'&&!couponOk&&applyCoupon()}
-                        disabled={couponOk} style={{...{}, opacity: couponOk ? 0.7 : 1}}/>
+                        disabled={couponOk}/>
                     </div>
                     <button onClick={applyCoupon} disabled={couponOk||!form.coupon.trim()||couponLoading}
                       style={{padding:'12px 20px',borderRadius:'12px',border:`1px solid ${couponOk?'rgba(74,222,128,0.3)':'rgba(201,169,110,0.28)'}`,
