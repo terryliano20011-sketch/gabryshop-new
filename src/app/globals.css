@@ -346,3 +346,7 @@ body::after {
   font-size: clamp(3rem, 7vw, 7.5rem) !important;
   line-height: 0.95 !important;
 }
+
+/* ══ COUPON INPUT STATES ══ */
+.coupon-valid .g-input { border-color: rgba(74,222,128,0.35) !important; background: rgba(74,222,128,0.03) !important; }
+.coupon-error .g-input { border-color: rgba(239,68,68,0.35) !important; background: rgba(239,68,68,0.03) !important; }

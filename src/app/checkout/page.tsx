@@ -17,9 +17,33 @@ export default function CheckoutPage() {
   const [acceptedTerms, setAcceptedTerms] = useState(false)
   const final = Math.max(0, total - discount)
 
-  const applyCoupon = () => {
-    if (form.coupon.toUpperCase() === 'GABRY10') { setDiscount(total * 0.1); setCouponOk(true) }
-    else alert('Coupon non valido')
+  const [couponLoading, setCouponLoading] = useState(false)
+  const [couponError, setCouponError] = useState('')
+  const [couponInfo, setCouponInfo] = useState<{label:string,description:string}|null>(null)
+
+  const applyCoupon = async () => {
+    if (!form.coupon.trim() || couponOk) return
+    setCouponLoading(true)
+    setCouponError('')
+    try {
+      const res = await fetch('/api/coupon/validate', {
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({ code: form.coupon, total })
+      })
+      const data = await res.json()
+      if (data.valid) {
+        setDiscount(data.discountAmount)
+        setCouponOk(true)
+        setCouponInfo({ label: data.label, description: data.description })
+      } else {
+        setCouponError(data.error)
+      }
+    } catch {
+      setCouponError('Errore di rete. Riprova.')
+    } finally {
+      setCouponLoading(false)
+    }
   }
 
   const handlePay = async () => {
@@ -99,15 +123,44 @@ export default function CheckoutPage() {
                   ))}
                 </div>
 
-                {/* Coupon */}
-                <div style={{display:'flex',gap:'10px',marginBottom:'24px'}}>
-                  <div style={{flex:1,position:'relative'}}>
-                    <Tag size={14} style={{position:'absolute',left:'14px',top:'50%',transform:'translateY(-50%)',color:'rgba(120,120,155,0.4)'}}/>
-                    <input className="g-input" placeholder="Codice coupon (prova: GABRY10)" style={{paddingLeft:'40px'}} value={form.coupon} onChange={e=>setForm(f=>({...f,coupon:e.target.value}))} disabled={couponOk}/>
+                {/* Coupon avanzato */}
+                <div style={{marginBottom:'24px'}}>
+                  <div style={{display:'flex',gap:'10px',marginBottom:'8px'}}>
+                    <div style={{flex:1,position:'relative'}}>
+                      <Tag size={14} style={{position:'absolute',left:'14px',top:'50%',transform:'translateY(-50%)',color:'rgba(120,120,155,0.4)'}}/>
+                      <input className="g-input" placeholder="Codice coupon (es. GABRY10, WELCOME5...)"
+                        style={{paddingLeft:'40px',borderColor:couponOk?'rgba(74,222,128,0.3)':couponError?'rgba(239,68,68,0.3)':'rgba(255,255,255,0.08)'}}
+                        value={form.coupon}
+                        onChange={e=>{setForm(f=>({...f,coupon:e.target.value}));setCouponError('')}}
+                        onKeyDown={e=>e.key==='Enter'&&!couponOk&&applyCoupon()}
+                        disabled={couponOk}/>
+                    </div>
+                    <button onClick={applyCoupon} disabled={couponOk||!form.coupon.trim()||couponLoading}
+                      style={{padding:'12px 20px',borderRadius:'12px',border:`1px solid ${couponOk?'rgba(74,222,128,0.3)':'rgba(201,169,110,0.28)'}`,
+                        color:couponOk?'#4ade80':'#c9a96e',background:couponOk?'rgba(74,222,128,0.06)':'rgba(201,169,110,0.06)',
+                        fontFamily:'Outfit,system-ui,sans-serif',fontSize:'13px',fontWeight:600,cursor:'pointer',whiteSpace:'nowrap',
+                        opacity:(couponOk||!form.coupon.trim())?0.6:1,transition:'all 0.2s'}}>
+                      {couponLoading?'...' : couponOk?'✓ Applicato':'Applica'}
+                    </button>
                   </div>
-                  <button onClick={applyCoupon} disabled={couponOk} style={{padding:'12px 20px',borderRadius:'12px',border:'1px solid rgba(201,169,110,0.28)',color:'#c9a96e',background:'rgba(201,169,110,0.06)',fontFamily:'Outfit,system-ui,sans-serif',fontSize:'13px',fontWeight:600,cursor:'pointer',whiteSpace:'nowrap',opacity:couponOk?0.5:1}}>
-                    {couponOk?'✓ Applicato':'Applica'}
-                  </button>
+                  {couponOk && couponInfo && (
+                    <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',padding:'10px 14px',background:'rgba(74,222,128,0.05)',border:'1px solid rgba(74,222,128,0.15)',borderRadius:'10px'}}>
+                      <div style={{display:'flex',alignItems:'center',gap:'8px'}}>
+                        <span style={{fontSize:'16px'}}>🎁</span>
+                        <div>
+                          <div style={{fontFamily:'Outfit,system-ui,sans-serif',color:'#4ade80',fontSize:'13px',fontWeight:600}}>{couponInfo.label} applicato!</div>
+                          <div style={{fontFamily:'Outfit,system-ui,sans-serif',color:'rgba(120,120,155,0.65)',fontSize:'11px'}}>{couponInfo.description}</div>
+                        </div>
+                      </div>
+                      <button onClick={()=>{setCouponOk(false);setCouponInfo(null);setDiscount(0);setForm(f=>({...f,coupon:''}))}}
+                        style={{background:'transparent',border:'none',color:'rgba(120,120,155,0.5)',cursor:'pointer',fontSize:'16px',lineHeight:1}}>×</button>
+                    </div>
+                  )}
+                  {couponError && (
+                    <div style={{padding:'10px 14px',background:'rgba(239,68,68,0.05)',border:'1px solid rgba(239,68,68,0.15)',borderRadius:'10px'}}>
+                      <span style={{fontFamily:'Outfit,system-ui,sans-serif',color:'#f87171',fontSize:'12px'}}>❌ {couponError}</span>
+                    </div>
+                  )}
                 </div>
 
                 <button onClick={() => setStep(1)} className="g-btn g-btn-gold" style={{width:'100%',justifyContent:'center',borderRadius:'14px',padding:'16px',fontSize:'15px'}}>
@@ -269,9 +322,18 @@ export default function CheckoutPage() {
             </div>
             <div style={{height:'1px',background:'rgba(255,255,255,0.05)',marginBottom:'16px'}}/>
             {discount > 0 && (
-              <div style={{display:'flex',justifyContent:'space-between',marginBottom:'10px'}}>
-                <span style={{color:'rgba(120,120,155,0.65)',fontFamily:'Outfit,system-ui,sans-serif',fontSize:'13px'}}>Sconto coupon</span>
-                <span style={{color:'#4ade80',fontFamily:'Outfit,system-ui,sans-serif',fontSize:'13px',fontWeight:600}}>−€{discount.toFixed(2)}</span>
+              <div style={{marginBottom:'12px'}}>
+                <div style={{display:'flex',justifyContent:'space-between',marginBottom:'6px'}}>
+                  <span style={{color:'rgba(120,120,155,0.65)',fontFamily:'Outfit,system-ui,sans-serif',fontSize:'13px'}}>Subtotale</span>
+                  <span style={{color:'rgba(150,150,185,0.8)',fontFamily:'Outfit,system-ui,sans-serif',fontSize:'13px'}}>€{total.toFixed(2)}</span>
+                </div>
+                <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',padding:'8px 12px',background:'rgba(74,222,128,0.04)',border:'1px solid rgba(74,222,128,0.12)',borderRadius:'8px'}}>
+                  <div>
+                    <span style={{color:'#4ade80',fontFamily:'Outfit,system-ui,sans-serif',fontSize:'12px',fontWeight:600}}>🎁 {form.coupon.toUpperCase()}</span>
+                    {couponInfo && <div style={{color:'rgba(74,222,128,0.7)',fontSize:'10px',fontFamily:'Outfit,system-ui,sans-serif'}}>{couponInfo.description}</div>}
+                  </div>
+                  <span style={{color:'#4ade80',fontFamily:'Outfit,system-ui,sans-serif',fontSize:'13px',fontWeight:700}}>−€{discount.toFixed(2)}</span>
+                </div>
               </div>
             )}
             <div style={{display:'flex',justifyContent:'space-between',alignItems:'baseline',marginBottom:'6px'}}>
