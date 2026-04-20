@@ -133,7 +133,7 @@ export default function CheckoutPage() {
                         value={form.coupon}
                         onChange={e=>{setForm(f=>({...f,coupon:e.target.value}));setCouponError('')}}
                         onKeyDown={e=>e.key==='Enter'&&!couponOk&&applyCoupon()}
-                        disabled={couponOk}/>
+                        disabled={couponOk} style={{...{}, opacity: couponOk ? 0.7 : 1}}/>
                     </div>
                     <button onClick={applyCoupon} disabled={couponOk||!form.coupon.trim()||couponLoading}
                       style={{padding:'12px 20px',borderRadius:'12px',border:`1px solid ${couponOk?'rgba(74,222,128,0.3)':'rgba(201,169,110,0.28)'}`,
@@ -152,8 +152,9 @@ export default function CheckoutPage() {
                           <div style={{fontFamily:'Outfit,system-ui,sans-serif',color:'rgba(120,120,155,0.65)',fontSize:'11px'}}>{couponInfo.description}</div>
                         </div>
                       </div>
-                      <button onClick={()=>{setCouponOk(false);setCouponInfo(null);setDiscount(0);setForm(f=>({...f,coupon:''}))}}
-                        style={{background:'transparent',border:'none',color:'rgba(120,120,155,0.5)',cursor:'pointer',fontSize:'16px',lineHeight:1}}>×</button>
+                      <div style={{fontFamily:'Outfit,system-ui,sans-serif',fontSize:'10px',color:'rgba(74,222,128,0.6)',background:'rgba(74,222,128,0.06)',padding:'3px 8px',borderRadius:'100px',border:'1px solid rgba(74,222,128,0.15)'}}>
+                        applicato
+                      </div>
                     </div>
                   )}
                   {couponError && (

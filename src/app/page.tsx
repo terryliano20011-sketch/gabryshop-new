@@ -212,14 +212,20 @@ export default function Home() {
               Cosa dicono<br/><em className="gold" style={{fontStyle:'italic'}}>i clienti</em>
             </h2>
           </div>
-          <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:'16px'}}>
+          <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:'16px',gridAutoRows:'1fr'}}>
             {[
-              {name:'Marco Bianchi',role:'Titolare Pizzeria',avatar:'🍕',text:'Menu digitale consegnato in meno di 24 ore. I clienti lo adorano e abbiamo già ridotto gli errori degli ordini del 40%. Qualità eccezionale.',stars:5},
-              {name:'Sara Lombardi',role:'Freelance Designer',avatar:'🎨',text:'Portfolio online professionale in 48 ore. Gabry ha capito esattamente quello che volevo. Già ricevuto 3 nuovi clienti grazie al sito.',stars:5},
-              {name:'Agenzia Meridian',role:'Marketing Agency',avatar:'🏢',text:'Il chatbot WhatsApp ha automatizzato il 70% del supporto clienti. ROI incredibile per il prezzo pagato. Lo consiglio a tutti.',stars:5},
-              {name:'Laura Esposito',role:'Parrucchiera',avatar:'✂️',text:'Sito bellissimo e funzionale. Le prenotazioni online sono aumentate del 60% nel primo mese. Assistenza super disponibile.',stars:5},
-              {name:'Roberto Mancini',role:'PMI owner',avatar:'📊',text:'Il foglio Excel per la gestione dipendenti ha rivoluzionato il nostro processo. Risparmio 3 ore a settimana. Vale 10 volte il prezzo.',stars:5},
-              {name:'Cristina Ferro',role:'Ristorante La Grotta',avatar:'🍽️',text:'Menu multilingua perfetto per i turisti stranieri. Aggiornamenti in tempo reale fantastici. Professionalità e velocità uniche.',stars:5},
+              {name:'Marco Bianchi',    role:'Titolare Pizzeria',       avatar:'🍕', text:'Menu digitale consegnato in meno di 24 ore. I clienti lo adorano e abbiamo già ridotto gli errori degli ordini del 40%. Qualità eccezionale.',stars:5},
+              {name:'Sara Lombardi',    role:'Freelance Designer',      avatar:'🎨', text:'Portfolio online professionale in 48 ore. Gabry ha capito esattamente quello che volevo. Già ricevuto 3 nuovi clienti grazie al sito.',stars:5},
+              {name:'Agenzia Meridian', role:'Marketing Agency',        avatar:'🏢', text:'Il chatbot WhatsApp ha automatizzato il 70% del supporto clienti. ROI incredibile per il prezzo pagato. Lo consiglio a tutti.',stars:5},
+              {name:'Laura Esposito',   role:'Parrucchiera',            avatar:'✂️', text:'Sito bellissimo e funzionale. Le prenotazioni online sono aumentate del 60% nel primo mese. Assistenza super disponibile.',stars:5},
+              {name:'Roberto Mancini',  role:'PMI owner',               avatar:'📊', text:'Il foglio Excel per la gestione dipendenti ha rivoluzionato il nostro processo. Risparmio 3 ore a settimana. Vale 10 volte il prezzo.',stars:5},
+              {name:'Cristina Ferro',   role:'Ristorante La Grotta',    avatar:'🍽️', text:'Menu multilingua perfetto per i turisti stranieri. Aggiornamenti in tempo reale fantastici. Professionalità e velocità uniche.',stars:5},
+              {name:'Davide Romano',    role:'E-commerce Fashion',      avatar:'👕', text:'Landing page convertissima! Tasso di conversione salito dal 1.2% al 4.8% in due settimane. Investimento che si è ripagato in 3 giorni.',stars:5},
+              {name:'Giulia Marchetti', role:'Studio Pilates',          avatar:'🧘', text:'App prenotazioni semplicissima da usare. Le clienti la adorano e ho zero telefonate per gli appuntamenti. Consiglio vivamente!',stars:5},
+              {name:'Luca Ferretti',    role:'Consulente Finanziario',  avatar:'💼', text:'Sito aziendale elegante e professionale. In meno di 48 ore avevo già il sito online. Supporto impeccabile anche dopo la consegna.',stars:5},
+              {name:'Anna Conti',       role:'Gelateria Artigianale',   avatar:'🍦', text:'Il menu QR con le foto dei gelati ha triplicato le ordinazioni di gusti nuovi. I clienti lo trovano divertente e pratico.',stars:5},
+              {name:'Matteo Gallo',     role:'Personal Trainer',        avatar:'💪', text:'Automazione Instagram DM fantastica. Rispondo a 200 messaggi al giorno in automatico. Ho guadagnato 2 ore libere ogni giorno.',stars:5},
+              {name:'Federica Bruno',   role:'Avvocato',                avatar:'⚖️', text:'Sito professionale esattamente come lo immaginavo. Design sobrio ed elegante. I clienti mi dicono che ispira subito fiducia.',stars:5},
             ].map((t,i) => (
               <div key={t.name} className="testimonial-card sr" data-delay={String(i*80)}>
                 <div style={{display:'flex',gap:'4px',marginBottom:'16px'}}>
