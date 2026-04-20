@@ -298,3 +298,51 @@ body::after {
 .input,.input-luxury { width:100%; padding:12px 16px; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:12px; color:#e2e2ea; font-family:"Outfit",system-ui,sans-serif; font-size:14px; outline:none; }
 .text-gold,.stat-number { background:linear-gradient(120deg,#c4923a,#e8c878,#b8924a,#f0d590); background-size:300% 300%; -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
 .dot-grid { background-image:radial-gradient(circle,rgba(255,255,255,0.04) 1px,transparent 1px); background-size:28px 28px; }
+
+/* ══ HERO INFO ROW ══ */
+.hero-info-row {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 48px;
+  align-items: center;
+  margin-bottom: 56px;
+}
+.hero-stats-row {
+  display: flex;
+  justify-content: flex-end;
+  gap: 32px;
+}
+.hero-cta-col {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 240px;
+}
+
+@media (max-width: 900px) {
+  .hero-info-row {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 24px !important;
+    margin-bottom: 36px !important;
+    align-items: center !important;
+  }
+  .hero-stats-row {
+    justify-content: center !important;
+    gap: 32px !important;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    width: 100%;
+  }
+  .hero-cta-col {
+    min-width: unset !important;
+    width: 100% !important;
+    max-width: 320px !important;
+  }
+}
+
+/* ══ FIX font size hero ══ */
+.hero-parallax {
+  font-size: clamp(3rem, 7vw, 7.5rem) !important;
+  line-height: 0.95 !important;
+}
