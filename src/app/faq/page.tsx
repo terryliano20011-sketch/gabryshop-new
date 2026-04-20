@@ -42,7 +42,7 @@ export default function FAQPage() {
         <div className="g-card" style={{padding:'36px',borderRadius:'20px',textAlign:'center'}}>
           <h3 style={{fontFamily:'Cormorant Garamond,serif',color:'white',fontSize:'1.6rem',fontWeight:600,marginBottom:'10px'}}>Non hai trovato risposta?</h3>
           <p style={{fontFamily:'Outfit,system-ui,sans-serif',color:'rgba(120,120,155,0.7)',fontSize:'14px',marginBottom:'24px'}}>Contattaci e ti risponderemo entro 24 ore.</p>
-          <a href="https://wa.me/393401234567" target="_blank" className="g-btn g-btn-gold" style={{borderRadius:'12px',display:'inline-flex'}}>
+          <a href="https://wa.me/393518435322" target="_blank" className="g-btn g-btn-gold" style={{borderRadius:'12px',display:'inline-flex'}}>
             💬 Scrivici su WhatsApp <ArrowRight size={15}/>
           </a>
         </div>

@@ -65,7 +65,7 @@ export async function POST(req: NextRequest) {
     <!-- Footer -->
     <div style="text-align:center;color:#8888aa;font-size:12px;">
       <p>Hai domande? <a href="mailto:info@gabryshop.it" style="color:#c9a96e;">info@gabryshop.it</a> · 
-        <a href="https://wa.me/393401234567" style="color:#c9a96e;">WhatsApp</a></p>
+        <a href="https://wa.me/393518435322" style="color:#c9a96e;">WhatsApp</a></p>
       <p style="margin-top:8px;">© ${new Date().getFullYear()} GabryShop — 
         <a href="${process.env.NEXT_PUBLIC_SITE_URL}/privacy" style="color:#c9a96e;">Privacy</a> · 
         <a href="${process.env.NEXT_PUBLIC_SITE_URL}/termini" style="color:#c9a96e;">Termini</a>
