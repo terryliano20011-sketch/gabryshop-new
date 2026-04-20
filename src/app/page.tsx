@@ -268,6 +268,38 @@ export default function Home() {
         </div>
       </section>
 
+
+      {/* ── JSON-LD Structured Data ── */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{__html: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Store",
+          "name": "GabryShop",
+          "description": "Servizi digitali professionali: siti web, menu digitali, automazioni, app mobile e fogli Excel.",
+          "url": "https://gabryshop-digitale.vercel.app",
+          "logo": "https://gabryshop-digitale.vercel.app/icon.svg",
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "contactType": "customer service",
+            "email": "terryliano20011@gmail.com",
+            "availableLanguage": "Italian"
+          },
+          "offers": {
+            "@type": "AggregateOffer",
+            "priceCurrency": "EUR",
+            "lowPrice": "10",
+            "highPrice": "40",
+            "offerCount": "29"
+          },
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.9",
+            "reviewCount": "200",
+            "bestRating": "5"
+          }
+        })}}
+      />
     </main>
   )
 }

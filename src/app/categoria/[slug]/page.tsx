@@ -1,3 +1,5 @@
+export { generateMetadata } from './metadata'
+
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
