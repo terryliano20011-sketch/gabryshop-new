@@ -14,6 +14,7 @@ export default function CheckoutPage() {
   const [couponOk, setCouponOk] = useState(false)
   const [payMethod, setPayMethod] = useState<'paypal'|'card'>('paypal')
   const [loading, setLoading]   = useState(false)
+  const [acceptedTerms, setAcceptedTerms] = useState(false)
   const final = Math.max(0, total - discount)
 
   const applyCoupon = () => {
@@ -216,9 +217,26 @@ export default function CheckoutPage() {
                   </div>
                 </div>
 
+                {/* Checkbox T&C obbligatorio */}
+                <div style={{padding:'16px 20px',background:'rgba(255,255,255,0.02)',border:`1px solid ${acceptedTerms?'rgba(201,169,110,0.2)':'rgba(255,255,255,0.06)'}`,borderRadius:'14px',marginBottom:'16px',transition:'border-color 0.2s'}}>
+                  <label style={{display:'flex',alignItems:'flex-start',gap:'12px',cursor:'pointer'}}>
+                    <div onClick={()=>setAcceptedTerms(v=>!v)}
+                      style={{width:'20px',height:'20px',borderRadius:'6px',border:`2px solid ${acceptedTerms?'#c9a96e':'rgba(120,120,155,0.4)'}`,background:acceptedTerms?'#c9a96e':'transparent',flexShrink:0,marginTop:'1px',display:'flex',alignItems:'center',justifyContent:'center',transition:'all 0.2s',cursor:'pointer'}}>
+                      {acceptedTerms&&<span style={{color:'#08060a',fontSize:'12px',fontWeight:900,lineHeight:1}}>✓</span>}
+                    </div>
+                    <span style={{fontFamily:'Outfit,system-ui,sans-serif',fontSize:'13px',color:'rgba(150,150,185,0.82)',lineHeight:1.6}}>
+                      Ho letto e accetto i{' '}
+                      <a href="/termini" target="_blank" style={{color:'#c9a96e',textDecoration:'underline'}}>Termini e Condizioni</a>
+                      {' '}e la{' '}
+                      <a href="/privacy" target="_blank" style={{color:'#c9a96e',textDecoration:'underline'}}>Privacy Policy</a>.
+                      {' '}<strong style={{color:'rgba(240,180,180,0.85)'}}>Confermo che i prodotti digitali personalizzati non sono rimborsabili dopo l&apos;inizio della lavorazione.</strong>
+                    </span>
+                  </label>
+                </div>
+
                 <div style={{display:'flex',gap:'12px'}}>
                   <button onClick={() => setStep(1)} className="g-btn g-btn-ghost" style={{borderRadius:'14px',padding:'14px 24px'}}><ArrowLeft size={15}/> Indietro</button>
-                  <button onClick={handlePay} disabled={loading} className="g-btn g-btn-gold" style={{flex:1,justifyContent:'center',borderRadius:'14px',padding:'16px',fontSize:'15px',opacity:loading?0.7:1}}>
+                  <button onClick={handlePay} disabled={loading||!acceptedTerms} className="g-btn g-btn-gold" style={{flex:1,justifyContent:'center',borderRadius:'14px',padding:'16px',fontSize:'15px',opacity:(loading||!acceptedTerms)?0.45:1}}>
                     {loading ? '⏳ Reindirizzamento...' : payMethod === 'card' ? `💳 Paga €${final.toFixed(2)} con carta` : `🅿️ Paga €${final.toFixed(2)} con PayPal`}
                   </button>
                 </div>
