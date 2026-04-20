@@ -17,7 +17,7 @@ async function getPayPalToken() {
 
 export async function POST(req: NextRequest) {
   try {
-    const { items, form, total } = await req.json()
+    const { items, form, total: final } = await req.json()
     const { token, baseUrl } = await getPayPalToken()
     const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://gabryshop-digitale.vercel.app'
 
@@ -101,6 +101,31 @@ export async function POST(req: NextRequest) {
 
     if (!approveUrl) {
       return NextResponse.json({ error: 'Errore PayPal: ' + (order.message || 'no link') }, { status: 500 })
+    }
+
+    // 3. Invia email di conferma
+    try {
+      const emailPayload = {
+        customerName: form.name,
+        customerEmail: form.email,
+        orderId: supabaseOrderId || order.id,
+        items: items.map((item: any) => ({
+          product_name: item.product.name,
+          price: item.product.price,
+          quantity: item.quantity || 1,
+          briefing: item.briefing || null,
+        })),
+        total: final,
+        status: 'pending',
+      }
+      const siteBase = process.env.NEXT_PUBLIC_SITE_URL || 'https://gabryshop-digitale.vercel.app'
+      await fetch(`${siteBase}/api/email/order-confirmation`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(emailPayload),
+      })
+    } catch (emailErr) {
+      console.error('Email send error (non-blocking):', emailErr)
     }
 
     return NextResponse.json({ orderId: order.id, approveUrl, supabaseOrderId })
