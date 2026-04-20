@@ -41,7 +41,7 @@ export async function POST(req: NextRequest) {
             quantity: item.quantity,
             briefing: item.briefing || null,
           })),
-          total: total,
+          total: final,
           discount_amount: 0,
           coupon_code: form.coupon || null,
           status: 'pending',
@@ -76,8 +76,8 @@ export async function POST(req: NextRequest) {
         purchase_units: [{
           amount: {
             currency_code: 'EUR',
-            value: Number(total).toFixed(2),
-            breakdown: { item_total: { currency_code:'EUR', value: Number(total).toFixed(2) } },
+            value: Number(final).toFixed(2),
+            breakdown: { item_total: { currency_code:'EUR', value: Number(final).toFixed(2) } },
           },
           items: orderItems,
           custom_id: supabaseOrderId || JSON.stringify({ email: form.email }),
