@@ -4,6 +4,7 @@ import { MessageCircle } from 'lucide-react'
 
 export default function WhatsAppButton() {
   const number = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '393518435322'
+  // Numero: +39 351 843 5322
   const message = encodeURIComponent('Ciao! Vorrei maggiori informazioni sui vostri servizi digitali.')
   const url = `https://wa.me/${number}?text=${message}`
 
