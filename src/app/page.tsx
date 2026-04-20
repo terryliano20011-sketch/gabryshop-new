@@ -26,6 +26,11 @@ export default function Home() {
 
         <div style={{maxWidth:'1200px',margin:'0 auto',padding:'0 6%',width:'100%',position:'relative'}}>
 
+          {/* Floating new badge */}
+          <div style={{marginBottom:'24px',display:'flex',justifyContent:'center'}}>
+            <span className="floating-label" style={{animation:'softPulse 3s ease-in-out infinite'}}>✨ Servizi digitali premium · Est. 2024</span>
+          </div>
+
           {/* Overline */}
           <div style={{display:'flex',alignItems:'center',gap:'16px',marginBottom:'56px'}}>
             <div style={{width:'32px',height:'1px',background:'rgba(201,169,110,0.5)'}}/>
@@ -194,6 +199,47 @@ export default function Home() {
           {featured.map((p,i) => (
             <div key={p.id} className="sr" style={{transitionDelay:`${i*120}ms`}}><ProductCard product={{...p,category:CATEGORIES.find(c=>c.id===p.category_id)}} delay={i*80}/></div>
           ))}
+        </div>
+      </section>
+
+
+      {/* ══ TESTIMONIALS ══ */}
+      <section style={{padding:'100px 6%',background:'#080810',borderTop:'1px solid rgba(255,255,255,0.04)',borderBottom:'1px solid rgba(255,255,255,0.04)'}}>
+        <div style={{maxWidth:'1200px',margin:'0 auto'}}>
+          <div style={{textAlign:'center',marginBottom:'64px'}}>
+            <span className="overline" style={{marginBottom:'16px',display:'block'}}>Recensioni</span>
+            <h2 style={{fontFamily:'Cormorant Garamond,serif',fontSize:'clamp(2.5rem,5vw,4rem)',fontWeight:600,color:'white',lineHeight:0.95,letterSpacing:'-0.025em'}}>
+              Cosa dicono<br/><em className="gold" style={{fontStyle:'italic'}}>i clienti</em>
+            </h2>
+          </div>
+          <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:'16px'}}>
+            {[
+              {name:'Marco Bianchi',role:'Titolare Pizzeria',avatar:'🍕',text:'Menu digitale consegnato in meno di 24 ore. I clienti lo adorano e abbiamo già ridotto gli errori degli ordini del 40%. Qualità eccezionale.',stars:5},
+              {name:'Sara Lombardi',role:'Freelance Designer',avatar:'🎨',text:'Portfolio online professionale in 48 ore. Gabry ha capito esattamente quello che volevo. Già ricevuto 3 nuovi clienti grazie al sito.',stars:5},
+              {name:'Agenzia Meridian',role:'Marketing Agency',avatar:'🏢',text:'Il chatbot WhatsApp ha automatizzato il 70% del supporto clienti. ROI incredibile per il prezzo pagato. Lo consiglio a tutti.',stars:5},
+              {name:'Laura Esposito',role:'Parrucchiera',avatar:'✂️',text:'Sito bellissimo e funzionale. Le prenotazioni online sono aumentate del 60% nel primo mese. Assistenza super disponibile.',stars:5},
+              {name:'Roberto Mancini',role:'PMI owner',avatar:'📊',text:'Il foglio Excel per la gestione dipendenti ha rivoluzionato il nostro processo. Risparmio 3 ore a settimana. Vale 10 volte il prezzo.',stars:5},
+              {name:'Cristina Ferro',role:'Ristorante La Grotta',avatar:'🍽️',text:'Menu multilingua perfetto per i turisti stranieri. Aggiornamenti in tempo reale fantastici. Professionalità e velocità uniche.',stars:5},
+            ].map((t,i) => (
+              <div key={t.name} className="testimonial-card sr" data-delay={String(i*80)}>
+                <div style={{display:'flex',gap:'4px',marginBottom:'16px'}}>
+                  {[...Array(t.stars)].map((_,j) => (
+                    <span key={j} style={{color:'#c9a96e',fontSize:'14px'}}>★</span>
+                  ))}
+                </div>
+                <p style={{fontFamily:'Outfit,system-ui,sans-serif',color:'rgba(165,165,195,0.85)',fontSize:'14px',lineHeight:1.75,marginBottom:'20px',fontStyle:'italic'}}>
+                  &ldquo;{t.text}&rdquo;
+                </p>
+                <div style={{display:'flex',alignItems:'center',gap:'12px',borderTop:'1px solid rgba(255,255,255,0.05)',paddingTop:'16px'}}>
+                  <div style={{width:'38px',height:'38px',borderRadius:'50%',background:'rgba(201,169,110,0.08)',border:'1px solid rgba(201,169,110,0.15)',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'18px'}}>{t.avatar}</div>
+                  <div>
+                    <div style={{fontFamily:'Outfit,system-ui,sans-serif',color:'white',fontSize:'13px',fontWeight:600}}>{t.name}</div>
+                    <div style={{fontFamily:'Outfit,system-ui,sans-serif',color:'rgba(120,120,155,0.6)',fontSize:'11px'}}>{t.role}</div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
