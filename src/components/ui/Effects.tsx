@@ -177,7 +177,6 @@ export default function Effects() {
 
 
 
-  /* ══ 11. VIGNETTE ══ */
   useEffect(() => {
     const div = document.createElement('div')
     div.style.cssText = 'position:fixed;inset:0;pointer-events:none;z-index:9994;background:radial-gradient(ellipse at center,transparent 55%,rgba(0,0,0,0.55) 100%);'
