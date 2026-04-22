@@ -73,6 +73,7 @@ export default function ParticlesHero() {
   return (
     <canvas
       ref={canvasRef}
+      id="particles-hero-canvas"
       style={{
         position: 'absolute',
         top: 0, left: 0,

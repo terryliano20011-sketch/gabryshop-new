@@ -175,40 +175,7 @@ export default function Effects() {
     })
   },[])
 
-  /* ══ 10. MOUSE GLOW TRAIL ══ */
-  useEffect(() => {
-    if (window.matchMedia('(hover:none)').matches) return
-    const canvas = document.createElement('canvas')
-    canvas.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9995;'
-    document.body.appendChild(canvas)
-    const ctx = canvas.getContext('2d')!
-    canvas.width = window.innerWidth
-    canvas.height = window.innerHeight
-    const trail:{x:number,y:number}[] = []
-    let mx=-200,my=-200,raf:number
-    const onMove = (e:MouseEvent)=>{mx=e.clientX;my=e.clientY}
-    document.addEventListener('mousemove', onMove)
-    const draw = () => {
-      ctx.clearRect(0,0,canvas.width,canvas.height)
-      trail.push({x:mx, y:my})
-      if (trail.length > 20) trail.shift()
-      trail.forEach((p,i) => {
-        const size = (i/trail.length)*20
-        ctx.beginPath()
-        ctx.arc(p.x, p.y, size, 0, Math.PI*2)
-        const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, size)
-        grad.addColorStop(0, `rgba(201,169,110,${(i/trail.length)*0.08})`)
-        grad.addColorStop(1, 'rgba(201,169,110,0)')
-        ctx.fillStyle = grad
-        ctx.fill()
-      })
-      raf = requestAnimationFrame(draw)
-    }
-    draw()
-    const resize = () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight }
-    window.addEventListener('resize', resize)
-    return () => { cancelAnimationFrame(raf); document.removeEventListener('mousemove', onMove); window.removeEventListener('resize', resize); canvas.remove() }
-  },[])
+
 
   /* ══ 11. VIGNETTE ══ */
   useEffect(() => {
