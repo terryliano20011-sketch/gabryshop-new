@@ -184,14 +184,12 @@ export default function Home() {
 
       {/* ══ PRODOTTI ══ */}
       <section style={{padding:'100px 6%',maxWidth:'1200px',margin:'0 auto'}}>
-        <div style={{display:'flex',alignItems:'flex-end',justifyContent:'space-between',marginBottom:'56px',flexWrap:'wrap',gap:'16px'}}>
-          <div>
-            <span className="overline" style={{marginBottom:'14px'}}>Più venduti</span>
-            <h2 style={{fontFamily:'Cormorant Garamond,serif',fontSize:'clamp(2.5rem,5vw,4rem)',fontWeight:600,color:'white',lineHeight:0.93,letterSpacing:'-0.025em'}}>
-              I più<br/><em className="gold" style={{fontStyle:'italic'}}>popolari</em>
-            </h2>
-          </div>
-          <Link href="/categoria/siti-web" className="g-btn g-btn-ghost" style={{borderRadius:'100px'}}>
+        <div style={{textAlign:'center',marginBottom:'56px'}}>
+          <span className="overline" style={{marginBottom:'14px',display:'block'}}>Più venduti</span>
+          <h2 style={{fontFamily:'Cormorant Garamond,serif',fontSize:'clamp(2.5rem,5vw,4rem)',fontWeight:600,color:'white',lineHeight:0.93,letterSpacing:'-0.025em',marginBottom:'24px'}}>
+            I più <em className="gold" style={{fontStyle:'italic'}}>popolari</em>
+          </h2>
+          <Link href="/categoria/siti-web" className="g-btn g-btn-ghost" style={{borderRadius:'100px',display:'inline-flex'}}>
             Catalogo completo <ArrowRight size={14}/>
           </Link>
         </div>
