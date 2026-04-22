@@ -28,13 +28,13 @@ export default function Home() {
 
           {/* Floating new badge */}
           <div style={{marginBottom:'24px',display:'flex',justifyContent:'center'}}>
-            <span className="floating-label" style={{animation:'softPulse 3s ease-in-out infinite'}}>✨ Servizi digitali premium · Est. 2024</span>
+            
           </div>
 
           {/* Overline */}
           <div style={{display:'flex',alignItems:'center',gap:'16px',marginBottom:'56px'}}>
             <div style={{width:'32px',height:'1px',background:'rgba(201,169,110,0.5)'}}/>
-            <span style={{fontFamily:'Outfit,system-ui,sans-serif',fontSize:'10px',fontWeight:700,letterSpacing:'0.22em',textTransform:'uppercase',color:'rgba(201,169,110,0.75)'}}>Servizi Digitali Professionali</span>
+            
             <div style={{flex:1,height:'1px',background:'linear-gradient(to right,rgba(201,169,110,0.2),transparent)'}}/>
             <span style={{fontFamily:'Outfit,system-ui,sans-serif',fontSize:'10px',color:'rgba(100,100,130,0.4)',letterSpacing:'0.12em'}}>EST. 2024</span>
           </div>
@@ -68,7 +68,7 @@ export default function Home() {
             {/* Destra: stats orizzontali */}
             <div className="hero-stats-row">
               {[
-                {n:'+200',l:'Clienti',counter:'200',prefix:'+'},
+                {n:'+32',l:'Clienti',counter:'32',prefix:'+'},
                 {n:'98%', l:'Soddisfazione',counter:'98',suffix:'%'},
                 {n:'24h', l:'Consegna',counter:'24',suffix:'h'},
               ].map((s:any) => (
@@ -91,7 +91,7 @@ export default function Home() {
             {[
               '🔒 Pagamenti sicuri PayPal',
               '⚡ Consegna 24-48 ore',
-              '⭐ +200 clienti soddisfatti',
+              '⭐ +32 clienti soddisfatti',
               '✅ Rimborso 7 giorni',
             ].map(b => (
               <span key={b} style={{fontFamily:'Outfit,system-ui,sans-serif',fontSize:'12px',color:'rgba(110,110,145,0.7)'}}>{b}</span>
@@ -301,7 +301,7 @@ export default function Home() {
           "aggregateRating": {
             "@type": "AggregateRating",
             "ratingValue": "4.9",
-            "reviewCount": "200",
+            "reviewCount": "32",
             "bestRating": "5"
           }
         })}}

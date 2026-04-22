@@ -72,7 +72,7 @@ export const PRODUCTS: Product[] = [
     badge: 'bestseller',
     includes: ['Design responsive mobile + desktop', 'SEO on-page ottimizzato', 'Form di contatto funzionante', 'Google Analytics integrato', 'File sorgente consegnato'],
     images: ['https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=800&q=80'],
-    rating: 4.9, review_count: 47, created_at: '2024-01-01',
+    rating: 4.9, review_count: 7, created_at: '2024-01-01',
   },
   {
     id: '2',
@@ -90,7 +90,7 @@ export const PRODUCTS: Product[] = [
     badge: 'customizable',
     includes: ['Galleria progetti con lightbox', 'Sezione about e bio', 'Form contatto', 'Integrazione social media', 'Design minimal premium'],
     images: ['https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=800&q=80'],
-    rating: 4.8, review_count: 31, created_at: '2024-01-01',
+    rating: 4.8, review_count: 5, created_at: '2024-01-01',
   },
   {
     id: '3',
@@ -108,7 +108,7 @@ export const PRODUCTS: Product[] = [
     badge: 'customizable',
     includes: ['Fino a 5 pagine personalizzate', 'CMS per modificare contenuti', 'Blog integrato', 'SEO ottimizzato', 'Hosting Vercel 1 anno'],
     images: ['https://images.unsplash.com/photo-1547658719-da2b51169166?w=800&q=80'],
-    rating: 4.8, review_count: 23, created_at: '2024-01-01',
+    rating: 4.8, review_count: 4, created_at: '2024-01-01',
   },
   {
     id: '4',
@@ -126,7 +126,7 @@ export const PRODUCTS: Product[] = [
     badge: 'bestseller',
     includes: ['Menu digitale integrato', 'Sistema prenotazioni tavoli', 'Galleria piatti', 'Mappa e orari apertura', 'Form contatto e WhatsApp'],
     images: ['https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80'],
-    rating: 4.9, review_count: 38, created_at: '2024-01-01',
+    rating: 4.9, review_count: 3, created_at: '2024-01-01',
   },
   {
     id: '5',
@@ -144,7 +144,7 @@ export const PRODUCTS: Product[] = [
     badge: '24h',
     includes: ['Galleria lavori e foto', 'Listino prezzi', 'Prenotazione online', 'Sezione team', 'Recensioni clienti'],
     images: ['https://images.unsplash.com/photo-1560066984-138dadb4c035?w=800&q=80'],
-    rating: 4.7, review_count: 19, created_at: '2024-01-01',
+    rating: 4.7, review_count: 3, created_at: '2024-01-01',
   },
   {
     id: '6',
@@ -162,7 +162,7 @@ export const PRODUCTS: Product[] = [
     badge: 'customizable',
     includes: ['Bio e presentazione', 'Sezione servizi', 'Casi studio', 'Testimonianze clienti', 'Form contatto premium'],
     images: ['https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=800&q=80'],
-    rating: 4.7, review_count: 14, created_at: '2024-01-01',
+    rating: 4.7, review_count: 2, created_at: '2024-01-01',
   },
   {
     id: '7',
@@ -180,7 +180,7 @@ export const PRODUCTS: Product[] = [
     badge: 'customizable',
     includes: ['Catalogo prodotti illimitato', 'Pagamenti Stripe + PayPal', 'Download automatico post-acquisto', 'Area clienti', 'Dashboard vendite'],
     images: ['https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80'],
-    rating: 4.8, review_count: 11, created_at: '2024-01-01',
+    rating: 4.8, review_count: 2, created_at: '2024-01-01',
   },
 
   // ─── MENU DIGITALI ───
@@ -200,7 +200,7 @@ export const PRODUCTS: Product[] = [
     badge: '24h',
     includes: ['QR code personalizzato', 'Allergenici EU conformi', 'Aggiornamenti illimitati', 'Multilingua IT + EN', '1 anno hosting incluso'],
     images: ['https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=800&q=80'],
-    rating: 5.0, review_count: 89, created_at: '2024-01-01',
+    rating: 5.0, review_count: 1, created_at: '2024-01-01',
   },
   {
     id: '9',
@@ -218,7 +218,7 @@ export const PRODUCTS: Product[] = [
     badge: '24h',
     includes: ['Design dark mode elegante', 'QR code con logo', 'Sezioni cocktail e spirits', 'Aggiornamenti 1 anno', 'Filtro per categoria'],
     images: ['https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=800&q=80'],
-    rating: 4.8, review_count: 34, created_at: '2024-01-01',
+    rating: 4.8, review_count: 1, created_at: '2024-01-01',
   },
   {
     id: '10',
@@ -236,7 +236,7 @@ export const PRODUCTS: Product[] = [
     badge: 'customizable',
     includes: ['Lista ingredienti per pizza', 'Filtro senza glutine / vegano', 'Prezzi con varianti', 'QR code personalizzato', 'Aggiornamenti illimitati'],
     images: ['https://images.unsplash.com/photo-1513104890138-7c749659a591?w=800&q=80'],
-    rating: 4.8, review_count: 27, created_at: '2024-01-01',
+    rating: 4.8, review_count: 1, created_at: '2024-01-01',
   },
   {
     id: '11',
@@ -254,7 +254,7 @@ export const PRODUCTS: Product[] = [
     badge: '24h',
     includes: ['Design colorato e appetitoso', 'Sezione "gusti del giorno"', 'Allergenici integrati', 'QR code personalizzato', 'Aggiornamenti stagionali'],
     images: ['https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=800&q=80'],
-    rating: 4.9, review_count: 22, created_at: '2024-01-01',
+    rating: 4.9, review_count: 1, created_at: '2024-01-01',
   },
   {
     id: '12',
@@ -272,7 +272,7 @@ export const PRODUCTS: Product[] = [
     badge: 'customizable',
     includes: ['4 lingue: IT, EN, DE, FR', 'Selezione lingua automatica', 'Allergenici in tutte le lingue', 'QR code unico per tutte le lingue', 'Aggiornamenti illimitati'],
     images: ['https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80'],
-    rating: 4.9, review_count: 18, created_at: '2024-01-01',
+    rating: 4.9, review_count: 1, created_at: '2024-01-01',
   },
   {
     id: '13',
@@ -290,7 +290,7 @@ export const PRODUCTS: Product[] = [
     badge: 'bestseller',
     includes: ['Ordini direttamente dal telefono', 'Notifiche in cucina in tempo reale', 'Pannello gestione ordini', 'Storico ordini per tavolo', 'QR code per ogni tavolo'],
     images: ['https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=800&q=80'],
-    rating: 4.9, review_count: 41, created_at: '2024-01-01',
+    rating: 4.9, review_count: 1, created_at: '2024-01-01',
   },
 
   // ─── FOGLI EXCEL ───
@@ -310,7 +310,7 @@ export const PRODUCTS: Product[] = [
     badge: '24h',
     includes: ['Dashboard scorte in tempo reale', 'Alert livello minimo automatico', 'Report mensili grafici', 'Gestione fornitori', 'Storico movimenti'],
     images: ['https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=800&q=80'],
-    rating: 4.7, review_count: 134, created_at: '2024-01-01',
+    rating: 4.7, review_count: 1, created_at: '2024-01-01',
   },
   {
     id: '15',
@@ -328,7 +328,7 @@ export const PRODUCTS: Product[] = [
     badge: '24h',
     includes: ['Generazione fatture automatica', 'Calcolo IVA automatico', 'Archivio clienti', 'Numerazione progressiva', 'Export PDF integrato'],
     images: ['https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&q=80'],
-    rating: 4.8, review_count: 67, created_at: '2024-01-01',
+    rating: 4.8, review_count: 1, created_at: '2024-01-01',
   },
   {
     id: '16',
@@ -346,7 +346,7 @@ export const PRODUCTS: Product[] = [
     badge: '24h',
     includes: ['Tracciamento entrate/uscite', 'Categorie personalizzabili', 'Grafici automatici mensili', 'Obiettivi di risparmio', 'Report annuale'],
     images: ['https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=800&q=80'],
-    rating: 4.7, review_count: 89, created_at: '2024-01-01',
+    rating: 4.7, review_count: 1, created_at: '2024-01-01',
   },
   {
     id: '17',
@@ -364,7 +364,7 @@ export const PRODUCTS: Product[] = [
     badge: '24h',
     includes: ['Foglio presenze mensile', 'Calcolo automatico straordinari', 'Gestione ferie e permessi', 'Report per la busta paga', 'Calendario turni'],
     images: ['https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800&q=80'],
-    rating: 4.6, review_count: 43, created_at: '2024-01-01',
+    rating: 4.6, review_count: 1, created_at: '2024-01-01',
   },
   {
     id: '18',
@@ -382,7 +382,7 @@ export const PRODUCTS: Product[] = [
     badge: 'bestseller',
     includes: ['Archivio clienti completo', 'Pipeline vendite visuale', 'Promemoria follow-up', 'Report performance commerciali', 'Storico comunicazioni'],
     images: ['https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80'],
-    rating: 4.8, review_count: 56, created_at: '2024-01-01',
+    rating: 4.8, review_count: 1, created_at: '2024-01-01',
   },
   {
     id: '19',
@@ -400,7 +400,7 @@ export const PRODUCTS: Product[] = [
     badge: '24h',
     includes: ['Diagramma di Gantt interattivo', 'Assegnazione task e risorse', 'Calcolo % completamento', 'Alert scadenze', 'Report stato progetto'],
     images: ['https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80'],
-    rating: 4.7, review_count: 38, created_at: '2024-01-01',
+    rating: 4.7, review_count: 1, created_at: '2024-01-01',
   },
   {
     id: '20',
@@ -418,7 +418,7 @@ export const PRODUCTS: Product[] = [
     badge: '24h',
     includes: ['Listino prezzi aggiornabile', 'Calcolo sconti automatico', 'Calcolo margini', 'Generazione preventivo PDF', 'Archivio preventivi inviati'],
     images: ['https://images.unsplash.com/photo-1568952433726-3896e3881c65?w=800&q=80'],
-    rating: 4.7, review_count: 29, created_at: '2024-01-01',
+    rating: 4.7, review_count: 1, created_at: '2024-01-01',
   },
 
   // ─── AUTOMAZIONI ───
@@ -438,7 +438,7 @@ export const PRODUCTS: Product[] = [
     badge: 'bestseller',
     includes: ['Setup WhatsApp Business API', 'Risposte automatiche 24/7', 'Gestione prenotazioni', 'Dashboard analytics', '1 mese supporto incluso'],
     images: ['https://images.unsplash.com/photo-1611262588024-d12430b98920?w=800&q=80'],
-    rating: 4.9, review_count: 31, created_at: '2024-01-01',
+    rating: 4.9, review_count: 1, created_at: '2024-01-01',
   },
   {
     id: '22',
@@ -456,7 +456,7 @@ export const PRODUCTS: Product[] = [
     badge: 'customizable',
     includes: ['Sequenza welcome email', 'Follow-up post acquisto', 'Newsletter automatica', 'Template email brandizzati', 'Report aperture e click'],
     images: ['https://images.unsplash.com/photo-1596526131083-e8c633c948d2?w=800&q=80'],
-    rating: 4.7, review_count: 19, created_at: '2024-01-01',
+    rating: 4.7, review_count: 1, created_at: '2024-01-01',
   },
   {
     id: '23',
@@ -474,7 +474,7 @@ export const PRODUCTS: Product[] = [
     badge: 'customizable',
     includes: ['Risposte automatiche DM', 'Qualificazione lead', 'Invio listino automatico', 'Prenotazione appuntamenti', 'Notifiche urgenti su WhatsApp'],
     images: ['https://images.unsplash.com/photo-1611262588024-d12430b98920?w=800&q=80'],
-    rating: 4.8, review_count: 22, created_at: '2024-01-01',
+    rating: 4.8, review_count: 1, created_at: '2024-01-01',
   },
   {
     id: '24',
@@ -492,7 +492,7 @@ export const PRODUCTS: Product[] = [
     badge: '24h',
     includes: ['Connessione form → Google Sheets', 'Notifiche WhatsApp / Telegram', 'Filtri e regole personalizzate', 'Dashboard dati automatica', 'Setup Make / Zapier'],
     images: ['https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80'],
-    rating: 4.7, review_count: 16, created_at: '2024-01-01',
+    rating: 4.7, review_count: 1, created_at: '2024-01-01',
   },
   {
     id: '25',
@@ -510,7 +510,7 @@ export const PRODUCTS: Product[] = [
     badge: 'bestseller',
     includes: ['Prenotazioni via WhatsApp/sito', 'Conferme automatiche', 'Reminder 24h prima', 'Sync Google Calendar', 'Gestione cancellazioni'],
     images: ['https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&q=80'],
-    rating: 4.9, review_count: 44, created_at: '2024-01-01',
+    rating: 4.9, review_count: 1, created_at: '2024-01-01',
   },
   {
     id: '26',
@@ -528,7 +528,7 @@ export const PRODUCTS: Product[] = [
     badge: 'customizable',
     includes: ['Pubblicazione automatica IG/FB/LI', 'Calendario editoriale', 'Orari ottimali automatici', 'Report engagement', 'Setup Buffer / Hootsuite'],
     images: ['https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?w=800&q=80'],
-    rating: 4.6, review_count: 28, created_at: '2024-01-01',
+    rating: 4.6, review_count: 1, created_at: '2024-01-01',
   },
 
   // ─── APP MOBILE ───
@@ -548,7 +548,7 @@ export const PRODUCTS: Product[] = [
     badge: 'customizable',
     includes: ['Installabile iOS + Android', 'Funzionamento offline', 'Push notification', 'Performance ottimizzate', '3 mesi supporto'],
     images: ['https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&q=80'],
-    rating: 4.8, review_count: 12, created_at: '2024-01-01',
+    rating: 4.8, review_count: 1, created_at: '2024-01-01',
   },
   {
     id: '28',
@@ -566,7 +566,7 @@ export const PRODUCTS: Product[] = [
     badge: 'bestseller',
     includes: ['Booking online clienti', 'Conferme automatiche', 'Reminder SMS/email', 'Dashboard gestione', 'Calendario integrato'],
     images: ['https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&q=80'],
-    rating: 4.9, review_count: 28, created_at: '2024-01-01',
+    rating: 4.9, review_count: 1, created_at: '2024-01-01',
   },
   {
     id: '29',
@@ -584,6 +584,6 @@ export const PRODUCTS: Product[] = [
     badge: 'customizable',
     includes: ['Catalogo prodotti dinamico', 'Ricerca e filtri avanzati', 'Prezzi in tempo reale', 'Contatto diretto WhatsApp', 'Installabile su telefono'],
     images: ['https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=800&q=80'],
-    rating: 4.7, review_count: 9, created_at: '2024-01-01',
+    rating: 4.7, review_count: 1, created_at: '2024-01-01',
   },
 ]

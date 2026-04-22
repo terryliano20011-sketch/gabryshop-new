@@ -6,6 +6,7 @@ import Navbar from "@/components/layout/Navbar"
 import Footer from "@/components/layout/Footer"
 import WhatsAppButton from "@/components/ui/WhatsAppButton"
 import Effects from "@/components/ui/Effects"
+import CouponPopup from "@/components/ui/CouponPopup"
 
 const playfair = Playfair_Display({ subsets:["latin"], weight:["400","500","600","700","800"], variable:"--font-display", display:"swap" })
 const dmSans = DM_Sans({ subsets:["latin"], weight:["300","400","500","600"], variable:"--font-body", display:"swap" })
@@ -77,6 +78,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Footer />
           <WhatsAppButton />
           <Effects />
+          <CouponPopup />
         </CartProvider>
       </body>
     </html>
