@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { ArrowLeft, Star, Clock, CheckCircle, Shield, Download } from 'lucide-react'
 import { PRODUCTS, CATEGORIES } from '@/lib/data'
 import AddToCartButton from '@/components/product/AddToCartButton'
+import { PRODUCT_REVIEWS, GENERIC_REVIEWS } from '@/lib/reviews'
 import BriefingForm from '@/components/product/BriefingForm'
 
 export async function generateStaticParams() {
@@ -109,6 +110,67 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
             </p>
           </div>
         </div>
+
+        {/* ══ RECENSIONI ══ */}
+        {(() => {
+          const reviews = PRODUCT_REVIEWS[product.slug] || GENERIC_REVIEWS
+          return (
+            <div style={{marginTop:'64px'}}>
+              <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',marginBottom:'32px',flexWrap:'wrap',gap:'16px'}}>
+                <div>
+                  <span style={{fontFamily:'Outfit,system-ui,sans-serif',fontSize:'10px',fontWeight:700,letterSpacing:'0.22em',textTransform:'uppercase',color:'#c9a96e',display:'block',marginBottom:'10px'}}>Recensioni clienti</span>
+                  <h2 style={{fontFamily:'Cormorant Garamond,serif',color:'white',fontSize:'clamp(1.8rem,3.5vw,2.8rem)',fontWeight:600,lineHeight:1,letterSpacing:'-0.025em'}}>
+                    Cosa dicono i <em style={{fontStyle:'italic',background:'linear-gradient(110deg,#c9a96e,#e8c878)',WebkitBackgroundClip:'text',WebkitTextFillColor:'transparent'}}>clienti</em>
+                  </h2>
+                </div>
+                <div style={{display:'flex',alignItems:'center',gap:'10px',padding:'12px 20px',background:'rgba(201,169,110,0.05)',border:'1px solid rgba(201,169,110,0.15)',borderRadius:'14px'}}>
+                  <div>
+                    <div style={{fontFamily:'Cormorant Garamond,serif',fontSize:'2rem',fontWeight:600,color:'white',lineHeight:1}}>{product.rating}</div>
+                    <div style={{display:'flex',gap:'2px',margin:'4px 0'}}>
+                      {[...Array(5)].map((_,i)=>(
+                        <span key={i} style={{color:i<Math.floor(product.rating)?'#c9a96e':'rgba(120,120,155,0.3)',fontSize:'12px'}}>★</span>
+                      ))}
+                    </div>
+                    <div style={{fontFamily:'Outfit,system-ui,sans-serif',fontSize:'11px',color:'rgba(120,120,155,0.6)'}}>{product.review_count} recensioni</div>
+                  </div>
+                </div>
+              </div>
+
+              <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(300px,1fr))',gap:'16px'}}>
+                {reviews.map((r,i) => (
+                  <div key={i} className="g-card" style={{padding:'24px',borderRadius:'18px',position:'relative',overflow:'hidden'}}>
+                    {/* Virgolette decorative */}
+                    <div style={{position:'absolute',top:'-8px',right:'16px',fontFamily:'Cormorant Garamond,serif',fontSize:'80px',color:'rgba(201,169,110,0.05)',lineHeight:1,pointerEvents:'none'}}>&ldquo;</div>
+                    
+                    {/* Stelle */}
+                    <div style={{display:'flex',gap:'3px',marginBottom:'14px'}}>
+                      {[...Array(5)].map((_,j)=>(
+                        <span key={j} style={{color:j<r.rating?'#c9a96e':'rgba(120,120,155,0.3)',fontSize:'13px'}}>★</span>
+                      ))}
+                    </div>
+
+                    {/* Testo */}
+                    <p style={{fontFamily:'Outfit,system-ui,sans-serif',color:'rgba(160,160,195,0.85)',fontSize:'13.5px',lineHeight:1.75,marginBottom:'20px',fontStyle:'italic',position:'relative'}}>
+                      &ldquo;{r.text}&rdquo;
+                    </p>
+
+                    {/* Autore */}
+                    <div style={{display:'flex',alignItems:'center',gap:'12px',borderTop:'1px solid rgba(255,255,255,0.05)',paddingTop:'16px'}}>
+                      <div style={{width:'40px',height:'40px',borderRadius:'50%',background:'rgba(201,169,110,0.08)',border:'1px solid rgba(201,169,110,0.15)',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'18px',flexShrink:0}}>
+                        {r.avatar}
+                      </div>
+                      <div style={{flex:1}}>
+                        <div style={{fontFamily:'Outfit,system-ui,sans-serif',color:'white',fontSize:'13px',fontWeight:600}}>{r.name}</div>
+                        <div style={{fontFamily:'Outfit,system-ui,sans-serif',color:'rgba(120,120,155,0.6)',fontSize:'11px'}}>{r.role}</div>
+                      </div>
+                      <div style={{fontFamily:'Outfit,system-ui,sans-serif',color:'rgba(100,100,135,0.45)',fontSize:'11px',flexShrink:0}}>{r.date}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )
+        })()}
       </div>
     </div>
   )
