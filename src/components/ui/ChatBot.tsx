@@ -47,7 +47,10 @@ export default function ChatBot() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          messages: newMessages.map(m => ({ role: m.role, content: m.text }))
+          // Escludi il messaggio di benvenuto iniziale (index 0 è sempre l'assistant)
+          messages: newMessages
+            .filter((_, i) => i > 0) // Salta il benvenuto iniziale
+            .map(m => ({ role: m.role, content: m.text }))
         })
       })
       const data = await res.json()
