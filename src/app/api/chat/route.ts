@@ -9,61 +9,63 @@ FOGLI EXCEL: Inventario €10 | Fatturazione €12 | Budget €10 | Dipendenti �
 AUTOMAZIONI: WhatsApp Bot €35 | Email Marketing €25 | Instagram Bot €28 | Google Sheets €20 | Bot Prenotazioni €32 | Social Media €22
 APP MOBILE: PWA Business €40 | App Prenotazioni €35 | App Catalogo €30
 
-Consegna: 24-48 ore per la maggior parte dei prodotti. Pagamento: PayPal, Visa, Mastercard, Amex. Rimborso: 7 giorni. Coupon: GABRY10 (10% sconto), WELCOME5 (€5 sconto). Contatto: WhatsApp +39 351 843 5322, email terryliano20011@gmail.com.
-
-Se non sai rispondere, suggerisci di contattare su WhatsApp.`
+Consegna: 24-48 ore. Pagamento: PayPal, Visa, Mastercard. Rimborso 7 giorni. Coupon: GABRY10 (10%), WELCOME5 (€5). WhatsApp: +39 351 843 5322.`
 
 export async function POST(req: NextRequest) {
   try {
-    const { messages } = await req.json()
+    const body = await req.json()
+    const messages = body.messages || []
     const apiKey = process.env.ANTHROPIC_API_KEY
 
-    if (!apiKey || apiKey.trim() === '') {
-      return NextResponse.json({
-        message: 'Ciao! Sono Gabry AI 👋 Il sistema è in manutenzione. Per info immediate scrivi su WhatsApp: +39 351 843 5322'
-      })
+    if (!apiKey) {
+      return NextResponse.json({ message: 'Chiave API mancante. Contattaci su WhatsApp: +39 351 843 5322' })
+    }
+
+    // Costruisci messaggi nel formato corretto per Anthropic
+    // Deve alternare user/assistant e iniziare con user
+    const formatted: { role: 'user' | 'assistant'; content: string }[] = []
+    for (const m of messages.slice(-6)) {
+      const role = m.role === 'user' ? 'user' : 'assistant'
+      const content = String(m.content || m.text || '').trim()
+      if (!content) continue
+      // Evita messaggi consecutivi dello stesso ruolo
+      if (formatted.length > 0 && formatted[formatted.length - 1].role === role) continue
+      formatted.push({ role, content })
+    }
+
+    // Deve iniziare con user
+    if (formatted.length === 0 || formatted[0].role !== 'user') {
+      return NextResponse.json({ message: 'Come posso aiutarti? 😊' })
     }
 
     const response = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'x-api-key': apiKey.trim(),
+        'x-api-key': apiKey,
         'anthropic-version': '2023-06-01',
       },
       body: JSON.stringify({
         model: 'claude-haiku-4-5-20251001',
         max_tokens: 400,
         system: SYSTEM_PROMPT,
-        messages: (messages || []).slice(-6).map((m: any) => ({
-          role: m.role,
-          content: m.content || m.text || ''
-        })),
+        messages: formatted,
       }),
     })
 
     if (!response.ok) {
-      const errText = await response.text()
-      console.error('Anthropic error:', response.status, errText)
-      return NextResponse.json({
-        message: `Ciao! Ho un problema tecnico (${response.status}). Scrivimi su WhatsApp: +39 351 843 5322 🙏`
-      })
+      const err = await response.json().catch(() => ({}))
+      console.error('Anthropic error:', response.status, JSON.stringify(err))
+      return NextResponse.json({ message: `Errore tecnico (${response.status}): ${err?.error?.message || 'sconosciuto'}. WhatsApp: +39 351 843 5322` })
     }
 
     const data = await response.json()
-    const text = data.content?.[0]?.text
-
-    if (!text) {
-      return NextResponse.json({ message: 'Non ho capito. Puoi riformulare la domanda? 😊' })
-    }
-
+    const text = data.content?.[0]?.text || 'Come posso aiutarti? 😊'
     return NextResponse.json({ message: text })
 
   } catch (err: any) {
-    console.error('Chat route error:', err?.message)
-    return NextResponse.json({
-      message: 'Problema di connessione momentaneo. Scrivimi su WhatsApp: +39 351 843 5322 🙏'
-    })
+    console.error('Chat error:', err?.message)
+    return NextResponse.json({ message: 'Errore momentaneo. WhatsApp: +39 351 843 5322 🙏' })
   }
 }
 
