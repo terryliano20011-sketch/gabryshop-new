@@ -66,3 +66,12 @@ export async function POST(req: NextRequest) {
     })
   }
 }
+
+export async function GET() {
+  const key = process.env.ANTHROPIC_API_KEY
+  return Response.json({
+    hasKey: !!key,
+    keyLength: key?.length || 0,
+    keyStart: key ? key.substring(0, 14) + '...' : 'NON TROVATA',
+  })
+}
