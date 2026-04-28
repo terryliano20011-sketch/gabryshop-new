@@ -98,6 +98,29 @@ export const PRODUCT_REVIEWS: Record<string, {
   ],
 }
 
+
+  'logo-brand-identita': [
+    { name:'Martina Greco', role:'Stilista', avatar:'👗', rating:5, text:'Logo bellissimo, moderno e professionale. Mi ha consegnato 3 varianti diverse e ho potuto scegliere quella che preferivo. Clienti che mi fanno i complimenti ogni giorno!', date:'Aprile 2026' },
+    { name:'Studio Legale Ferrara', role:'Avvocato', avatar:'⚖️', rating:5, text:'Brand identity completa in 48 ore. Il logo trasmette esattamente la professionalità che cercavo. Vale ogni centesimo.', date:'Marzo 2026' },
+  ],
+  'presentazione-powerpoint': [
+    { name:'Marco Vitali', role:'Startup Founder', avatar:'🚀', rating:5, text:'Presentazione per il pitch agli investitori fantastica. Design impeccabile e struttura convincente. Abbiamo ottenuto il finanziamento!', date:'Aprile 2026' },
+    { name:'Consulente Aziendale', role:'Business Coach', avatar:'💼', rating:5, text:'Slide deck professionale che uso ogni settimana con i clienti. Mi fa fare sempre una figura eccellente.', date:'Marzo 2026' },
+  ],
+  'video-promo-reels': [
+    { name:'Boutique Milano', role:'Negozio Moda', avatar:'👠', rating:5, text:'Il Reels per il lancio della nuova collezione ha fatto 50k visualizzazioni! Qualità cinematografica a un prezzo incredibile.', date:'Aprile 2026' },
+  ],
+  'social-media-kit': [
+    { name:'Federica Neri', role:'Fotografa', avatar:'📷', rating:5, text:'Finalmente un kit social che sembra davvero mio! I template sono facilissimi da modificare su Canva. Posto ogni giorno senza stress.', date:'Aprile 2026' },
+    { name:'Palestra FitLife', role:'Personal Trainer', avatar:'🏋️', rating:5, text:'I follower sono cresciuti del 40% in un mese grazie ai post professionali. Il kit si paga da solo!', date:'Marzo 2026' },
+  ],
+  'biglietto-da-visita': [
+    { name:'Roberto Manzi', role:'Agente Immobiliare', avatar:'🏠', rating:5, text:'Il biglietto digitale mi distingue da tutti i colleghi. I clienti lo trovano innovativo e lo salvano subito sul telefono.', date:'Marzo 2026' },
+  ],
+  'locandina-volantino': [
+    { name:'Bar Centrale', role:'Titolare Bar', avatar:'☕', rating:5, text:'Locandina per la promozione dell'aperitivo pronta in 24 ore. Stampata e già appesa, tanti nuovi clienti nel weekend!', date:'Aprile 2026' },
+  ],
+
 export const GENERIC_REVIEWS = [
   { name:'Cliente Verificato', role:'Acquirente GabryShop', avatar:'✅', rating:5, text:'Prodotto consegnato nei tempi promessi, qualità eccellente. Comunicazione ottima durante tutto il processo. Consigliatissimo!', date:'2026' },
 ]
