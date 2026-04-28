@@ -1,88 +1,68 @@
 import { NextRequest, NextResponse } from 'next/server'
 
-const SYSTEM_PROMPT = `Sei l'assistente virtuale di GabryShop, un negozio di servizi digitali professionali italiani. Il tuo nome è Gabry AI.
+const SYSTEM_PROMPT = `Sei Gabry AI, l'assistente virtuale di GabryShop. Rispondi SEMPRE in italiano, in modo amichevole e conciso (max 3-4 frasi).
 
 PRODOTTI E PREZZI:
-🌐 SITI WEB (€22-€40):
-- Landing Page Pro €29 (consegna 24-48h)
-- Sito Portfolio Creativo €25 (consegna 24-48h)
-- Sito Aziendale 5 Pagine €39 (consegna 3-5 giorni)
-- Sito Ristorante con Prenotazioni €35 (consegna 48-72h)
-- Sito Parrucchiere/Salone €29 (consegna 24-48h)
-- Sito Freelancer/Consulente €22 (consegna 24-48h)
-- E-commerce Digitale €40 (consegna 3-5 giorni)
+SITI WEB: Landing Page Pro €29 | Portfolio €25 | Sito Aziendale €39 | Ristorante €35 | Parrucchiere €29 | Freelancer €22 | E-commerce €40
+MENU DIGITALI: QR Ristorante €19 | Bar/Cocktail €15 | Pizzeria €17 | Gelateria €14 | Multilingua €22 | Ordini Tavolo €35
+FOGLI EXCEL: Inventario €10 | Fatturazione €12 | Budget €10 | Dipendenti €15 | CRM €18 | Gantt €14 | Listino €12
+AUTOMAZIONI: WhatsApp Bot €35 | Email Marketing €25 | Instagram Bot €28 | Google Sheets €20 | Bot Prenotazioni €32 | Social Media €22
+APP MOBILE: PWA Business €40 | App Prenotazioni €35 | App Catalogo €30
 
-🍽️ MENU DIGITALI (€14-€35):
-- Menu QR Ristorante €19 (consegna 24h)
-- Menu Bar/Cocktail €15 (consegna 24h)
-- Menu Pizzeria €17 (consegna 24h)
-- Menu Gelateria €14 (consegna 24h)
-- Menu Multilingua €22 (consegna 48h)
-- Menu Ordini al Tavolo €35 (consegna 48-72h)
+Consegna: 24-48 ore per la maggior parte dei prodotti. Pagamento: PayPal, Visa, Mastercard, Amex. Rimborso: 7 giorni. Coupon: GABRY10 (10% sconto), WELCOME5 (€5 sconto). Contatto: WhatsApp +39 351 843 5322, email terryliano20011@gmail.com.
 
-📊 FOGLI EXCEL (€10-€18):
-- Gestione Inventario €10 (download immediato)
-- Fatturazione Automatica €12 (download immediato)
-- Budget Personale €10 (download immediato)
-- Gestione Dipendenti €15 (download immediato)
-- CRM Clienti €18 (download immediato)
-- Gantt Project Manager €14 (download immediato)
-- Listino Prezzi Automatico €12 (download immediato)
-
-🤖 AUTOMAZIONI (€20-€35):
-- Chatbot WhatsApp Business €35 (consegna 48h)
-- Automazione Email Marketing €25 (consegna 48h)
-- Bot Instagram DM €28 (consegna 48h)
-- Integrazione Google Sheets €20 (consegna 24-48h)
-- Bot Prenotazioni Automatico €32 (consegna 48-72h)
-- Automazione Social Media €22 (consegna 48h)
-
-📱 APP MOBILE (€30-€40):
-- PWA Business App €40 (consegna 3-5 giorni)
-- App Prenotazioni €35 (consegna 3-5 giorni)
-- App Catalogo Prodotti €30 (consegna 3-5 giorni)
-
-INFORMAZIONI GENERALI:
-- Pagamento sicuro con PayPal, Visa, Mastercard, Amex
-- Rimborso garantito 7 giorni (se non ancora iniziata la lavorazione)
-- Dopo l'acquisto il cliente compila un briefing con i dettagli del progetto
-- Coupon sconto disponibili: GABRY10 (10% su tutto), WELCOME5 (€5 sconto min €15)
-- Contatto email: terryliano20011@gmail.com
-- WhatsApp: +39 351 843 5322
-
-COMPORTAMENTO:
-- Rispondi SEMPRE in italiano
-- Sii amichevole, professionale e conciso (max 3-4 frasi per risposta)
-- Se qualcuno chiede di un prodotto specifico, descrivi brevemente e dai il prezzo
-- Se qualcuno vuole acquistare, indirizzalo alla pagina del prodotto
-- Se non sai qualcosa, suggerisci di contattare WhatsApp o email
-- Non inventare prodotti o prezzi non elencati sopra
-- Usa emoji con moderazione per essere più friendly`
+Se non sai rispondere, suggerisci di contattare su WhatsApp.`
 
 export async function POST(req: NextRequest) {
   try {
     const { messages } = await req.json()
+    const apiKey = process.env.ANTHROPIC_API_KEY
+
+    if (!apiKey || apiKey.trim() === '') {
+      return NextResponse.json({
+        message: 'Ciao! Sono Gabry AI 👋 Il sistema è in manutenzione. Per info immediate scrivi su WhatsApp: +39 351 843 5322'
+      })
+    }
 
     const response = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'x-api-key': process.env.ANTHROPIC_API_KEY!,
+        'x-api-key': apiKey.trim(),
         'anthropic-version': '2023-06-01',
       },
       body: JSON.stringify({
         model: 'claude-haiku-4-5-20251001',
-        max_tokens: 300,
+        max_tokens: 400,
         system: SYSTEM_PROMPT,
-        messages: messages.slice(-8), // Ultimi 8 messaggi per contesto
+        messages: (messages || []).slice(-6).map((m: any) => ({
+          role: m.role,
+          content: m.content || m.text || ''
+        })),
       }),
     })
 
+    if (!response.ok) {
+      const errText = await response.text()
+      console.error('Anthropic error:', response.status, errText)
+      return NextResponse.json({
+        message: `Ciao! Ho un problema tecnico (${response.status}). Scrivimi su WhatsApp: +39 351 843 5322 🙏`
+      })
+    }
+
     const data = await response.json()
-    const text = data.content?.[0]?.text || 'Mi dispiace, c\'è stato un errore. Contattaci su WhatsApp!'
+    const text = data.content?.[0]?.text
+
+    if (!text) {
+      return NextResponse.json({ message: 'Non ho capito. Puoi riformulare la domanda? 😊' })
+    }
 
     return NextResponse.json({ message: text })
+
   } catch (err: any) {
-    return NextResponse.json({ message: 'Errore di connessione. Contattaci su WhatsApp: +39 351 843 5322' }, { status: 500 })
+    console.error('Chat route error:', err?.message)
+    return NextResponse.json({
+      message: 'Problema di connessione momentaneo. Scrivimi su WhatsApp: +39 351 843 5322 🙏'
+    })
   }
 }
