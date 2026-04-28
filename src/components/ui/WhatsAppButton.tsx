@@ -1,10 +1,8 @@
 'use client'
-
 import { MessageCircle } from 'lucide-react'
 
 export default function WhatsAppButton() {
   const number = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '393518435322'
-  // Numero: +39 351 843 5322
   const message = encodeURIComponent('Ciao! Vorrei maggiori informazioni sui vostri servizi digitali.')
   const url = `https://wa.me/${number}?text=${message}`
 
@@ -13,13 +11,16 @@ export default function WhatsAppButton() {
       href={url}
       target="_blank"
       rel="noopener noreferrer"
-      className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-[#25D366] flex items-center justify-center shadow-2xl hover:scale-110 transition-transform duration-300 group"
+      style={{
+        position:'fixed', bottom:'24px', right:'24px', zIndex:9990,
+        width:'52px', height:'52px', borderRadius:'50%',
+        background:'#25D366', display:'flex', alignItems:'center',
+        justifyContent:'center', boxShadow:'0 4px 20px rgba(37,211,102,0.4)',
+        transition:'transform 0.3s ease', textDecoration:'none'
+      }}
       aria-label="Contattaci su WhatsApp"
     >
-      <MessageCircle className="w-7 h-7 text-white" />
-      <span className="absolute right-full mr-3 bg-[#111118] text-white text-xs font-medium px-3 py-1.5 rounded-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity border border-white/10">
-        Supporto WhatsApp
-      </span>
+      <MessageCircle style={{width:'26px', height:'26px', color:'white'}}/>
     </a>
   )
 }

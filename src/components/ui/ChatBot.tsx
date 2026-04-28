@@ -64,7 +64,7 @@ export default function ChatBot() {
       {/* Bubble messaggio */}
       {showBubble && !open && (
         <div onClick={() => { setOpen(true); setShowBubble(false) }} style={{
-          position:'fixed', bottom:'90px', right:'24px', zIndex:9998,
+          position:'fixed', bottom:'90px', right:'88px', zIndex:9998,
           background:'#0d0d18', border:'1px solid rgba(201,169,110,0.25)',
           borderRadius:'16px 16px 4px 16px', padding:'12px 16px',
           cursor:'pointer', maxWidth:'220px', boxShadow:'0 8px 32px rgba(0,0,0,0.4)',
@@ -85,7 +85,7 @@ export default function ChatBot() {
       {/* Chat window */}
       {open && (
         <div style={{
-          position:'fixed', bottom:'90px', right:'24px', zIndex:9999,
+          position:'fixed', bottom:'90px', right:'88px', zIndex:9999,
           width:'360px', maxWidth:'calc(100vw - 32px)',
           background:'#0d0d18', border:'1px solid rgba(201,169,110,0.15)',
           borderRadius:'20px', boxShadow:'0 24px 80px rgba(0,0,0,0.6)',
@@ -230,7 +230,7 @@ export default function ChatBot() {
 
       {/* Toggle button */}
       <button onClick={() => { setOpen(o => !o); setShowBubble(false) }} style={{
-        position:'fixed', bottom:'24px', right:'90px', zIndex:9997,
+        position:'fixed', bottom:'24px', right:'88px', zIndex:9997,
         width:'52px', height:'52px', borderRadius:'50%',
         background: open ? 'rgba(120,120,155,0.3)' : 'linear-gradient(135deg,#7c6af0,#c9a96e)',
         border:'none', cursor:'pointer',
