@@ -118,6 +118,8 @@ export const PRODUCT_REVIEWS: Record<string, {
     { name:'Bar Centrale', role:'Titolare Bar', avatar:'☕', rating:5, text:'Locandina per la promozione dell\'aperitivo pronta in 24 ore. Stampata e già appesa, tanti nuovi clienti nel weekend!', date:'Aprile 2026' },
   ],
 
+}
+
 export const GENERIC_REVIEWS = [
   { name:'Cliente Verificato', role:'Acquirente GabryShop', avatar:'✅', rating:5, text:'Prodotto consegnato nei tempi promessi, qualità eccellente. Comunicazione ottima durante tutto il processo. Consigliatissimo!', date:'2026' },
 ]
