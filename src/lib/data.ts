@@ -51,6 +51,16 @@ export const CATEGORIES: Category[] = [
     product_count: 3,
     image: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&q=80',
   },
+  {
+    id: '6',
+    name: 'Creatività',
+    slug: 'creativita',
+    description: 'Loghi, presentazioni, video promo e contenuti visivi professionali',
+    icon: '🎨',
+    color: '#f97316',
+    product_count: 6,
+    image: 'https://images.unsplash.com/photo-1626785774573-4b799315345d?w=600&q=80',
+  },
 ]
 
 export const PRODUCTS: Product[] = [
