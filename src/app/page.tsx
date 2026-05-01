@@ -135,9 +135,8 @@ export default function Home() {
               {icon:'📱',name:'App Mobile',price:'da €30',time:'3-5 giorni',slug:'app-mobile'},
               {icon:'🎨',name:'Creatività',price:'da €15',time:'Da 24h',slug:'creativita'},
             ].map((cat,i) => (
-              <Link key={cat.slug} href={`/categoria/${cat.slug}`} style={{background:'#000',padding:'32px',display:'flex',flexDirection:'column',gap:'14px',textDecoration:'none',transition:'background 0.2s',cursor:'pointer',borderRight:i%3<2?'1px solid rgba(255,255,255,0.07)':'none'}}
-                onMouseEnter={e=>(e.currentTarget.style.background='#0d0d0d')}
-                onMouseLeave={e=>(e.currentTarget.style.background='#000')}>
+              <Link key={cat.slug} href={`/categoria/${cat.slug}`} className='cat-grid-item' style={{background:'#000',padding:'32px',display:'flex',flexDirection:'column',gap:'14px',textDecoration:'none',cursor:'pointer',borderRight:i%3<2?'1px solid rgba(255,255,255,0.07)':'none'}}
+>
                 <div style={{fontSize:'32px'}}>{cat.icon}</div>
                 <div>
                   <div style={{fontFamily:'Cormorant Garamond,serif',fontSize:'22px',fontWeight:700,color:'#fff',letterSpacing:'-0.02em',marginBottom:'4px'}}>{cat.name}</div>
