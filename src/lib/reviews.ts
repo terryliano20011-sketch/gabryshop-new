@@ -96,9 +96,6 @@ export const PRODUCT_REVIEWS: Record<string, {
   'app-catalogo': [
     { name:'Showroom Arredamenti', role:'Titolare', avatar:'🛋️', rating:5, text:'Il catalogo digitale fa una figura incredibile con i clienti. Sfogliano i prodotti sul telefono durante la visita allo showroom.', date:'Febbraio 2026' },
   ],
-}
-
-
   'logo-brand-identita': [
     { name:'Martina Greco', role:'Stilista', avatar:'👗', rating:5, text:'Logo bellissimo, moderno e professionale. Mi ha consegnato 3 varianti diverse e ho potuto scegliere quella che preferivo. Clienti che mi fanno i complimenti ogni giorno!', date:'Aprile 2026' },
     { name:'Studio Legale Ferrara', role:'Avvocato', avatar:'⚖️', rating:5, text:'Brand identity completa in 48 ore. Il logo trasmette esattamente la professionalità che cercavo. Vale ogni centesimo.', date:'Marzo 2026' },
