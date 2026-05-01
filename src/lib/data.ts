@@ -590,6 +590,10 @@ export const PRODUCTS: Product[] = [
   // ─── CREATIVITÀ ───
   {
     id: 'logo-brand-identita', name: 'Logo & Brand Identity', slug: 'logo-brand-identita',
+    long_description: '',
+    is_customizable: true,
+    is_digital: true,
+    created_at: '2026-01-01',
     description: 'Logo professionale con palette colori, font e guida brand completa',
     price: 35, original_price: 69, category_id: '6',
     delivery_time: '48-72 ore', badge: 'bestseller', is_bestseller: true,
@@ -599,6 +603,10 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 'presentazione-powerpoint', name: 'Presentazione PowerPoint Pro', slug: 'presentazione-powerpoint',
+    long_description: '',
+    is_customizable: true,
+    is_digital: true,
+    created_at: '2026-01-01',
     description: 'Slide deck professionale per pitch, vendite o presentazioni aziendali. Design moderno e impattante',
     price: 29, original_price: 59, category_id: '6',
     delivery_time: '24-48 ore', badge: 'new', is_bestseller: false,
@@ -608,6 +616,10 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 'video-promo-reels', name: 'Video Promo / Reels', slug: 'video-promo-reels',
+    long_description: '',
+    is_customizable: true,
+    is_digital: true,
+    created_at: '2026-01-01',
     description: 'Video promozionale verticale (Reels/TikTok/Story) o orizzontale per il tuo business. Animazioni e musica incluse',
     price: 39, original_price: 79, category_id: '6',
     delivery_time: '48-72 ore', badge: 'new', is_bestseller: false,
@@ -617,6 +629,10 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 'social-media-kit', name: 'Social Media Kit', slug: 'social-media-kit',
+    long_description: '',
+    is_customizable: true,
+    is_digital: true,
+    created_at: '2026-01-01',
     description: 'Pack di 15 template grafici per Instagram, Facebook e LinkedIn. Postare ogni giorno non è mai stato così facile',
     price: 25, original_price: 49, category_id: '6',
     delivery_time: '24-48 ore', badge: 'bestseller', is_bestseller: true,
@@ -626,6 +642,10 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 'biglietto-da-visita', name: 'Biglietto da Visita Digitale', slug: 'biglietto-da-visita',
+    long_description: '',
+    is_customizable: true,
+    is_digital: true,
+    created_at: '2026-01-01',
     description: 'Biglietto da visita digitale con QR code, link ai tuoi contatti e profili social. Condivisibile in un tap',
     price: 15, original_price: 29, category_id: '6',
     delivery_time: '24 ore', badge: 'new', is_bestseller: false,
@@ -635,6 +655,10 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 'locandina-volantino', name: 'Locandina / Volantino', slug: 'locandina-volantino',
+    long_description: '',
+    is_customizable: true,
+    is_digital: true,
+    created_at: '2026-01-01',
     description: 'Locandina o volantino professionale per eventi, promozioni o il tuo locale. Pronto per stampa e digitale',
     price: 18, original_price: 35, category_id: '6',
     delivery_time: '24 ore', badge: 'new', is_bestseller: false,
