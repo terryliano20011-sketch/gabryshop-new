@@ -115,7 +115,7 @@ export const PRODUCT_REVIEWS: Record<string, {
     { name:'Roberto Manzi', role:'Agente Immobiliare', avatar:'🏠', rating:5, text:'Il biglietto digitale mi distingue da tutti i colleghi. I clienti lo trovano innovativo e lo salvano subito sul telefono.', date:'Marzo 2026' },
   ],
   'locandina-volantino': [
-    { name:'Bar Centrale', role:'Titolare Bar', avatar:'☕', rating:5, text:'Locandina per la promozione dell'aperitivo pronta in 24 ore. Stampata e già appesa, tanti nuovi clienti nel weekend!', date:'Aprile 2026' },
+    { name:'Bar Centrale', role:'Titolare Bar', avatar:'☕', rating:5, text:'Locandina per la promozione dell\'aperitivo pronta in 24 ore. Stampata e già appesa, tanti nuovi clienti nel weekend!', date:'Aprile 2026' },
   ],
 
 export const GENERIC_REVIEWS = [
