@@ -1,244 +1,212 @@
 import Link from 'next/link'
-import ParticlesHero from '@/components/ui/ParticlesHero'
-import { ArrowRight, ArrowUpRight, CheckCircle } from 'lucide-react'
-import { CATEGORIES, PRODUCTS } from '@/lib/data'
+import { ArrowRight } from 'lucide-react'
+import { PRODUCTS, CATEGORIES } from '@/lib/data'
 import ProductCard from '@/components/product/ProductCard'
+import ParticlesHero from '@/components/ui/ParticlesHero'
 
 export default function Home() {
   const featured = PRODUCTS.filter(p => p.is_bestseller).slice(0, 3)
 
   return (
-    <main style={{background:'#05050a'}}>
+    <main style={{background:'#000',color:'#fff',overflowX:'hidden'}}>
 
       {/* ══ HERO ══ */}
-      <section style={{minHeight:'100svh', position:'relative', overflow:'hidden', display:'flex', flexDirection:'column', justifyContent:'center', paddingTop:'100px', paddingBottom:'80px'}}>
-
+      <section style={{minHeight:'100vh',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',padding:'120px 6% 80px',position:'relative',background:'#000',textAlign:'center'}}>
         <ParticlesHero />
 
         {/* Glow */}
-        <div style={{position:'absolute',inset:0,pointerEvents:'none'}}>
-          <div style={{position:'absolute',top:'20%',left:'50%',transform:'translateX(-50%)',width:'800px',height:'500px',background:'radial-gradient(ellipse,rgba(180,145,80,0.07) 0%,transparent 70%)',filter:'blur(60px)'}}/>
-          <div style={{position:'absolute',bottom:'10%',right:'5%',width:'400px',height:'400px',background:'radial-gradient(circle,rgba(90,70,180,0.04) 0%,transparent 70%)',filter:'blur(50px)'}}/>
-          {/* Linee verticali sottili */}
-          <div style={{position:'absolute',top:0,left:'15%',width:'1px',height:'100%',background:'linear-gradient(to bottom,transparent,rgba(201,169,110,0.06),transparent)'}}/>
-          <div style={{position:'absolute',top:0,right:'15%',width:'1px',height:'100%',background:'linear-gradient(to bottom,transparent,rgba(201,169,110,0.04),transparent)'}}/>
-        </div>
+        <div style={{position:'absolute',top:'15%',left:'50%',transform:'translateX(-50%)',width:'600px',height:'400px',background:'radial-gradient(ellipse,rgba(201,169,110,0.07) 0%,transparent 70%)',pointerEvents:'none'}}/>
 
-        <div style={{maxWidth:'1200px',margin:'0 auto',padding:'0 6%',width:'100%',position:'relative'}}>
-
-          {/* Floating new badge */}
-          <div style={{marginBottom:'24px',display:'flex',justifyContent:'center'}}>
-            
+        <div style={{position:'relative',zIndex:2,display:'flex',flexDirection:'column',alignItems:'center',gap:'28px'}}>
+          <div style={{display:'inline-flex',alignItems:'center',gap:'8px',padding:'6px 16px',background:'rgba(255,255,255,0.04)',border:'1px solid rgba(255,255,255,0.1)',borderRadius:'100px'}}>
+            <div style={{width:'6px',height:'6px',borderRadius:'50%',background:'#c9a96e'}}/>
+            <span style={{fontFamily:'Outfit,system-ui,sans-serif',fontSize:'11px',fontWeight:600,color:'rgba(255,255,255,0.5)',letterSpacing:'0.15em',textTransform:'uppercase'}}>Servizi digitali · Est. 2024</span>
           </div>
 
-          {/* Overline */}
-          <div style={{display:'flex',alignItems:'center',gap:'16px',marginBottom:'56px'}}>
-            <div style={{width:'32px',height:'1px',background:'rgba(201,169,110,0.5)'}}/>
-            
-            <div style={{flex:1,height:'1px',background:'linear-gradient(to right,rgba(201,169,110,0.2),transparent)'}}/>
-            <span style={{fontFamily:'Outfit,system-ui,sans-serif',fontSize:'10px',color:'rgba(100,100,130,0.4)',letterSpacing:'0.12em'}}>EST. 2024</span>
-          </div>
-
-          {/* Titolo centrato */}
-          <h1 className="hero-parallax" style={{fontFamily:'Cormorant Garamond,serif',fontSize:'clamp(3.5rem,8vw,8rem)',fontWeight:600,lineHeight:0.92,letterSpacing:'-0.025em',color:'white',marginBottom:'64px',textAlign:'center'}}>
-            Il tuo<br/>
-            <em className="gold" data-typewriter="business,digitale,futuro,successo" style={{fontStyle:'italic'}}>business</em><br/>
-            digitale.
+          <h1 className="hero-parallax" style={{fontFamily:'Cormorant Garamond,serif',fontSize:'clamp(60px,10vw,120px)',fontWeight:700,lineHeight:0.88,letterSpacing:'-0.04em',color:'#fff',maxWidth:'800px'}}>
+            Il tuo business<br/>
+            <em className="gold" style={{fontStyle:'italic'}}>merita di più.</em>
           </h1>
 
-          {/* Riga info: 3 blocchi orizzontali */}
-          <div className="hero-info-row">
+          <p style={{fontFamily:'Outfit,system-ui,sans-serif',fontSize:'17px',color:'rgba(255,255,255,0.4)',maxWidth:'420px',lineHeight:1.7}}>
+            Siti web, menu QR, automazioni e loghi professionali.<br/>Consegnati in 24–48 ore.
+          </p>
 
-            {/* Sinistra: copy */}
-            <p style={{fontFamily:'Outfit,system-ui,sans-serif',fontSize:'15px',lineHeight:1.85,color:'rgba(145,145,178,0.85)'}}>
-              Siti web, menu digitali, automazioni,<br/>app mobile. Consegnato in{' '}
-              <span style={{color:'rgba(201,169,110,0.9)',fontWeight:500}}>24–48 ore</span>.
-            </p>
+          <div style={{display:'flex',gap:'12px',flexWrap:'wrap',justifyContent:'center'}}>
+            <Link href="/categoria/siti-web" className="g-btn g-btn-gold" style={{borderRadius:'100px',fontSize:'15px',padding:'14px 32px'}}>
+              Scopri i servizi <ArrowRight size={16}/>
+            </Link>
+            <Link href="/chi-siamo" className="g-btn g-btn-ghost" style={{borderRadius:'100px',fontSize:'15px',padding:'14px 32px'}}>
+              Chi siamo
+            </Link>
+          </div>
+        </div>
+      </section>
 
-            {/* Centro: CTA */}
-            <div className="hero-cta-col">
-              <Link href="#servizi" className="g-btn g-btn-gold" style={{justifyContent:'space-between',padding:'15px 22px',borderRadius:'14px',fontSize:'15px',fontWeight:600}}>
-                Scopri i servizi <ArrowRight size={17}/>
-              </Link>
-              <Link href="/chi-siamo" className="g-btn g-btn-ghost" style={{justifyContent:'center',borderRadius:'14px',fontSize:'14px'}}>
-                Chi siamo
-              </Link>
+      {/* ══ STATS ══ */}
+      <div style={{borderTop:'1px solid rgba(255,255,255,0.06)',borderBottom:'1px solid rgba(255,255,255,0.06)'}}>
+        <div style={{maxWidth:'800px',margin:'0 auto',display:'grid',gridTemplateColumns:'repeat(3,1fr)'}}>
+          {[
+            {n:'+32', l:'Clienti', counter:'32', prefix:'+'},
+            {n:'98%', l:'Soddisfatti', counter:'98', suffix:'%'},
+            {n:'24h', l:'Consegna', counter:'24', suffix:'h'},
+          ].map((s,i) => (
+            <div key={s.l} style={{padding:'48px 24px',textAlign:'center',borderRight:i<2?'1px solid rgba(255,255,255,0.06)':'none'}}>
+              <div data-counter={s.counter} data-counter-suffix={s.suffix||''} data-counter-prefix={s.prefix||''} style={{fontFamily:'Cormorant Garamond,serif',fontSize:'clamp(48px,6vw,72px)',fontWeight:700,letterSpacing:'-0.05em',lineHeight:1,color:'#fff'}}>{s.n}</div>
+              <div style={{fontFamily:'Outfit,system-ui,sans-serif',fontSize:'11px',color:'rgba(255,255,255,0.25)',letterSpacing:'0.15em',textTransform:'uppercase',marginTop:'8px'}}>{s.l}</div>
             </div>
+          ))}
+        </div>
+      </div>
 
-            {/* Destra: stats orizzontali */}
-            <div className="hero-stats-row">
-              {[
-                {n:'+32',l:'Clienti',counter:'32',prefix:'+'},
-                {n:'98%', l:'Soddisfazione',counter:'98',suffix:'%'},
-                {n:'24h', l:'Consegna',counter:'24',suffix:'h'},
-              ].map((s:any) => (
-                <div key={s.l} style={{textAlign:'center'}}>
-                  <div
-                    data-counter={s.counter}
-                    data-counter-suffix={s.suffix||''}
-                    data-counter-prefix={s.prefix||''}
-                    style={{fontFamily:'Cormorant Garamond,serif',fontSize:'2.2rem',fontWeight:600,lineHeight:1,color:'white',marginBottom:'4px'}}
-                  >{s.n}</div>
-                  <div style={{fontFamily:'Outfit,system-ui,sans-serif',fontSize:'10px',color:'rgba(100,100,135,0.6)',letterSpacing:'0.06em',textTransform:'uppercase'}}>{s.l}</div>
+      {/* ══ IPHONE SECTION ══ */}
+      <section style={{minHeight:'100vh',display:'flex',alignItems:'center',justifyContent:'center',padding:'100px 6%',gap:'80px',flexWrap:'wrap'}}>
+        <div style={{maxWidth:'380px'}}>
+          <span style={{fontFamily:'Outfit,system-ui,sans-serif',fontSize:'10px',fontWeight:700,letterSpacing:'0.2em',textTransform:'uppercase',color:'#c9a96e',display:'block',marginBottom:'20px'}}>Il tuo shop, ovunque</span>
+          <h2 style={{fontFamily:'Cormorant Garamond,serif',fontSize:'clamp(40px,5vw,64px)',fontWeight:700,lineHeight:0.92,letterSpacing:'-0.04em',color:'#fff',marginBottom:'24px'}}>
+            Acquista dal<br/>telefono.<br/>In secondi.
+          </h2>
+          <p style={{fontFamily:'Outfit,system-ui,sans-serif',fontSize:'15px',color:'rgba(255,255,255,0.4)',lineHeight:1.75,marginBottom:'32px'}}>
+            Tutto il catalogo ottimizzato per mobile. Pagamento con PayPal o carta. Conferma via email in 1 minuto.
+          </p>
+          <Link href="/categoria/siti-web" className="g-btn g-btn-ghost" style={{borderRadius:'100px',fontSize:'14px'}}>
+            Esplora il catalogo <ArrowRight size={14}/>
+          </Link>
+        </div>
+
+        {/* iPhone mockup */}
+        <div style={{width:'240px',height:'480px',background:'linear-gradient(145deg,#1c1c1e,#2c2c2e)',borderRadius:'46px',border:'8px solid #3a3a3c',position:'relative',overflow:'hidden',flexShrink:0,boxShadow:'0 50px 100px rgba(0,0,0,0.8),0 0 0 1px rgba(255,255,255,0.06)',transform:'rotate(-2deg)'}}>
+          <div style={{width:'90px',height:'24px',background:'#000',borderRadius:'0 0 16px 16px',position:'absolute',top:0,left:'50%',transform:'translateX(-50%)',zIndex:2}}/>
+          <div style={{position:'absolute',inset:0,background:'linear-gradient(160deg,#05050a,#0d0d1f)',padding:'40px 14px 20px',display:'flex',flexDirection:'column',gap:'10px',overflowY:'hidden'}}>
+            <div style={{fontFamily:'Outfit,system-ui,sans-serif',fontSize:'10px',fontWeight:700,color:'rgba(255,255,255,0.3)',letterSpacing:'0.12em',textTransform:'uppercase',marginBottom:'2px'}}>GabryShop</div>
+            <div style={{fontFamily:'Cormorant Garamond,serif',fontSize:'18px',fontWeight:700,color:'#fff',marginBottom:'6px'}}>
+              <span style={{color:'#c9a96e'}}>Gabry</span>Shop
+            </div>
+            <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'8px'}}>
+              {[{icon:'🌐',name:'Landing Page',price:'€29'},{icon:'🍽️',name:'Menu QR',price:'€19'},{icon:'🤖',name:'WhatsApp Bot',price:'€35'},{icon:'🎨',name:'Logo Design',price:'€35'}].map(p => (
+                <div key={p.name} style={{background:'rgba(255,255,255,0.05)',border:'1px solid rgba(255,255,255,0.08)',borderRadius:'12px',padding:'10px'}}>
+                  <div style={{fontSize:'20px',marginBottom:'6px'}}>{p.icon}</div>
+                  <div style={{fontFamily:'Outfit,system-ui,sans-serif',fontSize:'9px',fontWeight:700,color:'#fff',marginBottom:'3px',lineHeight:1.2}}>{p.name}</div>
+                  <div style={{fontFamily:'Cormorant Garamond,serif',fontSize:'14px',fontWeight:700,color:'#c9a96e'}}>{p.price}</div>
                 </div>
               ))}
             </div>
-          </div>
-
-          {/* Trust bar */}
-          <div style={{height:'1px',background:'rgba(255,255,255,0.04)',marginBottom:'28px'}}/>
-          <div style={{display:'flex',flexWrap:'wrap',justifyContent:'center',gap:'32px'}}>
-            {[
-              '🔒 Pagamenti sicuri PayPal',
-              '⚡ Consegna 24-48 ore',
-              '⭐ +32 clienti soddisfatti',
-              '✅ Rimborso 7 giorni',
-            ].map(b => (
-              <span key={b} style={{fontFamily:'Outfit,system-ui,sans-serif',fontSize:'12px',color:'rgba(110,110,145,0.7)'}}>{b}</span>
-            ))}
+            <div style={{background:'linear-gradient(135deg,#c9a96e,#b8924a)',color:'#08060a',fontFamily:'Outfit,system-ui,sans-serif',fontSize:'10px',fontWeight:800,borderRadius:'100px',padding:'8px',textAlign:'center',marginTop:'4px'}}>
+              Acquista ora →
+            </div>
           </div>
         </div>
       </section>
 
-      {/* ══ SERVIZI ══ */}
-      <section id="servizi" style={{padding:'100px 6%',maxWidth:'1200px',margin:'0 auto'}}>
-        <div className="sr" style={{display:'flex',alignItems:'flex-end',justifyContent:'space-between',marginBottom:'56px',flexWrap:'wrap',gap:'24px'}}>
-          <div>
-            <span className="overline" style={{marginBottom:'14px'}}>Categorie</span>
-            <h2 style={{fontFamily:'Cormorant Garamond,serif',fontSize:'clamp(2.5rem,5vw,4.5rem)',fontWeight:600,color:'white',lineHeight:0.93,letterSpacing:'-0.025em'}}>
-              Cosa<br/><em className="gold" style={{fontStyle:'italic'}}>offriamo</em>
-            </h2>
-          </div>
-          <p style={{fontFamily:'Outfit,system-ui,sans-serif',fontSize:'15px',color:'rgba(125,125,160,0.78)',maxWidth:'280px',lineHeight:1.75}}>
-            Cinque aree di competenza. Dalla presenza web alle automazioni avanzate.
-          </p>
-        </div>
-
-        <div style={{display:'flex',flexDirection:'column',gap:'10px'}}>
-          <div className="grid-services-top" style={{display:'grid',gridTemplateColumns:'1.6fr 1fr',gap:'10px'}}>
-            {CATEGORIES.slice(0,2).map(cat => (
-              <Link key={cat.id} href={`/categoria/${cat.slug}`} className="g-card sr" style={{display:'block',textDecoration:'none',borderRadius:'20px',overflow:'hidden'}}>
-                <div style={{position:'relative',height:'300px',overflow:'hidden'}}>
-                  {cat.image && <img src={cat.image} alt={cat.name} style={{width:'100%',height:'100%',objectFit:'cover',filter:'brightness(0.28) saturate(0.55)',transition:'filter 0.6s ease,transform 0.8s cubic-bezier(0.16,1,0.3,1)'}}/>}
-                  <div style={{position:'absolute',inset:0,background:'linear-gradient(to top,rgba(5,5,10,0.98) 0%,rgba(5,5,10,0.3) 55%,transparent 100%)'}}/>
-                  <div style={{position:'absolute',top:'18px',left:'18px'}}>
-                    <span style={{fontFamily:'Outfit,system-ui,sans-serif',fontSize:'9px',fontWeight:700,letterSpacing:'0.18em',textTransform:'uppercase',color:'rgba(201,169,110,0.7)',background:'rgba(201,169,110,0.07)',border:'1px solid rgba(201,169,110,0.14)',borderRadius:'100px',padding:'4px 11px'}}>{cat.product_count} prodotti</span>
-                  </div>
-                  <div style={{position:'absolute',bottom:'24px',left:'24px',right:'24px'}}>
-                    <div style={{fontSize:'24px',marginBottom:'10px'}}>{cat.icon}</div>
-                    <h3 style={{fontFamily:'Cormorant Garamond,serif',color:'white',fontSize:'1.85rem',fontWeight:600,lineHeight:1.1,marginBottom:'8px'}}>{cat.name}</h3>
-                    <p style={{fontFamily:'Outfit,system-ui,sans-serif',color:'rgba(125,125,162,0.72)',fontSize:'12.5px',lineHeight:1.6,marginBottom:'14px'}}>{cat.description}</p>
-                    <div style={{display:'flex',alignItems:'center',gap:'5px',color:'#c9a96e',fontSize:'12px',fontWeight:600,fontFamily:'Outfit,system-ui,sans-serif'}}>Esplora <ArrowUpRight size={12}/></div>
-                  </div>
-                </div>
-              </Link>
-            ))}
-          </div>
-          <div className="grid-services-bottom" style={{display:'grid',gridTemplateColumns:'1fr 1fr 1fr',gap:'10px'}}>
-            {CATEGORIES.slice(2).map(cat => (
-              <Link key={cat.id} href={`/categoria/${cat.slug}`} className="g-card sr" style={{display:'block',textDecoration:'none',borderRadius:'20px',overflow:'hidden'}}>
-                <div style={{position:'relative',height:'200px',overflow:'hidden'}}>
-                  {cat.image && <img src={cat.image} alt={cat.name} style={{width:'100%',height:'100%',objectFit:'cover',filter:'brightness(0.25) saturate(0.45)',transition:'all 0.6s ease'}}/>}
-                  <div style={{position:'absolute',inset:0,background:'linear-gradient(to top,rgba(5,5,10,0.97) 0%,rgba(5,5,10,0.2) 55%,transparent 100%)'}}/>
-                  <div style={{position:'absolute',bottom:'18px',left:'18px',right:'18px'}}>
-                    <div style={{fontSize:'20px',marginBottom:'7px'}}>{cat.icon}</div>
-                    <h3 style={{fontFamily:'Cormorant Garamond,serif',color:'white',fontSize:'1.4rem',fontWeight:600,lineHeight:1.1,marginBottom:'6px'}}>{cat.name}</h3>
-                    <div style={{display:'flex',alignItems:'center',justifyContent:'space-between'}}>
-                      <span style={{fontFamily:'Outfit,system-ui,sans-serif',color:'rgba(100,100,138,0.6)',fontSize:'11px'}}>{cat.product_count} prodotti</span>
-                      <ArrowUpRight size={13} style={{color:'rgba(201,169,110,0.5)'}}/>
-                    </div>
-                  </div>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
+      {/* ══ TESTO CINEMATOGRAFICO ══ */}
+      <section style={{minHeight:'80vh',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',padding:'80px 6%',borderTop:'1px solid rgba(255,255,255,0.06)',textAlign:'center',gap:'24px'}}>
+        <h2 className="sr" style={{fontFamily:'Cormorant Garamond,serif',fontSize:'clamp(40px,7vw,88px)',fontWeight:700,lineHeight:0.9,letterSpacing:'-0.04em',color:'#fff',maxWidth:'720px'}}>
+          Ogni giorno senza<br/>
+          <em style={{fontStyle:'italic',color:'rgba(255,255,255,0.2)'}}>presenza</em> digitale<br/>
+          è un'opportunità<br/>
+          <em style={{fontStyle:'italic',color:'rgba(255,255,255,0.2)'}}>persa.</em>
+        </h2>
+        <p style={{fontFamily:'Outfit,system-ui,sans-serif',fontSize:'11px',color:'rgba(255,255,255,0.2)',letterSpacing:'0.2em',textTransform:'uppercase'}}>
+          Prezzi da €10 · Consegna in 24h · Pagamento sicuro
+        </p>
+        <Link href="/categoria/siti-web" className="g-btn g-btn-gold" style={{borderRadius:'100px',fontSize:'15px',padding:'15px 36px',marginTop:'8px'}}>
+          Inizia oggi <ArrowRight size={16}/>
+        </Link>
       </section>
 
-      {/* ══ PROCESSO ══ */}
-      <section style={{background:'#080810',borderTop:'1px solid rgba(255,255,255,0.04)',borderBottom:'1px solid rgba(255,255,255,0.04)',padding:'100px 6%'}}>
-        <div className="grid-process" style={{maxWidth:'1200px',margin:'0 auto',display:'grid',gridTemplateColumns:'1fr 2fr',gap:'80px',alignItems:'start'}}>
-          <div>
-            <span className="overline" style={{marginBottom:'18px'}}>Come funziona</span>
-            <h2 style={{fontFamily:'Cormorant Garamond,serif',fontSize:'clamp(2.5rem,4.5vw,4rem)',fontWeight:600,color:'white',lineHeight:0.95,letterSpacing:'-0.025em'}}>
-              Tre<br/><em className="gold" style={{fontStyle:'italic'}}>semplici</em><br/>passi.
-            </h2>
+      {/* ══ CATEGORIE ══ */}
+      <section style={{padding:'100px 6%',borderTop:'1px solid rgba(255,255,255,0.06)'}}>
+        <div style={{maxWidth:'1200px',margin:'0 auto'}}>
+          <div style={{marginBottom:'64px',display:'flex',alignItems:'flex-end',justifyContent:'space-between',flexWrap:'wrap',gap:'16px'}}>
+            <div>
+              <span style={{fontFamily:'Outfit,system-ui,sans-serif',fontSize:'10px',fontWeight:700,letterSpacing:'0.2em',textTransform:'uppercase',color:'rgba(255,255,255,0.25)',display:'block',marginBottom:'12px'}}>Catalogo</span>
+              <h2 style={{fontFamily:'Cormorant Garamond,serif',fontSize:'clamp(36px,5vw,60px)',fontWeight:700,lineHeight:0.92,letterSpacing:'-0.04em',color:'#fff'}}>
+                35 prodotti.<br/><em className="gold" style={{fontStyle:'italic'}}>Una soluzione.</em>
+              </h2>
+            </div>
           </div>
-          <div>
+
+          <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:'1px',background:'rgba(255,255,255,0.07)',border:'1px solid rgba(255,255,255,0.07)',borderRadius:'20px',overflow:'hidden'}}>
             {[
-              {n:'01',t:'Scegli il servizio',d:'Esplora il catalogo. Ogni prodotto ha descrizione dettagliata, tempi chiari e lista esatta di cosa include.'},
-              {n:'02',t:'Acquista con PayPal',d:'Tutte le carte accettate. Transazione 100% protetta. Rimborso completo entro 7 giorni.'},
-              {n:'03',t:'Ricevi in 24 ore',d:'File digitale in email, oppure ti contattiamo per i prodotti personalizzati. Revisioni incluse.'},
-            ].map((s,i,arr) => (
-              <div key={s.n} className="process-step-row" style={{display:'grid',gridTemplateColumns:'64px 1fr',gap:'20px',padding:'32px 0',borderBottom:i<arr.length-1?'1px solid rgba(255,255,255,0.045)':'none',alignItems:'start'}}>
-                <div style={{fontFamily:'Cormorant Garamond,serif',fontSize:'3.2rem',fontWeight:300,lineHeight:1,color:'rgba(201,169,110,0.16)',letterSpacing:'-0.04em'}}>{s.n}</div>
+              {icon:'🌐',name:'Siti Web',price:'da €22',time:'Da 24h',slug:'siti-web'},
+              {icon:'🍽️',name:'Menu Digitali',price:'da €14',time:'Da 24h',slug:'menu-digitali'},
+              {icon:'🤖',name:'Automazioni',price:'da €20',time:'Da 48h',slug:'automazioni'},
+              {icon:'📊',name:'Fogli Excel',price:'da €10',time:'Immediato',slug:'fogli-excel'},
+              {icon:'📱',name:'App Mobile',price:'da €30',time:'3-5 giorni',slug:'app-mobile'},
+              {icon:'🎨',name:'Creatività',price:'da €15',time:'Da 24h',slug:'creativita'},
+            ].map((cat,i) => (
+              <Link key={cat.slug} href={`/categoria/${cat.slug}`} style={{background:'#000',padding:'32px',display:'flex',flexDirection:'column',gap:'14px',textDecoration:'none',transition:'background 0.2s',cursor:'pointer',borderRight:i%3<2?'1px solid rgba(255,255,255,0.07)':'none'}}
+                onMouseEnter={e=>(e.currentTarget.style.background='#0d0d0d')}
+                onMouseLeave={e=>(e.currentTarget.style.background='#000')}>
+                <div style={{fontSize:'32px'}}>{cat.icon}</div>
                 <div>
-                  <h3 style={{fontFamily:'Cormorant Garamond,serif',color:'white',fontSize:'1.55rem',fontWeight:600,marginBottom:'10px',lineHeight:1.15}}>{s.t}</h3>
-                  <p style={{fontFamily:'Outfit,system-ui,sans-serif',color:'rgba(115,115,152,0.78)',fontSize:'14px',lineHeight:1.75}}>{s.d}</p>
+                  <div style={{fontFamily:'Cormorant Garamond,serif',fontSize:'22px',fontWeight:700,color:'#fff',letterSpacing:'-0.02em',marginBottom:'4px'}}>{cat.name}</div>
+                  <div style={{fontFamily:'Outfit,system-ui,sans-serif',fontSize:'13px',color:'#c9a96e',fontWeight:600}}>{cat.price}</div>
                 </div>
+                <div style={{fontFamily:'Outfit,system-ui,sans-serif',fontSize:'11px',color:'rgba(255,255,255,0.25)',letterSpacing:'0.08em'}}>⚡ {cat.time}</div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ══ PRODOTTI PIÙ VENDUTI ══ */}
+      <section style={{padding:'100px 6%',borderTop:'1px solid rgba(255,255,255,0.06)'}}>
+        <div style={{maxWidth:'1200px',margin:'0 auto'}}>
+          <div style={{textAlign:'center',marginBottom:'64px'}}>
+            <span style={{fontFamily:'Outfit,system-ui,sans-serif',fontSize:'10px',fontWeight:700,letterSpacing:'0.2em',textTransform:'uppercase',color:'rgba(255,255,255,0.25)',display:'block',marginBottom:'12px'}}>Più venduti</span>
+            <h2 style={{fontFamily:'Cormorant Garamond,serif',fontSize:'clamp(36px,5vw,60px)',fontWeight:700,lineHeight:0.92,letterSpacing:'-0.04em',color:'#fff',marginBottom:'24px'}}>
+              I più <em className="gold" style={{fontStyle:'italic'}}>popolari</em>
+            </h2>
+            <Link href="/categoria/siti-web" className="g-btn g-btn-ghost" style={{borderRadius:'100px',display:'inline-flex'}}>
+              Catalogo completo <ArrowRight size={14}/>
+            </Link>
+          </div>
+          <div className="grid-products" style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:'1px',background:'rgba(255,255,255,0.07)',border:'1px solid rgba(255,255,255,0.07)',borderRadius:'20px',overflow:'hidden'}}>
+            {featured.map((p,i) => (
+              <div key={p.id} className="sr" style={{transitionDelay:`${i*100}ms`,background:'#000'}}>
+                <ProductCard product={{...p,category:CATEGORIES.find(c=>c.id===p.category_id)}} delay={i*80}/>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ══ PRODOTTI ══ */}
-      <section style={{padding:'100px 6%',maxWidth:'1200px',margin:'0 auto'}}>
-        <div style={{textAlign:'center',marginBottom:'56px'}}>
-          <span className="overline" style={{marginBottom:'14px',display:'block'}}>Più venduti</span>
-          <h2 style={{fontFamily:'Cormorant Garamond,serif',fontSize:'clamp(2.5rem,5vw,4rem)',fontWeight:600,color:'white',lineHeight:0.93,letterSpacing:'-0.025em',marginBottom:'24px'}}>
-            I più <em className="gold" style={{fontStyle:'italic'}}>popolari</em>
-          </h2>
-          <Link href="/categoria/siti-web" className="g-btn g-btn-ghost" style={{borderRadius:'100px',display:'inline-flex'}}>
-            Catalogo completo <ArrowRight size={14}/>
-          </Link>
-        </div>
-        <div className="grid-products" style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:'14px'}}>
-          {featured.map((p,i) => (
-            <div key={p.id} className="sr" style={{transitionDelay:`${i*120}ms`}}><ProductCard product={{...p,category:CATEGORIES.find(c=>c.id===p.category_id)}} delay={i*80}/></div>
+      {/* ══ TRUST BAR ══ */}
+      <div style={{borderTop:'1px solid rgba(255,255,255,0.06)',borderBottom:'1px solid rgba(255,255,255,0.06)',padding:'24px 6%'}}>
+        <div style={{maxWidth:'1200px',margin:'0 auto',display:'flex',justifyContent:'center',gap:'48px',flexWrap:'wrap'}}>
+          {['🔒 Pagamento sicuro PayPal','⚡ Consegna 24-48 ore','⭐ +32 clienti soddisfatti','✅ Rimborso 7 giorni'].map(t => (
+            <span key={t} style={{fontFamily:'Outfit,system-ui,sans-serif',fontSize:'12px',color:'rgba(255,255,255,0.3)',letterSpacing:'0.05em'}}>{t}</span>
           ))}
         </div>
-      </section>
+      </div>
 
-
-      {/* ══ TESTIMONIALS ══ */}
-      <section style={{padding:'100px 6%',background:'#080810',borderTop:'1px solid rgba(255,255,255,0.04)',borderBottom:'1px solid rgba(255,255,255,0.04)'}}>
+      {/* ══ RECENSIONI ══ */}
+      <section style={{padding:'100px 6%'}}>
         <div style={{maxWidth:'1200px',margin:'0 auto'}}>
           <div style={{textAlign:'center',marginBottom:'64px'}}>
-            <span className="overline" style={{marginBottom:'16px',display:'block'}}>Recensioni</span>
-            <h2 style={{fontFamily:'Cormorant Garamond,serif',fontSize:'clamp(2.5rem,5vw,4rem)',fontWeight:600,color:'white',lineHeight:0.95,letterSpacing:'-0.025em'}}>
+            <span style={{fontFamily:'Outfit,system-ui,sans-serif',fontSize:'10px',fontWeight:700,letterSpacing:'0.2em',textTransform:'uppercase',color:'rgba(255,255,255,0.25)',display:'block',marginBottom:'12px'}}>Recensioni</span>
+            <h2 style={{fontFamily:'Cormorant Garamond,serif',fontSize:'clamp(36px,5vw,60px)',fontWeight:700,lineHeight:0.92,letterSpacing:'-0.04em',color:'#fff'}}>
               Cosa dicono<br/><em className="gold" style={{fontStyle:'italic'}}>i clienti</em>
             </h2>
           </div>
-          <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:'16px',gridAutoRows:'1fr'}}>
+          <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:'1px',background:'rgba(255,255,255,0.07)',border:'1px solid rgba(255,255,255,0.07)',borderRadius:'20px',overflow:'hidden'}}>
             {[
-              {name:'Marco Bianchi',    role:'Titolare Pizzeria',       avatar:'🍕', text:'Menu digitale consegnato in meno di 24 ore. I clienti lo adorano e abbiamo già ridotto gli errori degli ordini del 40%. Qualità eccezionale.',stars:5},
-              {name:'Sara Lombardi',    role:'Freelance Designer',      avatar:'🎨', text:'Portfolio online professionale in 48 ore. Gabry ha capito esattamente quello che volevo. Già ricevuto 3 nuovi clienti grazie al sito.',stars:5},
-              {name:'Agenzia Meridian', role:'Marketing Agency',        avatar:'🏢', text:'Il chatbot WhatsApp ha automatizzato il 70% del supporto clienti. ROI incredibile per il prezzo pagato. Lo consiglio a tutti.',stars:5},
-              {name:'Laura Esposito',   role:'Parrucchiera',            avatar:'✂️', text:'Sito bellissimo e funzionale. Le prenotazioni online sono aumentate del 60% nel primo mese. Assistenza super disponibile.',stars:5},
-              {name:'Roberto Mancini',  role:'PMI owner',               avatar:'📊', text:'Il foglio Excel per la gestione dipendenti ha rivoluzionato il nostro processo. Risparmio 3 ore a settimana. Vale 10 volte il prezzo.',stars:5},
-              {name:'Cristina Ferro',   role:'Ristorante La Grotta',    avatar:'🍽️', text:'Menu multilingua perfetto per i turisti stranieri. Aggiornamenti in tempo reale fantastici. Professionalità e velocità uniche.',stars:5},
-              {name:'Davide Romano',    role:'E-commerce Fashion',      avatar:'👕', text:'Landing page convertissima! Tasso di conversione salito dal 1.2% al 4.8% in due settimane. Investimento che si è ripagato in 3 giorni.',stars:5},
-              {name:'Giulia Marchetti', role:'Studio Pilates',          avatar:'🧘', text:'App prenotazioni semplicissima da usare. Le clienti la adorano e ho zero telefonate per gli appuntamenti. Consiglio vivamente!',stars:5},
-              {name:'Luca Ferretti',    role:'Consulente Finanziario',  avatar:'💼', text:'Sito aziendale elegante e professionale. In meno di 48 ore avevo già il sito online. Supporto impeccabile anche dopo la consegna.',stars:5},
-              {name:'Anna Conti',       role:'Gelateria Artigianale',   avatar:'🍦', text:'Il menu QR con le foto dei gelati ha triplicato le ordinazioni di gusti nuovi. I clienti lo trovano divertente e pratico.',stars:5},
-              {name:'Matteo Gallo',     role:'Personal Trainer',        avatar:'💪', text:'Automazione Instagram DM fantastica. Rispondo a 200 messaggi al giorno in automatico. Ho guadagnato 2 ore libere ogni giorno.',stars:5},
-              {name:'Federica Bruno',   role:'Avvocato',                avatar:'⚖️', text:'Sito professionale esattamente come lo immaginavo. Design sobrio ed elegante. I clienti mi dicono che ispira subito fiducia.',stars:5},
-            ].map((t,i) => (
-              <div key={t.name} className="testimonial-card sr" data-delay={String(i*80)}>
-                <div style={{display:'flex',gap:'4px',marginBottom:'16px'}}>
-                  {[...Array(t.stars)].map((_,j) => (
-                    <span key={j} style={{color:'#c9a96e',fontSize:'14px'}}>★</span>
-                  ))}
-                </div>
-                <p style={{fontFamily:'Outfit,system-ui,sans-serif',color:'rgba(165,165,195,0.85)',fontSize:'14px',lineHeight:1.75,marginBottom:'20px',fontStyle:'italic'}}>
-                  &ldquo;{t.text}&rdquo;
-                </p>
-                <div style={{display:'flex',alignItems:'center',gap:'12px',borderTop:'1px solid rgba(255,255,255,0.05)',paddingTop:'16px'}}>
-                  <div style={{width:'38px',height:'38px',borderRadius:'50%',background:'rgba(201,169,110,0.08)',border:'1px solid rgba(201,169,110,0.15)',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'18px'}}>{t.avatar}</div>
+              {avatar:'🍕',name:'Marco B.',role:'Pizzeria',text:'"Menu digitale in meno di 24 ore. Errori ordini ridotti del 40%."'},
+              {avatar:'🎨',name:'Sara L.',role:'Designer',text:'"Portfolio online in 48 ore. Già 3 nuovi clienti grazie al sito."'},
+              {avatar:'🏢',name:'Agenzia Meridian',role:'Marketing',text:'"Chatbot WhatsApp che ha automatizzato il 70% del supporto."'},
+              {avatar:'✂️',name:'Laura E.',role:'Parrucchiera',text:'"Prenotazioni aumentate del 60% nel primo mese. Fantastico."'},
+              {avatar:'💪',name:'Matteo G.',role:'Personal Trainer',text:'"Rispondo a 200 messaggi al giorno in automatico. Incredibile."'},
+              {avatar:'🎨',name:'Martina G.',role:'Stilista',text:'"Logo bellissimo e professionale consegnato in 48 ore precise."'},
+            ].map((r,i) => (
+              <div key={r.name} style={{background:'#000',padding:'28px',borderRight:i%3<2?'1px solid rgba(255,255,255,0.07)':'none'}}>
+                <div style={{color:'#c9a96e',fontSize:'12px',letterSpacing:'3px',marginBottom:'14px'}}>★★★★★</div>
+                <p style={{fontFamily:'Outfit,system-ui,sans-serif',fontSize:'14px',color:'rgba(255,255,255,0.55)',lineHeight:1.7,fontStyle:'italic',marginBottom:'18px'}}>{r.text}</p>
+                <div style={{display:'flex',alignItems:'center',gap:'10px',borderTop:'1px solid rgba(255,255,255,0.05)',paddingTop:'16px'}}>
+                  <div style={{width:'34px',height:'34px',borderRadius:'50%',background:'rgba(201,169,110,0.08)',border:'1px solid rgba(201,169,110,0.12)',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'16px'}}>{r.avatar}</div>
                   <div>
-                    <div style={{fontFamily:'Outfit,system-ui,sans-serif',color:'white',fontSize:'13px',fontWeight:600}}>{t.name}</div>
-                    <div style={{fontFamily:'Outfit,system-ui,sans-serif',color:'rgba(120,120,155,0.6)',fontSize:'11px'}}>{t.role}</div>
+                    <div style={{fontFamily:'Outfit,system-ui,sans-serif',fontSize:'12px',fontWeight:700,color:'rgba(255,255,255,0.4)',textTransform:'uppercase',letterSpacing:'0.08em'}}>{r.name}</div>
+                    <div style={{fontFamily:'Outfit,system-ui,sans-serif',fontSize:'11px',color:'rgba(255,255,255,0.2)'}}>{r.role}</div>
                   </div>
                 </div>
               </div>
@@ -247,63 +215,28 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ══ CTA ══ */}
-      <section style={{padding:'0 6% 100px',maxWidth:'1200px',margin:'0 auto'}}>
-        <div className="grid-cta" style={{position:'relative',overflow:'hidden',border:'1px solid rgba(255,255,255,0.065)',borderRadius:'24px',background:'linear-gradient(135deg,rgba(255,255,255,0.024) 0%,rgba(255,255,255,0.008) 100%)',padding:'clamp(56px,8vw,88px)',display:'grid',gridTemplateColumns:'1fr auto',gap:'56px',alignItems:'center'}}>
-          <div style={{position:'absolute',top:'-30%',right:'-3%',width:'520px',height:'520px',borderRadius:'50%',background:'radial-gradient(circle,rgba(201,169,110,0.05) 0%,transparent 65%)',filter:'blur(55px)',pointerEvents:'none'}}/>
-          <div style={{position:'relative'}}>
-            <span className="overline" style={{marginBottom:'20px'}}>Inizia oggi</span>
-            <h2 style={{fontFamily:'Cormorant Garamond,serif',fontSize:'clamp(2.2rem,5vw,4rem)',fontWeight:600,color:'white',lineHeight:1.02,letterSpacing:'-0.025em',marginBottom:'20px'}}>
-              Ogni giorno senza<br/>
-              <em className="gold" style={{fontStyle:'italic'}}>presenza digitale</em><br/>
-              è un&apos;opportunità persa.
-            </h2>
-            <div style={{display:'flex',alignItems:'center',gap:'8px',fontFamily:'Outfit,system-ui,sans-serif',fontSize:'13px',color:'rgba(95,95,125,0.85)'}}>
-              <CheckCircle size={13} style={{color:'#4ade80',flexShrink:0}}/>
-              Rimborso 7 giorni &nbsp;·&nbsp; Nessun abbonamento &nbsp;·&nbsp; Tutto digitale
-            </div>
-          </div>
-          <div className="cta-btns" style={{display:'flex',flexDirection:'column',gap:'10px',minWidth:'210px',position:'relative'}}>
-            <Link href="#servizi" className="g-btn g-btn-gold" style={{borderRadius:'14px',justifyContent:'center',padding:'16px 28px',fontSize:'15px'}}>
-              Scopri i servizi <ArrowRight size={17}/>
-            </Link>
-            <Link href="/contatti" className="g-btn g-btn-ghost" style={{borderRadius:'14px',justifyContent:'center',fontSize:'14px'}}>Hai domande?</Link>
-          </div>
-        </div>
+      {/* ══ CTA FINALE ══ */}
+      <section style={{minHeight:'60vh',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',textAlign:'center',padding:'80px 6%',borderTop:'1px solid rgba(255,255,255,0.06)',gap:'32px'}}>
+        <h2 style={{fontFamily:'Cormorant Garamond,serif',fontSize:'clamp(60px,10vw,120px)',fontWeight:700,lineHeight:0.88,letterSpacing:'-0.05em',color:'#fff'}}>
+          Inizia<br/><em className="gold" style={{fontStyle:'italic'}}>oggi.</em>
+        </h2>
+        <p style={{fontFamily:'Outfit,system-ui,sans-serif',fontSize:'13px',color:'rgba(255,255,255,0.2)',letterSpacing:'0.1em',textTransform:'uppercase'}}>
+          Rimborso 7 giorni · Nessun abbonamento · Tutto digitale
+        </p>
+        <Link href="/categoria/siti-web" className="g-btn g-btn-gold" style={{borderRadius:'100px',fontSize:'16px',padding:'16px 40px'}}>
+          Scopri i servizi <ArrowRight size={17}/>
+        </Link>
       </section>
 
+      {/* JSON-LD */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify({
+        "@context":"https://schema.org","@type":"Store",
+        "name":"GabryShop","description":"Servizi digitali professionali",
+        "url":"https://gabryshop-digitale.vercel.app",
+        "aggregateRating":{"@type":"AggregateRating","ratingValue":"4.9","reviewCount":"32","bestRating":"5"},
+        "offers":{"@type":"AggregateOffer","priceCurrency":"EUR","lowPrice":"10","highPrice":"40","offerCount":"35"}
+      })}}/>
 
-      {/* ── JSON-LD Structured Data ── */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{__html: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "Store",
-          "name": "GabryShop",
-          "description": "Servizi digitali professionali: siti web, menu digitali, automazioni, app mobile e fogli Excel.",
-          "url": "https://gabryshop-digitale.vercel.app",
-          "logo": "https://gabryshop-digitale.vercel.app/icon.svg",
-          "contactPoint": {
-            "@type": "ContactPoint",
-            "contactType": "customer service",
-            "email": "terryliano20011@gmail.com",
-            "availableLanguage": "Italian"
-          },
-          "offers": {
-            "@type": "AggregateOffer",
-            "priceCurrency": "EUR",
-            "lowPrice": "10",
-            "highPrice": "40",
-            "offerCount": "29"
-          },
-          "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": "4.9",
-            "reviewCount": "32",
-            "bestRating": "5"
-          }
-        })}}
-      />
     </main>
   )
 }
