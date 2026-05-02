@@ -83,11 +83,18 @@ export default function Home() {
               <span style={{color:'#c9a96e'}}>Gabry</span>Shop
             </div>
             <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'8px'}}>
-              {[{icon:'🌐',name:'Landing Page',price:'€29'},{icon:'🍽️',name:'Menu QR',price:'€19'},{icon:'🤖',name:'WhatsApp Bot',price:'€35'},{icon:'🎨',name:'Logo Design',price:'€35'}].map(p => (
-                <div key={p.name} style={{background:'rgba(255,255,255,0.05)',border:'1px solid rgba(255,255,255,0.08)',borderRadius:'12px',padding:'10px'}}>
-                  <div style={{fontSize:'20px',marginBottom:'6px'}}>{p.icon}</div>
-                  <div style={{fontFamily:'Outfit,system-ui,sans-serif',fontSize:'9px',fontWeight:700,color:'#fff',marginBottom:'3px',lineHeight:1.2}}>{p.name}</div>
-                  <div style={{fontFamily:'Cormorant Garamond,serif',fontSize:'14px',fontWeight:700,color:'#c9a96e'}}>{p.price}</div>
+              {[
+                {img:'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=200',name:'Sito Web',price:'€22'},
+                {img:'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=200',name:'Menu QR',price:'€13'},
+                {img:'https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=200',name:'Bot WhatsApp',price:'€25'},
+                {img:'https://images.unsplash.com/photo-1626785774573-4b799315345d?w=200',name:'Logo Design',price:'€25'},
+              ].map(p => (
+                <div key={p.name} style={{background:'rgba(255,255,255,0.05)',border:'1px solid rgba(255,255,255,0.08)',borderRadius:'10px',overflow:'hidden'}}>
+                  <img src={p.img} alt={p.name} style={{width:'100%',height:'40px',objectFit:'cover',filter:'brightness(0.7)'}}/>
+                  <div style={{padding:'6px 8px'}}>
+                    <div style={{fontFamily:'Outfit,system-ui,sans-serif',fontSize:'8px',fontWeight:700,color:'#fff',marginBottom:'2px',lineHeight:1.2}}>{p.name}</div>
+                    <div style={{fontFamily:'Cormorant Garamond,serif',fontSize:'12px',fontWeight:700,color:'#c9a96e'}}>{p.price}</div>
+                  </div>
                 </div>
               ))}
             </div>
@@ -119,7 +126,7 @@ export default function Home() {
         <div style={{maxWidth:'1200px',margin:'0 auto'}}>
           <div style={{marginBottom:'64px',display:'flex',alignItems:'flex-end',justifyContent:'space-between',flexWrap:'wrap',gap:'16px'}}>
             <div>
-              <span style={{fontFamily:'Outfit,system-ui,sans-serif',fontSize:'10px',fontWeight:700,letterSpacing:'0.2em',textTransform:'uppercase',color:'rgba(255,255,255,0.25)',display:'block',marginBottom:'12px'}}>Catalogo</span>
+              <span style={{fontFamily:'Outfit,system-ui,sans-serif',fontSize:'10px',fontWeight:700,letterSpacing:'0.2em',textTransform:'uppercase',color:'rgba(255,255,255,0.25)',display:'block',marginBottom:'12px',textAlign:'center'}}>Catalogo</span>
               <h2 style={{fontFamily:'Cormorant Garamond,serif',fontSize:'clamp(36px,5vw,60px)',fontWeight:700,lineHeight:0.92,letterSpacing:'-0.04em',color:'#fff'}}>
                 35 prodotti.<br/><em className="gold" style={{fontStyle:'italic'}}>Una soluzione.</em>
               </h2>
