@@ -32,11 +32,31 @@ export default function Navbar() {
         <div style={{ maxWidth:'1400px', margin:'0 auto', padding:'0 5%', display:'flex', alignItems:'center', justifyContent:'space-between' }}>
 
           {/* Logo */}
-          <Link href="/" style={{ display:'flex', alignItems:'center', gap:'12px', textDecoration:'none' }}>
-            <div style={{ width:'32px', height:'32px', borderRadius:'9px', background:'linear-gradient(135deg,#c9a96e,#7c6af0)', display:'flex', alignItems:'center', justifyContent:'center', fontSize:'16px', fontWeight:700, color:'white' }}>G</div>
-            <span style={{ fontFamily:'Cormorant Garamond,serif', fontSize:'22px', fontWeight:600, letterSpacing:'-0.01em' }}>
-              <span style={{ background:'linear-gradient(135deg,#c9a96e,#e8c878)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text' }}>Gabry</span>
-              <span style={{ color:'white' }}>Shop</span>
+          <Link href="/" style={{ display:'flex', alignItems:'center', gap:'10px', textDecoration:'none' }}>
+            {/* Logo SVG ispirato al globo+robot teal */}
+            <div style={{ width:'38px', height:'38px', borderRadius:'50%', background:'linear-gradient(135deg,#0d1f2d,#1a3a4a)', border:'1.5px solid rgba(0,220,200,0.3)', display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0, boxShadow:'0 0 12px rgba(0,200,180,0.15)' }}>
+              <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                {/* Globo */}
+                <circle cx="9" cy="11" r="7" stroke="#4dd9c0" strokeWidth="1.2" fill="none" opacity="0.8"/>
+                <line x1="2" y1="11" x2="16" y2="11" stroke="#4dd9c0" strokeWidth="0.8" opacity="0.5"/>
+                <ellipse cx="9" cy="11" rx="3.5" ry="7" stroke="#4dd9c0" strokeWidth="0.8" fill="none" opacity="0.5"/>
+                {/* Robot testa */}
+                <rect x="13" y="5" width="7" height="6" rx="1.5" fill="#0d1f2d" stroke="#4dd9c0" strokeWidth="1"/>
+                {/* Robot occhi */}
+                <circle cx="15" cy="8" r="0.8" fill="#4dd9c0"/>
+                <circle cx="18" cy="8" r="0.8" fill="#4dd9c0"/>
+                {/* Antenne */}
+                <line x1="15" y1="5" x2="15" y2="3.5" stroke="#4dd9c0" strokeWidth="0.8"/>
+                <circle cx="15" cy="3" r="0.5" fill="#4dd9c0"/>
+                <line x1="18" y1="5" x2="18" y2="3.5" stroke="#4dd9c0" strokeWidth="0.8"/>
+                <circle cx="18" cy="3" r="0.5" fill="#4dd9c0"/>
+                {/* Circuiti */}
+                <line x1="13" y1="9" x2="11" y2="9" stroke="#4dd9c0" strokeWidth="0.7" opacity="0.6"/>
+                <circle cx="10.5" cy="9" r="0.5" fill="#4dd9c0" opacity="0.6"/>
+              </svg>
+            </div>
+            <span style={{ fontFamily:'Outfit,system-ui,sans-serif', fontSize:'18px', fontWeight:800, letterSpacing:'-0.02em', color:'white' }}>
+              <span style={{ color:'#4dd9c0' }}>Gabry</span>Shop
             </span>
           </Link>
 
