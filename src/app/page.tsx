@@ -57,7 +57,7 @@ export default function Home() {
           </h2>
         </div>
 
-        <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:'1px',background:'rgba(255,255,255,0.06)',border:'1px solid rgba(255,255,255,0.06)',borderRadius:'20px',overflow:'hidden',width:'100%',maxWidth:'800px'}}>
+        <div className="stats-grid-wrap" style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:'1px',background:'rgba(255,255,255,0.06)',border:'1px solid rgba(255,255,255,0.06)',borderRadius:'20px',overflow:'hidden',width:'100%',maxWidth:'800px'}}>
           {[
             {n:'+32',l:'Clienti soddisfatti',counter:'32',prefix:'+',desc:'Professionisti e aziende che ci hanno scelto'},
             {n:'98%',l:'Soddisfazione',counter:'98',suffix:'%',desc:'Valutazione media dei nostri clienti'},
@@ -79,7 +79,7 @@ export default function Home() {
       </section>
 
       {/* ══ SEZIONE 3 — IPHONE (100vh) ══ */}
-      <section style={{minHeight:'100vh',display:'flex',alignItems:'center',justifyContent:'center',padding:'80px 6%',gap:'80px',flexWrap:'wrap',borderTop:'1px solid rgba(255,255,255,0.06)'}}>
+      <section className='iphone-section-wrap' style={{minHeight:'100vh',display:'flex',alignItems:'center',justifyContent:'center',padding:'80px 6%',gap:'80px',flexWrap:'wrap',borderTop:'1px solid rgba(255,255,255,0.06)'}}>
         <div style={{maxWidth:'380px'}}>
           <span style={{fontFamily:'Outfit,system-ui,sans-serif',fontSize:'10px',fontWeight:700,letterSpacing:'0.2em',textTransform:'uppercase',color:'#4dd9c0',display:'block',marginBottom:'20px'}}>Il tuo shop, ovunque</span>
           <h2 style={{fontFamily:'Cormorant Garamond,serif',fontSize:'clamp(40px,5vw,64px)',fontWeight:700,lineHeight:0.92,letterSpacing:'-0.04em',color:'#fff',marginBottom:'24px'}}>
@@ -133,7 +133,7 @@ export default function Home() {
           </h2>
         </div>
 
-        <div style={{display:'grid',gridTemplateColumns:'repeat(5,1fr)',gap:'1px',background:'rgba(255,255,255,0.07)',border:'1px solid rgba(255,255,255,0.07)',borderRadius:'20px',overflow:'hidden',width:'100%',maxWidth:'1200px'}}>
+        <div className="cats-grid-wrap" style={{display:'grid',gridTemplateColumns:'repeat(5,1fr)',gap:'1px',background:'rgba(255,255,255,0.07)',border:'1px solid rgba(255,255,255,0.07)',borderRadius:'20px',overflow:'hidden',width:'100%',maxWidth:'1200px'}}>
           {[
             {icon:'🍽️',name:'Ristorazione',price:'da €13',time:'Da 24h',slug:'ristorazione',desc:'Ristoranti, bar, pizzerie e locali',img:'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=70'},
             {icon:'🎉',name:'Locali & Discoteche',price:'da €11',time:'Da 24h',slug:'locali',desc:'Discoteche, club ed eventi',img:'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=600&q=70'},
@@ -204,18 +204,18 @@ export default function Home() {
             Cosa dicono<br/><em style={{fontStyle:'italic',background:'linear-gradient(110deg,#4dd9c0,#a8f0e0)',WebkitBackgroundClip:'text',WebkitTextFillColor:'transparent',backgroundClip:'text'}}>i clienti</em>
           </h2>
         </div>
-        <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:'1px',background:'rgba(255,255,255,0.07)',border:'1px solid rgba(255,255,255,0.07)',borderRadius:'20px',overflow:'hidden',width:'100%',maxWidth:'1100px'}}>
+        <div className="reviews-grid-wrap" style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:'1px',background:'rgba(255,255,255,0.07)',border:'1px solid rgba(255,255,255,0.07)',borderRadius:'20px',overflow:'hidden',width:'100%',maxWidth:'1100px'}}>
           {[
-            {avatar:'🍕',name:'Marco B.',role:'Pizzeria',text:'"Menu digitale in meno di 24 ore. Errori ordini ridotti del 40%."'},
-            {avatar:'🎨',name:'Sara L.',role:'Designer',text:'"Portfolio online in 48 ore. Già 3 nuovi clienti grazie al sito."'},
-            {avatar:'🏢',name:'Agenzia Meridian',role:'Marketing',text:'"Chatbot WhatsApp che ha automatizzato il 70% del supporto."'},
-            {avatar:'✂️',name:'Laura E.',role:'Parrucchiera',text:'"Prenotazioni aumentate del 60% nel primo mese. Fantastico."'},
-            {avatar:'💪',name:'Matteo G.',role:'Personal Trainer',text:'"Rispondo a 200 messaggi al giorno in automatico. Incredibile."'},
-            {avatar:'🎨',name:'Martina G.',role:'Stilista',text:'"Logo bellissimo e professionale consegnato in 48 ore precise."'},
+            {avatar:'🍕',name:'Marco B.',role:'Pizzeria',text:'Il menu digitale era pronto in meno di 24 ore. I clienti lo usano ogni giorno e gli errori negli ordini sono quasi spariti.'},
+            {avatar:'🎨',name:'Sara L.',role:'Designer',text:'Avevo bisogno di un portfolio veloce e professionale. In 48 ore era online, e già la settimana dopo ho ricevuto 3 contatti nuovi.'},
+            {avatar:'🏢',name:'Agenzia Meridian',role:'Marketing',text:'Ho preso il chatbot WhatsApp per il locale. Ora risponde da solo alle domande più comuni e io non devo stare sempre al telefono.'},
+            {avatar:'✂️',name:'Laura E.',role:'Parrucchiera',text:'Dal giorno che ho messo le prenotazioni online, il telefono squilla molto meno. I clienti prenotano da soli, comodissimo.'},
+            {avatar:'💪',name:'Matteo G.',role:'Personal Trainer',text:'Gestivo tutto a mano, ci mettevo ore. Adesso il bot risponde ai messaggi in automatico e io mi concentro sugli allenamenti.'},
+            {avatar:'🎨',name:'Martina G.',role:'Stilista',text:'Avevo bisogno di un logo serio per la mia attività. Me lo hanno consegnato in due giorni, con varianti e tutto. Molto soddisfatta.'},
           ].map((r,i) => (
             <div key={r.name} style={{background:'#000',padding:'32px 28px',borderRight:i%3<2?'1px solid rgba(255,255,255,0.07)':'none',borderBottom:i<3?'1px solid rgba(255,255,255,0.07)':'none'}}>
               <div style={{color:'#4dd9c0',fontSize:'13px',letterSpacing:'3px',marginBottom:'16px'}}>★★★★★</div>
-              <p style={{fontFamily:'Outfit,system-ui,sans-serif',fontSize:'14px',color:'rgba(255,255,255,0.55)',lineHeight:1.75,fontStyle:'italic',marginBottom:'20px'}}>{r.text}</p>
+              <p style={{fontFamily:'Outfit,system-ui,sans-serif',fontSize:'14px',color:'rgba(255,255,255,0.55)',lineHeight:1.75,fontStyle:'normal',marginBottom:'20px'}}>{r.text}</p>
               <div style={{display:'flex',alignItems:'center',gap:'10px',borderTop:'1px solid rgba(255,255,255,0.05)',paddingTop:'16px'}}>
                 <div style={{width:'36px',height:'36px',borderRadius:'50%',background:'rgba(77,217,192,0.08)',border:'1px solid rgba(77,217,192,0.15)',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'16px'}}>{r.avatar}</div>
                 <div>
