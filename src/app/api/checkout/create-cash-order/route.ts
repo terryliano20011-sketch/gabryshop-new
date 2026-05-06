@@ -37,9 +37,9 @@ export async function POST(req: NextRequest) {
       console.error('Supabase error:', e)
     }
 
-    // 2. Invia email tramite Gmail SMTP via fetch a servizio esterno
-    // Usiamo Brevo (ex Sendinblue) - gratuito 300 email/giorno, nessun dominio richiesto
+    // 2. Email con Brevo
     const BREVO_KEY = process.env.BREVO_API_KEY
+    console.log('BREVO_KEY presente:', !!BREVO_KEY, 'lunghezza:', BREVO_KEY?.length)
     if (BREVO_KEY) {
       const itemsList = items.map((i: any) => `${i.product.name} — €${i.product.price}`).join('\n')
       const briefingText = items
@@ -47,7 +47,7 @@ export async function POST(req: NextRequest) {
         .map((i: any) => `\n--- ${i.product.name} ---\n${Object.entries(i.briefing).map(([k,v]) => `${k}: ${v}`).join('\n')}`)
         .join('\n')
 
-      await fetch('https://api.brevo.com/v3/smtp/email', {
+      const brevoRes = await fetch('https://api.brevo.com/v3/smtp/email', {
         method: 'POST',
         headers: {
           'api-key': BREVO_KEY,
@@ -72,6 +72,10 @@ export async function POST(req: NextRequest) {
           </div>`
         })
       })
+      const brevoResult = await brevoRes.json()
+      console.log('Brevo response:', JSON.stringify(brevoResult))
+    } else {
+      console.log('BREVO_KEY mancante - email non inviata')
     }
 
     return NextResponse.json({ success: true, orderId })
