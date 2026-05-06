@@ -119,6 +119,24 @@ export async function POST(req: NextRequest) {
           <span style="color:#c9a96e;font-size:28px;font-weight:800">€${total}</span>
         </div>
 
+        <!-- Briefing -->
+        ${(items || []).some((i: any) => i.briefing && Object.keys(i.briefing || {}).length > 0) ? `
+        <div style="background:#f9fafb;border:1px solid #e5e7eb;border-radius:10px;padding:16px;margin-bottom:24px">
+          <div style="font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#9ca3af;margin-bottom:12px">✏️ Briefing compilato dal cliente</div>
+          ${(items || []).filter((i: any) => i.briefing && Object.keys(i.briefing || {}).length > 0).map((item: any) => `
+            <div style="margin-bottom:16px">
+              <div style="font-size:13px;font-weight:700;color:#111;margin-bottom:8px;padding:6px 10px;background:#e5e7eb;border-radius:6px">📦 ${item.product_name}</div>
+              <table width="100%" cellpadding="0" cellspacing="0">
+                ${Object.entries(item.briefing || {}).filter(([,v]) => v && String(v).trim()).map(([key, value]) => `
+                <tr>
+                  <td style="padding:5px 8px;font-size:11px;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:0.08em;width:35%;vertical-align:top">${key.replace(/_/g,' ')}</td>
+                  <td style="padding:5px 8px;font-size:12px;color:#111;vertical-align:top">${Array.isArray(value) ? (value as string[]).join(', ') : String(value)}</td>
+                </tr>`).join('')}
+              </table>
+            </div>
+          `).join('')}
+        </div>` : '<div style="background:#f9fafb;border:1px solid #e5e7eb;border-radius:10px;padding:14px;margin-bottom:24px;color:#9ca3af;font-size:13px;text-align:center">⚠️ Il cliente non ha compilato il briefing</div>'}
+
         <!-- Azioni -->
         <div style="display:flex;gap:10px;justify-content:center">
           <a href="${SITE_URL}/admin" style="padding:12px 24px;background:#c9a96e;color:#08060a;text-decoration:none;border-radius:8px;font-size:13px;font-weight:700">Vai all'Admin →</a>
