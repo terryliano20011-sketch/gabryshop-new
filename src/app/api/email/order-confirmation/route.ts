@@ -2,7 +2,8 @@ import { NextRequest, NextResponse } from 'next/server'
 import { Resend } from 'resend'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
-const OWNER_EMAIL = 'gabryshop7@gmail.com'
+const OWNER_EMAIL = 'terryliano20011@gmail.com' // Resend free: solo email account verificata
+const OWNER_EMAIL_NEW = 'gabryshop7@gmail.com' // Da aggiungere quando verificata su Resend
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://gabryshop-digitale.vercel.app'
 
 export async function POST(req: NextRequest) {
