@@ -221,57 +221,18 @@ export default function CheckoutPage() {
                   <CreditCard size={20} style={{color:'#c9a96e'}}/> Metodo di pagamento
                 </h2>
 
-                {/* Selezione metodo - PayPal temporaneamente sospeso */}
-                <div style={{display:'grid',gridTemplateColumns:'1fr',gap:'10px',marginBottom:'28px'}}>
-                  {/* PayPal - SOSPESO
-                  <button onClick={() => setPayMethod('paypal')} style={{padding:'20px',borderRadius:'16px',border:`2px solid ${payMethod==='paypal'?'rgba(201,169,110,0.5)':'rgba(255,255,255,0.07)'}`,background:payMethod==='paypal'?'rgba(201,169,110,0.04)':'rgba(255,255,255,0.02)',cursor:'pointer',display:'flex',flexDirection:'column',alignItems:'center',gap:'10px',transition:'all 0.2s'}}>
-                    <div style={{fontSize:'28px'}}>🅿️</div>
-                    <div style={{fontFamily:'Outfit,system-ui,sans-serif',color:'white',fontSize:'14px',fontWeight:600}}>PayPal</div>
-                    <div style={{fontFamily:'Outfit,system-ui,sans-serif',color:'rgba(120,120,155,0.6)',fontSize:'11px',textAlign:'center'}}>Conto PayPal o carta tramite PayPal</div>
-                    {payMethod==='paypal' && <div style={{fontFamily:'Outfit,system-ui,sans-serif',fontSize:'10px',fontWeight:700,color:'#c9a96e',background:'rgba(201,169,110,0.1)',padding:'3px 10px',borderRadius:'100px',border:'1px solid rgba(201,169,110,0.2)'}}>✓ Selezionato</div>}
-                  </button>
-
-                  */ }
-                  {/* Paga alla consegna */}
-                  <button onClick={() => setPayMethod('cash')} style={{padding:'20px',borderRadius:'16px',border:`2px solid ${payMethod==='cash'?'rgba(77,217,192,0.5)':'rgba(255,255,255,0.07)'}`,background:payMethod==='cash'?'rgba(77,217,192,0.04)':'rgba(255,255,255,0.02)',cursor:'pointer',display:'flex',flexDirection:'column',alignItems:'center',gap:'10px',transition:'all 0.2s'}}>
+                {/* Selezione metodo - solo pagamento alla consegna */}
+                <div style={{marginBottom:'28px'}}>
+                  <div style={{padding:'20px',borderRadius:'16px',border:'2px solid rgba(77,217,192,0.5)',background:'rgba(77,217,192,0.04)',display:'flex',flexDirection:'column',alignItems:'center',gap:'10px'}}>
                     <div style={{fontSize:'28px'}}>💵</div>
                     <div style={{fontFamily:'Outfit,system-ui,sans-serif',color:'white',fontSize:'14px',fontWeight:600}}>Paga alla consegna</div>
-                    <div style={{fontFamily:'Outfit,system-ui,sans-serif',color:'rgba(120,120,155,0.6)',fontSize:'11px',textAlign:'center'}}>Contanti o bonifico dopo la consegna</div>
-                    {payMethod==='cash' && <div style={{fontFamily:'Outfit,system-ui,sans-serif',fontSize:'10px',fontWeight:700,color:'#4dd9c0',background:'rgba(77,217,192,0.1)',padding:'3px 10px',borderRadius:'100px',border:'1px solid rgba(77,217,192,0.2)'}}>✓ Selezionato</div>}
-                  </button>
-
-                  */ }
-                  {/* Carta - SOSPESO
-                  <button onClick={() => setPayMethod('card')} style={{padding:'20px',borderRadius:'16px',border:`2px solid ${payMethod==='card'?'rgba(201,169,110,0.5)':'rgba(255,255,255,0.07)'}`,background:payMethod==='card'?'rgba(201,169,110,0.04)':'rgba(255,255,255,0.02)',cursor:'pointer',display:'flex',flexDirection:'column',alignItems:'center',gap:'10px',transition:'all 0.2s'}}>
-                    <div style={{display:'flex',gap:'6px'}}>
-                      {/* Loghi carte */}
-                      <div style={{width:'36px',height:'24px',background:'#1a1f71',borderRadius:'5px',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'10px',fontWeight:900,color:'white',fontFamily:'Arial,sans-serif',letterSpacing:'-0.5px'}}>VISA</div>
-                      <div style={{width:'36px',height:'24px',background:'transparent',borderRadius:'5px',display:'flex',alignItems:'center',justifyContent:'center',position:'relative'}}>
-                        <div style={{width:'16px',height:'16px',borderRadius:'50%',background:'#eb001b',position:'absolute',left:'2px'}}/>
-                        <div style={{width:'16px',height:'16px',borderRadius:'50%',background:'#f79e1b',position:'absolute',right:'2px',opacity:0.9}}/>
-                      </div>
-                      <div style={{width:'36px',height:'24px',background:'#006FCF',borderRadius:'5px',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'8px',fontWeight:900,color:'white',fontFamily:'Arial,sans-serif'}}>AMEX</div>
-                    </div>
-                    <div style={{fontFamily:'Outfit,system-ui,sans-serif',color:'white',fontSize:'14px',fontWeight:600}}>Carta di credito / debito</div>
-                    <div style={{fontFamily:'Outfit,system-ui,sans-serif',color:'rgba(120,120,155,0.6)',fontSize:'11px',textAlign:'center'}}>Visa, Mastercard, Amex</div>
-                    {payMethod==='card' && <div style={{fontFamily:'Outfit,system-ui,sans-serif',fontSize:'10px',fontWeight:700,color:'#c9a96e',background:'rgba(201,169,110,0.1)',padding:'3px 10px',borderRadius:'100px',border:'1px solid rgba(201,169,110,0.2)'}}>✓ Selezionato</div>}
-                  </button>
+                    <div style={{fontFamily:'Outfit,system-ui,sans-serif',color:'rgba(120,120,155,0.6)',fontSize:'11px',textAlign:'center'}}>Contanti, bonifico o Satispay</div>
+                    <div style={{fontFamily:'Outfit,system-ui,sans-serif',fontSize:'10px',fontWeight:700,color:'#4dd9c0',background:'rgba(77,217,192,0.1)',padding:'3px 10px',borderRadius:'100px',border:'1px solid rgba(77,217,192,0.2)'}}>✓ Selezionato</div>
+                  </div>
                 </div>
 
                 {/* Info metodo selezionato */}
-                {payMethod === 'card' && (
-                  <div style={{padding:'16px 20px',background:'rgba(201,169,110,0.04)',border:'1px solid rgba(201,169,110,0.12)',borderRadius:'14px',marginBottom:'24px'}}>
-                    <div style={{display:'flex',alignItems:'flex-start',gap:'10px'}}>
-                      <Lock size={15} style={{color:'#c9a96e',flexShrink:0,marginTop:'2px'}}/>
-                      <div>
-                        <div style={{fontFamily:'Outfit,system-ui,sans-serif',color:'white',fontSize:'13px',fontWeight:600,marginBottom:'4px'}}>Pagamento sicuro con carta</div>
-                        <div style={{fontFamily:'Outfit,system-ui,sans-serif',color:'rgba(120,120,155,0.7)',fontSize:'12px',lineHeight:1.6}}>
-                          Verrai reindirizzato al checkout sicuro PayPal dove potrai inserire i dati della tua carta. I dati non passano mai per i nostri server — sicurezza garantita da PayPal.
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                )}
+                
 
                 {payMethod === 'cash' && (
                   <div style={{padding:'16px 20px',background:'rgba(77,217,192,0.04)',border:'1px solid rgba(77,217,192,0.12)',borderRadius:'14px',marginBottom:'24px'}}>
@@ -287,19 +248,7 @@ export default function CheckoutPage() {
                   </div>
                 )}
 
-                {payMethod === 'paypal' && (
-                  <div style={{padding:'16px 20px',background:'rgba(0,48,135,0.08)',border:'1px solid rgba(0,48,135,0.2)',borderRadius:'14px',marginBottom:'24px'}}>
-                    <div style={{display:'flex',alignItems:'flex-start',gap:'10px'}}>
-                      <span style={{fontSize:'18px',flexShrink:0}}>🅿️</span>
-                      <div>
-                        <div style={{fontFamily:'Outfit,system-ui,sans-serif',color:'white',fontSize:'13px',fontWeight:600,marginBottom:'4px'}}>Pagamento con PayPal</div>
-                        <div style={{fontFamily:'Outfit,system-ui,sans-serif',color:'rgba(120,120,155,0.7)',fontSize:'12px',lineHeight:1.6}}>
-                          Accedi al tuo conto PayPal oppure paga con carta direttamente dalla finestra PayPal. Rimborso garantito 7 giorni.
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                )}
+                
 
                 {/* Riepilogo finale */}
                 <div style={{padding:'20px',background:'rgba(255,255,255,0.025)',borderRadius:'14px',marginBottom:'24px'}}>
