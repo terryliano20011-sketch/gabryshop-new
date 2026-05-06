@@ -12,7 +12,7 @@ const links = [
   { href:'/categoria/artigiani',     label:'Artigiani',      emoji:'🏠' },
   { href:'/categoria/professionisti',label:'Professionisti', emoji:'⚖️' },
   { href:'/categoria/negozi',        label:'Negozi',         emoji:'🛍️' },
-  { href:'/categoria/automazioni',   label:'Automazioni',    emoji:'🤖' },
+  { href:'/categoria/automazioni',   label:'Auto Risponditore',    emoji:'💬' },
   { href:'/categoria/business',      label:'Business',       emoji:'📊' },
   { href:'/categoria/creativita',    label:'Creatività',     emoji:'🎨' },
 ]

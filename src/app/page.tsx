@@ -142,7 +142,7 @@ export default function Home() {
             {icon:'🏠',name:'Artigiani & Casa',price:'da €9',time:'Da 24h',slug:'artigiani',desc:'Idraulici, elettricisti, muratori',img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=70'},
             {icon:'⚖️',name:'Professionisti',price:'da €22',time:'Da 48h',slug:'professionisti',desc:'Avvocati, medici, commercialisti',img:'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=70'},
             {icon:'🛍️',name:'Negozi & Retail',price:'da €9',time:'Da 24h',slug:'negozi',desc:'E-commerce, boutique e negozi',img:'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=600&q=70'},
-            {icon:'🤖',name:'Automazioni AI',price:'da €18',time:'Da 48h',slug:'automazioni',desc:'WhatsApp bot, Instagram, email',img:'https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=600&q=70'},
+            {icon:'🤖',name:'Auto Risponditore',price:'da €18',time:'Da 48h',slug:'automazioni',desc:'WhatsApp bot, Instagram, email',img:'https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=600&q=70'},
             {icon:'📊',name:'Strumenti Business',price:'da €9',time:'Immediato',slug:'business',desc:'Excel, CRM, fatturazione',img:'https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=600&q=70'},
             {icon:'🎨',name:'Creatività',price:'da €12',time:'Da 24h',slug:'creativita',desc:'Logo, video, social kit',img:'https://images.unsplash.com/photo-1626785774573-4b799315345d?w=600&q=70'},
           ].map((cat,i) => (
