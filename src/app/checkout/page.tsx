@@ -7,7 +7,7 @@ import { ArrowLeft, ArrowRight, ShoppingCart, User, CreditCard, Trash2, Tag, Loc
 const STEPS = ['Riepilogo', 'I tuoi dati', 'Pagamento']
 
 export default function CheckoutPage() {
-  const { items, removeItem, total } = useCart()
+  const { items, removeItem, total, clearCart } = useCart()
   const [step, setStep]         = useState(0)
   const [form, setForm]         = useState({ name:'', email:'', vat:'', coupon:'' })
   const [discount, setDiscount] = useState(0)
@@ -58,7 +58,7 @@ export default function CheckoutPage() {
           body: JSON.stringify({ items, form, total: final, payMethod: 'cash' }),
         })
         const data = await res.json()
-        if (data.success) window.location.href = '/checkout/success?method=cash'
+        if (data.success) { clearCart(); window.location.href = '/checkout/success?method=cash' }
         else alert(data.error || 'Errore. Riprova.')
       } catch { alert('Errore. Riprova.') }
       finally { setLoading(false) }
