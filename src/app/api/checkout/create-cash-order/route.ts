@@ -1,13 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
-import { Resend } from 'resend'
-
-const resend = new Resend(process.env.RESEND_API_KEY)
 
 export async function POST(req: NextRequest) {
   try {
     const { items, form, total } = await req.json()
 
+    // 1. Salva su Supabase
     let orderId = 'CASH-' + Date.now()
     try {
       const supabase = createClient(
@@ -27,56 +25,58 @@ export async function POST(req: NextRequest) {
         total,
         status: 'pending',
         coupon_code: form.coupon || null,
+        briefing: items.reduce((acc: any, item: any) => {
+          if (item.briefing && Object.keys(item.briefing).length > 0) {
+            acc[item.product.name] = item.briefing
+          }
+          return acc
+        }, {}),
       }).select('id').single()
       if (order) orderId = order.id
     } catch (e) {
       console.error('Supabase error:', e)
     }
 
-    // Email diretta al proprietario
-    const itemsHtml = items.map((i: any) => `
-      <tr><td style="padding:8px 0;border-bottom:1px solid #e5e7eb;font-size:13px">
-        <b>${i.product.name}</b> — €${i.product.price}
-      </td></tr>`).join('')
+    // 2. Invia email tramite Gmail SMTP via fetch a servizio esterno
+    // Usiamo Brevo (ex Sendinblue) - gratuito 300 email/giorno, nessun dominio richiesto
+    const BREVO_KEY = process.env.BREVO_API_KEY
+    if (BREVO_KEY) {
+      const itemsList = items.map((i: any) => `${i.product.name} — €${i.product.price}`).join('\n')
+      const briefingText = items
+        .filter((i: any) => i.briefing && Object.keys(i.briefing).length > 0)
+        .map((i: any) => `\n--- ${i.product.name} ---\n${Object.entries(i.briefing).map(([k,v]) => `${k}: ${v}`).join('\n')}`)
+        .join('\n')
 
-    await resend.emails.send({
-      from: 'GabryShop <onboarding@resend.dev>',
-      to: ['terryliano20011@gmail.com'],
-      replyTo: form.email,
-      subject: `🛒 Nuovo ordine €${total} da ${form.name}`,
-      html: `<div style="font-family:Arial,sans-serif;max-width:500px;margin:0 auto;padding:24px">
-        <h2 style="color:#111;margin-bottom:4px">🛒 Nuovo ordine ricevuto!</h2>
-        <p style="color:#666;margin-bottom:20px">Paga alla consegna · ${new Date().toLocaleString('it-IT')}</p>
-        <div style="background:#f9fafb;border:1px solid #e5e7eb;border-radius:8px;padding:16px;margin-bottom:16px">
-          <b>Cliente:</b> ${form.name}<br/>
-          <b>Email:</b> ${form.email}<br/>
-          ${form.vat ? `<b>P.IVA:</b> ${form.vat}<br/>` : ''}
-        </div>
-        <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:16px">${itemsHtml}</table>
-        <div style="background:#1a1a2e;color:white;border-radius:8px;padding:16px;text-align:center;font-size:20px;font-weight:700;margin-bottom:20px">
-          Totale: €${total}
-        </div>
-        <a href="mailto:${form.email}" style="display:inline-block;padding:10px 20px;background:#4dd9c0;color:#000;border-radius:8px;text-decoration:none;font-weight:700">📧 Rispondi al cliente</a>
-      </div>`
-    })
-
-    // Email al cliente
-    await resend.emails.send({
-      from: 'GabryShop <onboarding@resend.dev>',
-      to: [form.email],
-      subject: '✅ Ordine ricevuto — GabryShop',
-      html: `<div style="font-family:Arial,sans-serif;max-width:500px;margin:0 auto;padding:24px;background:#000;color:white">
-        <h2>✅ Ordine ricevuto!</h2>
-        <p>Grazie ${form.name}! Ti contatteremo presto per il pagamento.</p>
-        <p style="color:#aaa">Ordine: <b>${String(orderId).slice(0,8).toUpperCase()}</b></p>
-        <p style="color:#aaa">Totale: <b style="color:#4dd9c0">€${total}</b></p>
-        <p>Puoi contattarci su WhatsApp: <a href="https://wa.me/393518435322" style="color:#4dd9c0">+39 351 843 5322</a></p>
-      </div>`
-    })
+      await fetch('https://api.brevo.com/v3/smtp/email', {
+        method: 'POST',
+        headers: {
+          'api-key': BREVO_KEY,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          sender: { name: 'GabryShop', email: 'terryliano20011@gmail.com' },
+          to: [{ email: 'terryliano20011@gmail.com', name: 'GabryShop' }],
+          replyTo: { email: form.email, name: form.name },
+          subject: `🛒 Nuovo ordine €${total} da ${form.name}`,
+          textContent: `NUOVO ORDINE RICEVUTO!\n\nCliente: ${form.name}\nEmail: ${form.email}\n${form.vat ? `P.IVA: ${form.vat}\n` : ''}\nProdotti:\n${itemsList}\n\nTotale: €${total}\n${briefingText ? `\nBRIEFING:\n${briefingText}` : ''}`,
+          htmlContent: `<div style="font-family:Arial,sans-serif;max-width:500px;margin:0 auto;padding:24px">
+            <h2 style="color:#111">🛒 Nuovo ordine da ${form.name}</h2>
+            <p><b>Email:</b> ${form.email}</p>
+            <p><b>Totale:</b> <span style="color:#4dd9c0;font-size:20px">€${total}</span></p>
+            <hr/>
+            <h3>Prodotti:</h3>
+            ${items.map((i: any) => `<p>• ${i.product.name} — €${i.product.price}</p>`).join('')}
+            ${briefingText ? `<hr/><h3>Briefing:</h3><pre style="background:#f5f5f5;padding:12px;border-radius:6px">${briefingText}</pre>` : ''}
+            <hr/>
+            <a href="mailto:${form.email}" style="padding:10px 20px;background:#4dd9c0;color:#000;border-radius:8px;text-decoration:none;font-weight:700">📧 Rispondi al cliente</a>
+          </div>`
+        })
+      })
+    }
 
     return NextResponse.json({ success: true, orderId })
   } catch (err: any) {
-    console.error('Cash order error:', err)
+    console.error('Error:', err)
     return NextResponse.json({ error: err.message }, { status: 500 })
   }
 }
