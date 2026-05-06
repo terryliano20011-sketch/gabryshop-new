@@ -52,7 +52,7 @@ export default async function CategoriaPage({ params }: { params: Promise<{ slug
         ) : (
           <div style={{display:'grid', gridTemplateColumns:'repeat(auto-fill,minmax(300px,1fr))', gap:'16px'}}>
             {products.map((p, i) => (
-              <ProductCard key={p.id} product={p} delay={i * 60}/>
+              <ProductCard key={p.id} product={p as any} delay={i * 60}/>
             ))}
           </div>
         )}
