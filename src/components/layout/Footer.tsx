@@ -4,8 +4,8 @@ import { Mail, MapPin } from 'lucide-react'
 export default function Footer() {
   return (
     <footer style={{background:'#060608',borderTop:'1px solid rgba(255,255,255,0.05)',marginTop:'40px'}}>
-      <div className="max-w-7xl mx-auto px-5 lg:px-8" style={{padding:'72px 20px 48px'}}>
-        <div style={{display:'grid',gridTemplateColumns:'1fr 1fr 1fr 1fr',gap:'48px',marginBottom:'64px',flexWrap:'wrap'}}>
+      <div className="max-w-7xl mx-auto px-5 lg:px-8" style={{padding:'72px 5% 48px',maxWidth:'1200px',margin:'0 auto'}}>
+        <div style={{display:'grid',gridTemplateColumns:'1.5fr 1fr 1fr',gap:'48px',marginBottom:'64px',flexWrap:'wrap'}}>
 
           <div className="footer-brand-col">
             <div style={{display:'flex',alignItems:'center',gap:'12px',marginBottom:'20px'}}>

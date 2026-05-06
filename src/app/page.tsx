@@ -135,22 +135,24 @@ export default function Home() {
 
         <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:'1px',background:'rgba(255,255,255,0.07)',border:'1px solid rgba(255,255,255,0.07)',borderRadius:'20px',overflow:'hidden',width:'100%',maxWidth:'1100px'}}>
           {[
-            {icon:'🌐',name:'Siti Web',price:'da €15',time:'Da 24h',slug:'siti-web',desc:'Landing page, portfolio, e-commerce'},
-            {icon:'🍽️',name:'Menu Digitali',price:'da €9',time:'Da 24h',slug:'menu-digitali',desc:'QR code, allergenici, aggiornamenti'},
-            {icon:'🤖',name:'Automazioni',price:'da €14',time:'Da 48h',slug:'automazioni',desc:'WhatsApp bot, email, social media'},
-            {icon:'📊',name:'Fogli Excel',price:'da €7',time:'Immediato',slug:'fogli-excel',desc:'Inventario, fatturazione, CRM'},
-            {icon:'📱',name:'App Mobile',price:'da €22',time:'3-5 giorni',slug:'app-mobile',desc:'PWA installabile su iOS e Android'},
-            {icon:'🎨',name:'Creatività',price:'da €9',time:'Da 24h',slug:'creativita',desc:'Logo, video, social kit, locandine'},
+            {icon:'🌐',name:'Siti Web',price:'da €15',time:'Da 24h',slug:'siti-web',desc:'Landing page, portfolio, e-commerce',img:'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=600&q=70'},
+            {icon:'🍽️',name:'Menu Digitali',price:'da €9',time:'Da 24h',slug:'menu-digitali',desc:'QR code, allergenici, aggiornamenti',img:'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600&q=70'},
+            {icon:'🤖',name:'Automazioni',price:'da €14',time:'Da 48h',slug:'automazioni',desc:'WhatsApp bot, email, social media',img:'https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=600&q=70'},
+            {icon:'📊',name:'Fogli Excel',price:'da €7',time:'Immediato',slug:'fogli-excel',desc:'Inventario, fatturazione, CRM',img:'https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=600&q=70'},
+            {icon:'📱',name:'App Mobile',price:'da €22',time:'3-5 giorni',slug:'app-mobile',desc:'PWA installabile su iOS e Android',img:'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&q=70'},
+            {icon:'🎨',name:'Creatività',price:'da €9',time:'Da 24h',slug:'creativita',desc:'Logo, video, social kit, locandine',img:'https://images.unsplash.com/photo-1626785774573-4b799315345d?w=600&q=70'},
           ].map((cat,i) => (
-            <Link key={cat.slug} href={`/categoria/${cat.slug}`} className="cat-grid-item" style={{background:'#000',padding:'36px 28px',display:'flex',flexDirection:'column',gap:'14px',textDecoration:'none',borderRight:i%3<2?'1px solid rgba(255,255,255,0.07)':'none',borderBottom:i<3?'1px solid rgba(255,255,255,0.07)':'none'}}>
-              <div style={{fontSize:'32px'}}>{cat.icon}</div>
-              <div>
-                <div style={{fontFamily:'Cormorant Garamond,serif',fontSize:'22px',fontWeight:700,color:'#fff',letterSpacing:'-0.02em',marginBottom:'4px'}}>{cat.name}</div>
-                <div style={{fontFamily:'Outfit,system-ui,sans-serif',fontSize:'12px',color:'rgba(255,255,255,0.35)',lineHeight:1.5}}>{cat.desc}</div>
-              </div>
-              <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',marginTop:'auto'}}>
-                <span style={{fontFamily:'Outfit,system-ui,sans-serif',fontSize:'13px',color:'#4dd9c0',fontWeight:600}}>{cat.price}</span>
-                <span style={{fontFamily:'Outfit,system-ui,sans-serif',fontSize:'11px',color:'rgba(255,255,255,0.2)'}}>⚡ {cat.time}</span>
+            <Link key={cat.slug} href={`/categoria/${cat.slug}`} className="cat-grid-item" style={{position:'relative',overflow:'hidden',textDecoration:'none',borderRight:i%3<2?'1px solid rgba(255,255,255,0.07)':'none',borderBottom:i<3?'1px solid rgba(255,255,255,0.07)':'none',minHeight:'200px',display:'flex',flexDirection:'column',justifyContent:'flex-end'}}>
+              <img src={cat.img} alt={cat.name} style={{position:'absolute',inset:0,width:'100%',height:'100%',objectFit:'cover',filter:'brightness(0.3)',transition:'transform 0.6s cubic-bezier(0.16,1,0.3,1)',}}/>
+              <div style={{position:'absolute',inset:0,background:'linear-gradient(to top,rgba(0,0,0,0.95) 0%,rgba(0,0,0,0.3) 60%,transparent 100%)'}}/>
+              <div style={{position:'relative',zIndex:2,padding:'28px',display:'flex',flexDirection:'column',gap:'6px'}}>
+                <div style={{fontSize:'24px',marginBottom:'4px'}}>{cat.icon}</div>
+                <div style={{fontFamily:'Cormorant Garamond,serif',fontSize:'22px',fontWeight:700,color:'#fff',letterSpacing:'-0.02em'}}>{cat.name}</div>
+                <div style={{fontFamily:'Outfit,system-ui,sans-serif',fontSize:'11px',color:'rgba(255,255,255,0.45)',lineHeight:1.5,marginBottom:'8px'}}>{cat.desc}</div>
+                <div style={{display:'flex',alignItems:'center',justifyContent:'space-between'}}>
+                  <span style={{fontFamily:'Outfit,system-ui,sans-serif',fontSize:'13px',color:'#4dd9c0',fontWeight:600}}>{cat.price}</span>
+                  <span style={{fontFamily:'Outfit,system-ui,sans-serif',fontSize:'11px',color:'rgba(255,255,255,0.3)'}}>⚡ {cat.time}</span>
+                </div>
               </div>
             </Link>
           ))}

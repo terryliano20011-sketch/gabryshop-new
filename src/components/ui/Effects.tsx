@@ -13,8 +13,8 @@ export default function Effects() {
     let mx=0,my=0,rx=0,ry=0,raf:number
     const move = (e:MouseEvent)=>{mx=e.clientX;my=e.clientY;dot.style.transform=`translate(${mx-3}px,${my-3}px)`;dot.style.opacity='1';ring.style.opacity='1'}
     const tick = ()=>{rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.transform=`translate(${rx-18}px,${ry-18}px)`;raf=requestAnimationFrame(tick)}
-    const over = ()=>{ring.style.width='48px';ring.style.height='48px';ring.style.borderColor='rgba(201,169,110,0.8)';ring.style.background='rgba(201,169,110,0.08)'}
-    const out = ()=>{ring.style.width='36px';ring.style.height='36px';ring.style.borderColor='rgba(201,169,110,0.3)';ring.style.background='transparent'}
+    const over = ()=>{ring.style.width='56px';ring.style.height='56px';ring.style.borderColor='rgba(77,217,192,1)';ring.style.background='rgba(201,169,110,0.08)'}
+    const out = ()=>{ring.style.width='42px';ring.style.height='42px';ring.style.borderColor='rgba(77,217,192,0.5)';ring.style.background='transparent'}
     document.addEventListener('mousemove',move)
     document.querySelectorAll('a,button,[role=button]').forEach(el=>{el.addEventListener('mouseenter',over);el.addEventListener('mouseleave',out)})
     raf=requestAnimationFrame(tick)
@@ -278,8 +278,8 @@ export default function Effects() {
 
   return (
     <>
-      <div ref={cursorDotRef} style={{position:'fixed',top:0,left:0,zIndex:99999,pointerEvents:'none',width:'6px',height:'6px',borderRadius:'50%',background:'#c9a96e',boxShadow:'0 0 12px rgba(201,169,110,0.6)',opacity:0,transition:'opacity 0.3s'}} className="hidden-mobile"/>
-      <div ref={cursorRingRef} style={{position:'fixed',top:0,left:0,zIndex:99998,pointerEvents:'none',width:'36px',height:'36px',borderRadius:'50%',border:'1px solid rgba(201,169,110,0.3)',opacity:0,transition:'width .3s,height .3s,border-color .3s,background .3s,opacity .3s'}} className="hidden-mobile"/>
+      <div ref={cursorDotRef} style={{position:'fixed',top:0,left:0,zIndex:99999,pointerEvents:'none',width:'10px',height:'10px',borderRadius:'50%',background:'#4dd9c0',boxShadow:'0 0 16px rgba(77,217,192,0.8)',opacity:0,transition:'opacity 0.3s'}} className="hidden-mobile"/>
+      <div ref={cursorRingRef} style={{position:'fixed',top:0,left:0,zIndex:99998,pointerEvents:'none',width:'42px',height:'42px',borderRadius:'50%',border:'2px solid rgba(77,217,192,0.5)',opacity:0,transition:'width .3s,height .3s,border-color .3s,background .3s,opacity .3s'}} className="hidden-mobile"/>
     </>
   )
 }

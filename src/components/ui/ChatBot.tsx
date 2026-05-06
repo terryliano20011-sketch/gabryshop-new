@@ -72,9 +72,9 @@ export default function ChatBot() {
       {/* Bubble */}
       {showBubble && !open && (
         <div onClick={() => { setOpen(true); setShowBubble(false) }} style={{
-          position:'fixed', bottom:'88px', right:'88px', zIndex:9998,
+          position:'fixed', bottom:'88px', left:'24px', zIndex:9998,
           background:'#0d0d18', border:'1px solid rgba(201,169,110,0.25)',
-          borderRadius:'16px 16px 4px 16px', padding:'12px 16px',
+          borderRadius:'16px 16px 16px 4px', padding:'12px 16px',
           cursor:'pointer', maxWidth:'210px', boxShadow:'0 8px 32px rgba(0,0,0,0.4)',
         }}>
           <p style={{fontFamily:'Outfit,system-ui,sans-serif',fontSize:'13px',color:'white',margin:0,lineHeight:1.5}}>
@@ -92,7 +92,7 @@ export default function ChatBot() {
       {/* Chat window */}
       {open && (
         <div style={{
-          position:'fixed', bottom:'88px', right:'88px', zIndex:9999,
+          position:'fixed', bottom:'88px', left:'24px', zIndex:9999,
           width:'360px', maxWidth:'calc(100vw - 48px)',
           background:'#0d0d18', border:'1px solid rgba(201,169,110,0.15)',
           borderRadius:'20px', boxShadow:'0 24px 80px rgba(0,0,0,0.6)',
