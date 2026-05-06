@@ -15,6 +15,7 @@ export default function CheckoutPage() {
   const [payMethod, setPayMethod] = useState<'paypal'|'card'>('paypal')
   const [loading, setLoading]   = useState(false)
   const [acceptedTerms, setAcceptedTerms] = useState(false)
+  const [payInPerson, setPayInPerson] = useState(false)
   const final = Math.max(0, total - discount)
 
   const [couponLoading, setCouponLoading] = useState(false)
@@ -48,6 +49,22 @@ export default function CheckoutPage() {
 
   const handlePay = async () => {
     setLoading(true)
+    // Gestisci pagamento alla consegna
+    if (payMethod === 'cash') {
+      try {
+        const res = await fetch('/api/checkout/create-cash-order', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ items, form, total: final, payMethod: 'cash' }),
+        })
+        const data = await res.json()
+        if (data.success) window.location.href = '/checkout/success?method=cash'
+        else alert(data.error || 'Errore. Riprova.')
+      } catch { alert('Errore. Riprova.') }
+      finally { setLoading(false) }
+      return
+    }
+
     try {
       const res = await fetch('/api/checkout/create-order', {
         method: 'POST',
@@ -205,13 +222,21 @@ export default function CheckoutPage() {
                 </h2>
 
                 {/* Selezione metodo */}
-                <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'12px',marginBottom:'28px'}}>
+                <div style={{display:'grid',gridTemplateColumns:'1fr 1fr 1fr',gap:'10px',marginBottom:'28px'}}>
                   {/* PayPal */}
                   <button onClick={() => setPayMethod('paypal')} style={{padding:'20px',borderRadius:'16px',border:`2px solid ${payMethod==='paypal'?'rgba(201,169,110,0.5)':'rgba(255,255,255,0.07)'}`,background:payMethod==='paypal'?'rgba(201,169,110,0.04)':'rgba(255,255,255,0.02)',cursor:'pointer',display:'flex',flexDirection:'column',alignItems:'center',gap:'10px',transition:'all 0.2s'}}>
                     <div style={{fontSize:'28px'}}>🅿️</div>
                     <div style={{fontFamily:'Outfit,system-ui,sans-serif',color:'white',fontSize:'14px',fontWeight:600}}>PayPal</div>
                     <div style={{fontFamily:'Outfit,system-ui,sans-serif',color:'rgba(120,120,155,0.6)',fontSize:'11px',textAlign:'center'}}>Conto PayPal o carta tramite PayPal</div>
                     {payMethod==='paypal' && <div style={{fontFamily:'Outfit,system-ui,sans-serif',fontSize:'10px',fontWeight:700,color:'#c9a96e',background:'rgba(201,169,110,0.1)',padding:'3px 10px',borderRadius:'100px',border:'1px solid rgba(201,169,110,0.2)'}}>✓ Selezionato</div>}
+                  </button>
+
+                  {/* Paga alla consegna */}
+                  <button onClick={() => setPayMethod('cash')} style={{padding:'20px',borderRadius:'16px',border:`2px solid ${payMethod==='cash'?'rgba(77,217,192,0.5)':'rgba(255,255,255,0.07)'}`,background:payMethod==='cash'?'rgba(77,217,192,0.04)':'rgba(255,255,255,0.02)',cursor:'pointer',display:'flex',flexDirection:'column',alignItems:'center',gap:'10px',transition:'all 0.2s'}}>
+                    <div style={{fontSize:'28px'}}>💵</div>
+                    <div style={{fontFamily:'Outfit,system-ui,sans-serif',color:'white',fontSize:'14px',fontWeight:600}}>Paga alla consegna</div>
+                    <div style={{fontFamily:'Outfit,system-ui,sans-serif',color:'rgba(120,120,155,0.6)',fontSize:'11px',textAlign:'center'}}>Contanti o bonifico dopo la consegna</div>
+                    {payMethod==='cash' && <div style={{fontFamily:'Outfit,system-ui,sans-serif',fontSize:'10px',fontWeight:700,color:'#4dd9c0',background:'rgba(77,217,192,0.1)',padding:'3px 10px',borderRadius:'100px',border:'1px solid rgba(77,217,192,0.2)'}}>✓ Selezionato</div>}
                   </button>
 
                   {/* Carta diretta */}
@@ -240,6 +265,20 @@ export default function CheckoutPage() {
                         <div style={{fontFamily:'Outfit,system-ui,sans-serif',color:'white',fontSize:'13px',fontWeight:600,marginBottom:'4px'}}>Pagamento sicuro con carta</div>
                         <div style={{fontFamily:'Outfit,system-ui,sans-serif',color:'rgba(120,120,155,0.7)',fontSize:'12px',lineHeight:1.6}}>
                           Verrai reindirizzato al checkout sicuro PayPal dove potrai inserire i dati della tua carta. I dati non passano mai per i nostri server — sicurezza garantita da PayPal.
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {payMethod === 'cash' && (
+                  <div style={{padding:'16px 20px',background:'rgba(77,217,192,0.04)',border:'1px solid rgba(77,217,192,0.12)',borderRadius:'14px',marginBottom:'24px'}}>
+                    <div style={{display:'flex',alignItems:'flex-start',gap:'10px'}}>
+                      <span style={{fontSize:'18px',flexShrink:0}}>💵</span>
+                      <div>
+                        <div style={{fontFamily:'Outfit,system-ui,sans-serif',color:'white',fontSize:'13px',fontWeight:600,marginBottom:'4px'}}>Come funziona</div>
+                        <div style={{fontFamily:'Outfit,system-ui,sans-serif',color:'rgba(120,120,155,0.7)',fontSize:'12px',lineHeight:1.6}}>
+                          Invia l&apos;ordine senza pagare ora. Ti contatteremo su WhatsApp o email per concordare il pagamento tramite <strong style={{color:'white'}}>contanti, bonifico o Satispay</strong> prima della consegna del prodotto.
                         </div>
                       </div>
                     </div>
@@ -291,7 +330,7 @@ export default function CheckoutPage() {
                 <div style={{display:'flex',gap:'12px'}}>
                   <button onClick={() => setStep(1)} className="g-btn g-btn-ghost" style={{borderRadius:'14px',padding:'14px 24px'}}><ArrowLeft size={15}/> Indietro</button>
                   <button onClick={handlePay} disabled={loading||!acceptedTerms} className="g-btn g-btn-gold" style={{flex:1,justifyContent:'center',borderRadius:'14px',padding:'16px',fontSize:'15px',opacity:(loading||!acceptedTerms)?0.45:1}}>
-                    {loading ? '⏳ Reindirizzamento...' : payMethod === 'card' ? `💳 Paga €${final.toFixed(2)} con carta` : `🅿️ Paga €${final.toFixed(2)} con PayPal`}
+                    {loading ? '⏳ Invio in corso...' : payMethod === 'cash' ? `💵 Invia ordine — paga alla consegna` : payMethod === 'card' ? `💳 Paga €${final.toFixed(2)} con carta` : `🅿️ Paga €${final.toFixed(2)} con PayPal`}
                   </button>
                 </div>
 
