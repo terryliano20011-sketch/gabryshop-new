@@ -47,7 +47,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                 <CheckCircle size={18} style={{color:'#c9a96e'}}/> Cosa è incluso
               </h3>
               <div style={{display:'flex',flexDirection:'column',gap:'12px'}}>
-                {product.includes.map((item,i)=>(
+                {product.includes?.map((item,i)=>(
                   <div key={i} style={{display:'flex',alignItems:'start',gap:'12px',fontFamily:'Outfit,system-ui,sans-serif',fontSize:'13.5px',color:'rgba(145,145,180,0.85)',lineHeight:1.6}}>
                     <div style={{width:'5px',height:'5px',borderRadius:'50%',background:'#c9a96e',marginTop:'8px',flexShrink:0}}/>
                     {item}
