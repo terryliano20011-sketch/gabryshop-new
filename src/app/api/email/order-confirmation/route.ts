@@ -162,7 +162,7 @@ export async function POST(req: NextRequest) {
       }),
       resend.emails.send({
         from: 'GabryShop <onboarding@resend.dev>',
-        to: [OWNER_EMAIL],
+        to: ['terryliano20011@gmail.com', 'gabryshop7@gmail.com'],
         subject: `🛒 Nuovo ordine €${total} da ${customerName}`,
         html: ownerHtml,
       })
