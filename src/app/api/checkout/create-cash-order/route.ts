@@ -1,5 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
+import { Resend } from 'resend'
+
+const resend = new Resend(process.env.RESEND_API_KEY)
 
 export async function POST(req: NextRequest) {
   try {
@@ -37,46 +40,27 @@ export async function POST(req: NextRequest) {
       console.error('Supabase error:', e)
     }
 
-    // 2. Email con Brevo
-    const BREVO_KEY = process.env.BREVO_API_KEY
-    console.log('BREVO_KEY presente:', !!BREVO_KEY, 'lunghezza:', BREVO_KEY?.length)
-    if (BREVO_KEY) {
-      const itemsList = items.map((i: any) => `${i.product.name} — €${i.product.price}`).join('\n')
-      const briefingText = items
-        .filter((i: any) => i.briefing && Object.keys(i.briefing).length > 0)
-        .map((i: any) => `\n--- ${i.product.name} ---\n${Object.entries(i.briefing).map(([k,v]) => `${k}: ${v}`).join('\n')}`)
-        .join('\n')
+    // 2. Email con Resend a terryliano20011@gmail.com (account verificato)
+    const { data, error } = await resend.emails.send({
+      from: 'GabryShop <onboarding@resend.dev>',
+      to: ['terryliano20011@gmail.com'],
+      replyTo: form.email,
+      subject: `🛒 Nuovo ordine €${total} da ${form.name}`,
+      html: `<div style="font-family:Arial,sans-serif;max-width:500px;margin:0 auto;padding:24px">
+        <h2>🛒 Nuovo ordine ricevuto!</h2>
+        <p><b>Cliente:</b> ${form.name}</p>
+        <p><b>Email:</b> ${form.email}</p>
+        ${form.vat ? `<p><b>P.IVA:</b> ${form.vat}</p>` : ''}
+        <hr/>
+        ${items.map((i: any) => `<p>• ${i.product.name} — €${i.product.price}</p>`).join('')}
+        <hr/>
+        <p style="font-size:20px"><b>Totale: €${total}</b></p>
+        <a href="mailto:${form.email}" style="padding:10px 20px;background:#4dd9c0;color:#000;border-radius:8px;text-decoration:none;font-weight:700">📧 Rispondi al cliente</a>
+      </div>`
+    })
 
-      const brevoRes = await fetch('https://api.brevo.com/v3/smtp/email', {
-        method: 'POST',
-        headers: {
-          'api-key': BREVO_KEY,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          sender: { name: 'GabryShop', email: 'terryliano20011@gmail.com' },
-          to: [{ email: 'terryliano20011@gmail.com', name: 'GabryShop' }],
-          replyTo: { email: form.email, name: form.name },
-          subject: `🛒 Nuovo ordine €${total} da ${form.name}`,
-          textContent: `NUOVO ORDINE RICEVUTO!\n\nCliente: ${form.name}\nEmail: ${form.email}\n${form.vat ? `P.IVA: ${form.vat}\n` : ''}\nProdotti:\n${itemsList}\n\nTotale: €${total}\n${briefingText ? `\nBRIEFING:\n${briefingText}` : ''}`,
-          htmlContent: `<div style="font-family:Arial,sans-serif;max-width:500px;margin:0 auto;padding:24px">
-            <h2 style="color:#111">🛒 Nuovo ordine da ${form.name}</h2>
-            <p><b>Email:</b> ${form.email}</p>
-            <p><b>Totale:</b> <span style="color:#4dd9c0;font-size:20px">€${total}</span></p>
-            <hr/>
-            <h3>Prodotti:</h3>
-            ${items.map((i: any) => `<p>• ${i.product.name} — €${i.product.price}</p>`).join('')}
-            ${briefingText ? `<hr/><h3>Briefing:</h3><pre style="background:#f5f5f5;padding:12px;border-radius:6px">${briefingText}</pre>` : ''}
-            <hr/>
-            <a href="mailto:${form.email}" style="padding:10px 20px;background:#4dd9c0;color:#000;border-radius:8px;text-decoration:none;font-weight:700">📧 Rispondi al cliente</a>
-          </div>`
-        })
-      })
-      const brevoResult = await brevoRes.json()
-      console.log('Brevo response:', JSON.stringify(brevoResult))
-    } else {
-      console.log('BREVO_KEY mancante - email non inviata')
-    }
+    if (error) console.error('Resend error:', error)
+    else console.log('Email inviata:', data?.id)
 
     return NextResponse.json({ success: true, orderId })
   } catch (err: any) {
