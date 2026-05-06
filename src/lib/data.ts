@@ -5,7 +5,7 @@ export interface Category {
   description: string
   icon: string
   color: string
-  product_count?: number
+  product_count?: number | undefined
   image?: string
 }
 
@@ -18,7 +18,7 @@ export interface Product {
   price: number
   original_price?: number
   category_id: string
-  category?: Category
+  category?: Omit<Category, "product_count"> & { product_count?: number }
   delivery_time: string
   badge?: 'bestseller' | 'new' | 'customizable' | '24h'
   is_bestseller?: boolean
