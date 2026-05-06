@@ -31,7 +31,7 @@ export default function Home() {
           </p>
 
           <div style={{display:'flex',gap:'12px',flexWrap:'wrap',justifyContent:'center'}}>
-            <Link href="/categoria/siti-web" className="g-btn" style={{borderRadius:'100px',fontSize:'15px',padding:'14px 32px',background:'#fff',color:'#000',fontWeight:700,textDecoration:'none',display:'inline-flex',alignItems:'center',gap:'8px'}}>
+            <Link href="/categoria/ristorazione" className="g-btn" style={{borderRadius:'100px',fontSize:'15px',padding:'14px 32px',background:'#fff',color:'#000',fontWeight:700,textDecoration:'none',display:'inline-flex',alignItems:'center',gap:'8px'}}>
               Scopri i servizi <ArrowRight size={16}/>
             </Link>
             <Link href="/chi-siamo" className="g-btn g-btn-ghost" style={{borderRadius:'100px',fontSize:'15px',padding:'14px 32px'}}>
@@ -88,7 +88,7 @@ export default function Home() {
           <p style={{fontFamily:'Outfit,system-ui,sans-serif',fontSize:'15px',color:'rgba(255,255,255,0.4)',lineHeight:1.75,marginBottom:'32px'}}>
             35 prodotti ottimizzati per mobile. Pagamento con PayPal o carta. Conferma via email in 1 minuto.
           </p>
-          <Link href="/categoria/siti-web" className="g-btn g-btn-ghost" style={{borderRadius:'100px',fontSize:'14px',textDecoration:'none',display:'inline-flex',alignItems:'center',gap:'8px'}}>
+          <Link href="/categoria/ristorazione" className="g-btn g-btn-ghost" style={{borderRadius:'100px',fontSize:'14px',textDecoration:'none',display:'inline-flex',alignItems:'center',gap:'8px'}}>
             Esplora il catalogo <ArrowRight size={14}/>
           </Link>
         </div>
@@ -170,7 +170,7 @@ export default function Home() {
           <h2 style={{fontFamily:'Cormorant Garamond,serif',fontSize:'clamp(40px,5vw,64px)',fontWeight:700,lineHeight:0.92,letterSpacing:'-0.04em',color:'#fff',marginBottom:'24px'}}>
             I più <em style={{fontStyle:'italic',background:'linear-gradient(110deg,#4dd9c0,#a8f0e0)',WebkitBackgroundClip:'text',WebkitTextFillColor:'transparent',backgroundClip:'text'}}>popolari</em>
           </h2>
-          <Link href="/categoria/siti-web" className="g-btn g-btn-ghost" style={{borderRadius:'100px',display:'inline-flex',fontSize:'14px',textDecoration:'none',alignItems:'center',gap:'8px'}}>
+          <Link href="/categoria/ristorazione" className="g-btn g-btn-ghost" style={{borderRadius:'100px',display:'inline-flex',fontSize:'14px',textDecoration:'none',alignItems:'center',gap:'8px'}}>
             Tutto il catalogo <ArrowRight size={14}/>
           </Link>
         </div>
@@ -238,7 +238,7 @@ export default function Home() {
           <p style={{fontFamily:'Outfit,system-ui,sans-serif',fontSize:'13px',color:'rgba(255,255,255,0.2)',letterSpacing:'0.1em',textTransform:'uppercase'}}>
             Rimborso 7 giorni · Nessun abbonamento · Tutto digitale
           </p>
-          <Link href="/categoria/siti-web" style={{padding:'16px 40px',background:'#fff',color:'#000',fontFamily:'Outfit,system-ui,sans-serif',fontSize:'16px',fontWeight:800,borderRadius:'100px',textDecoration:'none',display:'inline-flex',alignItems:'center',gap:'10px',letterSpacing:'-0.01em'}}>
+          <Link href="/categoria/ristorazione" style={{padding:'16px 40px',background:'#fff',color:'#000',fontFamily:'Outfit,system-ui,sans-serif',fontSize:'16px',fontWeight:800,borderRadius:'100px',textDecoration:'none',display:'inline-flex',alignItems:'center',gap:'10px',letterSpacing:'-0.01em'}}>
             Scopri i servizi <ArrowRight size={18}/>
           </Link>
           <div style={{display:'flex',gap:'32px',flexWrap:'wrap',justifyContent:'center',marginTop:'8px'}}>
