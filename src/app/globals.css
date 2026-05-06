@@ -354,3 +354,8 @@ body::after {
 /* ══ CATEGORIA GRID HOVER ══ */
 .cat-grid-item { transition: background 0.2s ease; }
 .cat-grid-item:hover { background: #0d0d0d !important; }
+
+/* ══ FULL PAGE SECTIONS ══ */
+html { scroll-behavior: smooth; }
+section { scroll-margin-top: 0; }
+.cat-grid-item:hover { background: #0a0a0a !important; }
