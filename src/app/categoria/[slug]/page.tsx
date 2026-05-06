@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
 import { CATEGORIES, PRODUCTS } from '@/lib/data'
 import ProductCard from '@/components/product/ProductCard'
+import ComingSoon from '@/components/ui/ComingSoon'
 
 export async function generateStaticParams() {
   return CATEGORIES.map(c => ({ slug: c.slug }))
