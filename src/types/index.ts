@@ -1,3 +1,14 @@
+export interface Category {
+  id: string
+  name: string
+  slug: string
+  description: string
+  icon: string
+  color: string
+  product_count?: number
+  image?: string
+}
+
 export interface Product {
   id: string
   name: string
@@ -11,26 +22,15 @@ export interface Product {
   file_url?: string
   preview_url?: string
   delivery_time: string
-  is_customizable: boolean
-  is_bestseller: boolean
-  is_digital: boolean
+  is_customizable?: boolean
+  is_bestseller?: boolean
+  is_digital?: boolean
   badge?: 'bestseller' | 'new' | 'customizable' | '24h'
-  includes: string[]
-  images: string[]
+  includes?: string[]
+  images?: string[]
   rating: number
   review_count: number
-  created_at: string
-}
-
-export interface Category {
-  id: string
-  name: string
-  slug: string
-  description: string
-  icon: string
-  color: string
-  product_count: number
-  image?: string
+  created_at?: string
 }
 
 export interface Order {
@@ -83,7 +83,7 @@ export interface Download {
 export interface CartItem {
   product: Product
   quantity: number
-  briefing?: Record<string, string>
+  briefing?: Record<string, any>
 }
 
 export interface CheckoutData {

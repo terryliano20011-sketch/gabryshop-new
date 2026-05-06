@@ -1,35 +1,5 @@
-export interface Category {
-  id: string
-  name: string
-  slug: string
-  description: string
-  icon: string
-  color: string
-  product_count?: number
-  image?: string
-}
-
-export interface Product {
-  id: string
-  name: string
-  slug: string
-  description: string
-  long_description: string
-  price: number
-  original_price?: number
-  category_id: string
-  category?: Category
-  delivery_time: string
-  badge?: 'bestseller' | 'new' | 'customizable' | '24h'
-  is_bestseller?: boolean
-  is_customizable?: boolean
-  is_digital?: boolean
-  rating: number
-  review_count: number
-  images?: string[]
-  includes?: string[]
-  created_at?: string
-}
+import type { Category, Product } from '@/types'
+export type { Category, Product }
 
 export const CATEGORIES: Category[] = [
   { id:'1',  name:'🍽️ Ristorazione',        slug:'ristorazione',    description:'Ristoranti, bar, pizzerie, gelaterie, pub e locali notturni', icon:'🍽️', color:'#f59e0b', image:'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=70' },
