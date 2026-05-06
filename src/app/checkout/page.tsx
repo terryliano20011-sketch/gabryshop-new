@@ -12,7 +12,7 @@ export default function CheckoutPage() {
   const [form, setForm]         = useState({ name:'', email:'', vat:'', coupon:'' })
   const [discount, setDiscount] = useState(0)
   const [couponOk, setCouponOk] = useState(false)
-  const [payMethod, setPayMethod] = useState<'paypal'|'card'>('paypal')
+  const [payMethod, setPayMethod] = useState<'paypal'|'card'|'cash'>('paypal')
   const [loading, setLoading]   = useState(false)
   const [acceptedTerms, setAcceptedTerms] = useState(false)
   const [payInPerson, setPayInPerson] = useState(false)
