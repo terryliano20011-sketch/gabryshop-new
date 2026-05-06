@@ -210,7 +210,7 @@ export default function ChatBot() {
 
       {/* Toggle button */}
       <button onClick={()=>{setOpen(o=>!o);setShowBubble(false)}} style={{
-        position:'fixed',bottom:'24px',right:'88px',zIndex:9997,
+        position:'fixed',bottom:'24px',left:'24px',zIndex:9997,
         width:'52px',height:'52px',borderRadius:'50%',border:'none',cursor:'pointer',
         background:open?'rgba(120,120,155,0.3)':'linear-gradient(135deg,#7c6af0,#c9a96e)',
         display:'flex',alignItems:'center',justifyContent:'center',
