@@ -54,7 +54,7 @@ CASI IN CUI IL RIMBORSO VIENE EROGATO:
 • Il prodotto consegnato è gravemente difforme dalla descrizione (es. sito non funzionante)
 • Errore tecnico verificabile che impedisce l'utilizzo del prodotto
 
-Per richiedere un rimborso nei casi ammissibili, contatta terryliano20011@gmail.com entro 48 ore dalla consegna.`
+Per richiedere un rimborso nei casi ammissibili, contatta gabryshop7@gmail.com entro 48 ore dalla consegna.`
           },
           {
             n:'4', t:'Responsabilità del cliente',
@@ -82,7 +82,7 @@ Per richiedere un rimborso nei casi ammissibili, contatta terryliano20011@gmail.
           },
           {
             n:'10', t:'Contatti',
-            c:`Per qualsiasi domanda sui presenti Termini e Condizioni:\nEmail: terryliano20011@gmail.com\nRisposta garantita entro 24 ore nei giorni lavorativi.`
+            c:`Per qualsiasi domanda sui presenti Termini e Condizioni:\nEmail: gabryshop7@gmail.com\nRisposta garantita entro 24 ore nei giorni lavorativi.`
           },
         ].map(s => (
           <div key={s.n} style={{marginBottom:'36px',paddingBottom:'36px',borderBottom:'1px solid rgba(255,255,255,0.05)'}}>

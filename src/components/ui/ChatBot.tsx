@@ -17,7 +17,7 @@ const RESPONSES: { keywords: string[]; answer: string }[] = [
   { keywords: ['tempo','consegna','quando','giorni','ore','rapido','veloce'], answer: '⚡ I tempi di consegna:\n• Fogli Excel: immediato\n• Menu Digitali: 24 ore\n• Siti Web: 24-72 ore\n• Automazioni: 48 ore\n• App Mobile: 3-5 giorni\n\nLavoriamo anche il weekend!' },
   { keywords: ['pagamento','pago','paypal','carta','visa','mastercard','sicuro'], answer: '💳 Metodi di pagamento accettati:\n• PayPal\n• Visa / Mastercard / Amex\n\nTutti i pagamenti sono 100% sicuri e protetti. Rimborso garantito 7 giorni!' },
   { keywords: ['rimborso','reso','garanzia','restituire','indietro'], answer: '✅ Offriamo rimborso completo entro 7 giorni se la lavorazione non è ancora iniziata. Una volta consegnato il prodotto digitale, non è rimborsabile (come da T&C accettati al checkout).' },
-  { keywords: ['contatt','email','telefono','numero','whatsapp','chiamare','scrivere'], answer: '📞 Puoi contattarci su:\n• WhatsApp: +39 351 843 5322\n• Email: terryliano20011@gmail.com\n\nRispondiamo entro 1 ora!' },
+  { keywords: ['contatt','email','telefono','numero','whatsapp','chiamare','scrivere'], answer: '📞 Puoi contattarci su:\n• WhatsApp: +39 351 843 5322\n• Email: gabryshop7@gmail.com\n\nRispondiamo entro 1 ora!' },
   { keywords: ['come','funziona','processo','passi','acquisto'], answer: '🛒 Come funziona:\n1️⃣ Scegli il prodotto che ti serve\n2️⃣ Compila il briefing con i tuoi dettagli\n3️⃣ Paga con PayPal o carta\n4️⃣ Ricevi il prodotto in email entro 24-48h\n\nSemplice e veloce!' },
   { keywords: ['grazie','ok','perfetto','ottimo','capito','bene'], answer: 'Prego! 😊 Se hai altre domande sono qui. Puoi anche scriverci direttamente su WhatsApp: +39 351 843 5322' },
 ]

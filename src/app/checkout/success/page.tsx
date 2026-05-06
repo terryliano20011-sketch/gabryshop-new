@@ -1,47 +1,57 @@
-'use client'
-import { useEffect } from 'react'
 import Link from 'next/link'
-import { CheckCircle, Download, Mail, ArrowRight } from 'lucide-react'
-import { useCart } from '@/hooks/useCart'
 
 export default function SuccessPage() {
-  const { clearCart } = useCart()
-  useEffect(() => { clearCart() }, [])
-
   return (
-    <div className="pt-28 pb-20 flex items-center justify-center min-h-screen px-4">
-      <div className="max-w-lg w-full text-center">
-        <div className="w-20 h-20 rounded-full bg-[#22c55e]/15 border border-[#22c55e]/30 flex items-center justify-center mx-auto mb-6 animate-fade-up">
-          <CheckCircle className="w-10 h-10 text-[#22c55e]" />
+    <div style={{minHeight:'100vh',background:'#000',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',padding:'40px 6%',textAlign:'center'}}>
+      
+      <div style={{maxWidth:'520px',width:'100%'}}>
+        {/* Icona */}
+        <div style={{width:'80px',height:'80px',borderRadius:'50%',background:'rgba(77,217,192,0.1)',border:'1px solid rgba(77,217,192,0.3)',display:'flex',alignItems:'center',justifyContent:'center',margin:'0 auto 28px',fontSize:'36px'}}>
+          ✅
         </div>
-        <h1 className="text-4xl font-bold text-white mb-4 animate-fade-up" style={{fontFamily:'Playfair Display,serif',animationDelay:'100ms'}}>
-          Pagamento completato!
+
+        <h1 style={{fontFamily:'Cormorant Garamond,serif',color:'white',fontSize:'clamp(2rem,5vw,3.5rem)',fontWeight:600,lineHeight:1,marginBottom:'16px',letterSpacing:'-0.03em'}}>
+          Ordine ricevuto!
         </h1>
-        <p className="text-[#8888aa] text-lg mb-8 animate-fade-up" style={{animationDelay:'200ms'}}>
-          Grazie per il tuo acquisto. Riceverai una email di conferma con i dettagli del tuo ordine e il link per il download.
+
+        <p style={{fontFamily:'Outfit,system-ui,sans-serif',color:'rgba(140,140,175,0.75)',fontSize:'15px',lineHeight:1.75,marginBottom:'36px'}}>
+          Grazie per il tuo ordine. Ti contatteremo presto su WhatsApp o email per concordare il pagamento e procedere con la consegna.
         </p>
 
-        <div className="luxury-card rounded-2xl p-6 mb-8 text-left animate-fade-up" style={{animationDelay:'300ms'}}>
-          <div className="flex items-center gap-3 mb-3">
-            <Mail className="w-5 h-5 text-[#c9a96e]" />
-            <span className="text-white font-medium">Controlla la tua email</span>
-          </div>
-          <p className="text-[#8888aa] text-sm">Abbiamo inviato una email con il link per scaricare i tuoi prodotti digitali. Controlla anche la cartella spam.</p>
-          <div className="mt-4 flex items-center gap-3">
-            <Download className="w-5 h-5 text-[#c9a96e]" />
-            <span className="text-white font-medium">Download disponibile</span>
-          </div>
-          <p className="text-[#8888aa] text-sm mt-1">Puoi anche accedere ai tuoi acquisti dalla pagina Account in qualsiasi momento.</p>
+        {/* Step */}
+        <div style={{background:'rgba(255,255,255,0.03)',border:'1px solid rgba(255,255,255,0.07)',borderRadius:'16px',padding:'24px',marginBottom:'28px',textAlign:'left'}}>
+          <div style={{fontFamily:'Outfit,system-ui,sans-serif',fontSize:'11px',fontWeight:700,letterSpacing:'0.15em',textTransform:'uppercase',color:'rgba(120,120,155,0.5)',marginBottom:'16px'}}>Cosa succede adesso</div>
+          {[
+            {n:'1', t:'Conferma ricevuta', d:'Hai ricevuto una email di riepilogo del tuo ordine'},
+            {n:'2', t:'Ti contattiamo noi', d:'Ti scriviamo su WhatsApp o email entro poche ore'},
+            {n:'3', t:'Concordiamo il pagamento', d:'Contanti, bonifico o Satispay — decidiamo insieme'},
+            {n:'4', t:'Consegna del prodotto', d:'Ricevi il file digitale in 24-48 ore'},
+          ].map(s => (
+            <div key={s.n} style={{display:'flex',gap:'14px',alignItems:'flex-start',marginBottom:'14px'}}>
+              <div style={{width:'26px',height:'26px',borderRadius:'50%',background:'rgba(77,217,192,0.1)',border:'1px solid rgba(77,217,192,0.25)',display:'flex',alignItems:'center',justifyContent:'center',flexShrink:0,fontFamily:'Outfit,system-ui,sans-serif',fontSize:'12px',fontWeight:700,color:'#4dd9c0'}}>{s.n}</div>
+              <div>
+                <div style={{fontFamily:'Outfit,system-ui,sans-serif',color:'white',fontSize:'13px',fontWeight:600,marginBottom:'2px'}}>{s.t}</div>
+                <div style={{fontFamily:'Outfit,system-ui,sans-serif',color:'rgba(120,120,155,0.6)',fontSize:'12px'}}>{s.d}</div>
+              </div>
+            </div>
+          ))}
         </div>
 
-        <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-up" style={{animationDelay:'400ms'}}>
-          <Link href="/account" className="btn-gold px-6 py-3 rounded-xl font-semibold flex items-center justify-center gap-2">
-            Vai al tuo account <ArrowRight className="w-4 h-4" />
-          </Link>
-          <Link href="/" className="px-6 py-3 rounded-xl font-semibold border border-white/10 text-white hover:border-white/20 hover:bg-white/5 transition-all flex items-center justify-center">
-            Torna alla home
-          </Link>
+        {/* Contatti rapidi */}
+        <div style={{display:'flex',gap:'10px',justifyContent:'center',marginBottom:'28px'}}>
+          <a href="https://wa.me/393518435322" target="_blank" rel="noopener noreferrer"
+            style={{display:'flex',alignItems:'center',gap:'8px',padding:'12px 20px',background:'rgba(37,211,102,0.08)',border:'1px solid rgba(37,211,102,0.2)',borderRadius:'100px',textDecoration:'none',fontFamily:'Outfit,system-ui,sans-serif',fontSize:'13px',fontWeight:600,color:'#25D366'}}>
+            💬 WhatsApp
+          </a>
+          <a href="mailto:gabryshop7@gmail.com"
+            style={{display:'flex',alignItems:'center',gap:'8px',padding:'12px 20px',background:'rgba(255,255,255,0.04)',border:'1px solid rgba(255,255,255,0.08)',borderRadius:'100px',textDecoration:'none',fontFamily:'Outfit,system-ui,sans-serif',fontSize:'13px',fontWeight:600,color:'rgba(180,180,210,0.8)'}}>
+            ✉️ Email
+          </a>
         </div>
+
+        <Link href="/" style={{fontFamily:'Outfit,system-ui,sans-serif',fontSize:'13px',color:'rgba(100,100,135,0.55)',textDecoration:'none'}}>
+          ← Torna alla home
+        </Link>
       </div>
     </div>
   )

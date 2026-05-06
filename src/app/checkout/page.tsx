@@ -12,7 +12,7 @@ export default function CheckoutPage() {
   const [form, setForm]         = useState({ name:'', email:'', vat:'', coupon:'' })
   const [discount, setDiscount] = useState(0)
   const [couponOk, setCouponOk] = useState(false)
-  const [payMethod, setPayMethod] = useState<'paypal'|'card'|'cash'>('paypal')
+  const [payMethod, setPayMethod] = useState<'paypal'|'card'|'cash'>('cash')
   const [loading, setLoading]   = useState(false)
   const [acceptedTerms, setAcceptedTerms] = useState(false)
   const [payInPerson, setPayInPerson] = useState(false)
@@ -221,9 +221,9 @@ export default function CheckoutPage() {
                   <CreditCard size={20} style={{color:'#c9a96e'}}/> Metodo di pagamento
                 </h2>
 
-                {/* Selezione metodo */}
-                <div style={{display:'grid',gridTemplateColumns:'1fr 1fr 1fr',gap:'10px',marginBottom:'28px'}}>
-                  {/* PayPal */}
+                {/* Selezione metodo - PayPal temporaneamente sospeso */}
+                <div style={{display:'grid',gridTemplateColumns:'1fr',gap:'10px',marginBottom:'28px'}}>
+                  {/* PayPal - SOSPESO
                   <button onClick={() => setPayMethod('paypal')} style={{padding:'20px',borderRadius:'16px',border:`2px solid ${payMethod==='paypal'?'rgba(201,169,110,0.5)':'rgba(255,255,255,0.07)'}`,background:payMethod==='paypal'?'rgba(201,169,110,0.04)':'rgba(255,255,255,0.02)',cursor:'pointer',display:'flex',flexDirection:'column',alignItems:'center',gap:'10px',transition:'all 0.2s'}}>
                     <div style={{fontSize:'28px'}}>🅿️</div>
                     <div style={{fontFamily:'Outfit,system-ui,sans-serif',color:'white',fontSize:'14px',fontWeight:600}}>PayPal</div>
@@ -231,6 +231,7 @@ export default function CheckoutPage() {
                     {payMethod==='paypal' && <div style={{fontFamily:'Outfit,system-ui,sans-serif',fontSize:'10px',fontWeight:700,color:'#c9a96e',background:'rgba(201,169,110,0.1)',padding:'3px 10px',borderRadius:'100px',border:'1px solid rgba(201,169,110,0.2)'}}>✓ Selezionato</div>}
                   </button>
 
+                  */ }
                   {/* Paga alla consegna */}
                   <button onClick={() => setPayMethod('cash')} style={{padding:'20px',borderRadius:'16px',border:`2px solid ${payMethod==='cash'?'rgba(77,217,192,0.5)':'rgba(255,255,255,0.07)'}`,background:payMethod==='cash'?'rgba(77,217,192,0.04)':'rgba(255,255,255,0.02)',cursor:'pointer',display:'flex',flexDirection:'column',alignItems:'center',gap:'10px',transition:'all 0.2s'}}>
                     <div style={{fontSize:'28px'}}>💵</div>
@@ -239,7 +240,8 @@ export default function CheckoutPage() {
                     {payMethod==='cash' && <div style={{fontFamily:'Outfit,system-ui,sans-serif',fontSize:'10px',fontWeight:700,color:'#4dd9c0',background:'rgba(77,217,192,0.1)',padding:'3px 10px',borderRadius:'100px',border:'1px solid rgba(77,217,192,0.2)'}}>✓ Selezionato</div>}
                   </button>
 
-                  {/* Carta diretta */}
+                  */ }
+                  {/* Carta - SOSPESO
                   <button onClick={() => setPayMethod('card')} style={{padding:'20px',borderRadius:'16px',border:`2px solid ${payMethod==='card'?'rgba(201,169,110,0.5)':'rgba(255,255,255,0.07)'}`,background:payMethod==='card'?'rgba(201,169,110,0.04)':'rgba(255,255,255,0.02)',cursor:'pointer',display:'flex',flexDirection:'column',alignItems:'center',gap:'10px',transition:'all 0.2s'}}>
                     <div style={{display:'flex',gap:'6px'}}>
                       {/* Loghi carte */}

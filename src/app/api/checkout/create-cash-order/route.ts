@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
 
-const OWNER_EMAIL = 'terryliano20011@gmail.com'
+const OWNER_EMAIL = 'gabryshop7@gmail.com'
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://gabryshop-digitale.vercel.app'
 
 export async function POST(req: NextRequest) {

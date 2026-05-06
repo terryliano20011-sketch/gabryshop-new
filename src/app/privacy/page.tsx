@@ -18,11 +18,11 @@ export default function PrivacyPage() {
         <div style={{height:'1px',background:'linear-gradient(90deg,transparent,rgba(77,217,192,0.2),transparent)',marginBottom:'40px'}}/>
 
         {[
-          { n:'1', t:'Titolare del trattamento', c:'Il titolare del trattamento dei dati personali è GabryShop (terryliano20011@gmail.com). Per qualsiasi questione relativa alla privacy, puoi contattarci all\'indirizzo email indicato.' },
+          { n:'1', t:'Titolare del trattamento', c:'Il titolare del trattamento dei dati personali è GabryShop (gabryshop7@gmail.com). Per qualsiasi questione relativa alla privacy, puoi contattarci all\'indirizzo email indicato.' },
           { n:'2', t:'Dati raccolti', c:'Raccogliamo i seguenti dati: nome e cognome, indirizzo email, partita IVA (se fornita), dati relativi agli ordini effettuati. Non raccogliamo dati di pagamento: questi sono gestiti direttamente da PayPal in modo sicuro.' },
           { n:'3', t:'Finalità del trattamento', c:'I dati sono trattati per: processare gli ordini e inviare i prodotti digitali acquistati, inviare email transazionali legate all\'ordine, rispondere a richieste di supporto, adempiere a obblighi fiscali e contabili.' },
           { n:'4', t:'Conservazione dei dati', c:'I dati degli ordini sono conservati per 10 anni come previsto dalla normativa fiscale italiana. I dati degli account sono conservati fino alla cancellazione dell\'account da parte dell\'utente.' },
-          { n:'5', t:'Diritti dell\'interessato', c:'Hai il diritto di accedere ai tuoi dati, correggerli, cancellarli e opporti al loro trattamento. Per esercitare questi diritti, contattaci a terryliano20011@gmail.com.' },
+          { n:'5', t:'Diritti dell\'interessato', c:'Hai il diritto di accedere ai tuoi dati, correggerli, cancellarli e opporti al loro trattamento. Per esercitare questi diritti, contattaci a gabryshop7@gmail.com.' },
           { n:'6', t:'Cookie', c:'Utilizziamo solo cookie tecnici essenziali per il funzionamento del sito. Non utilizziamo cookie di profilazione o di terze parti per la pubblicità.' },
           { n:'7', t:'Sicurezza', c:'Adottiamo misure tecniche e organizzative adeguate per proteggere i tuoi dati da accessi non autorizzati, perdita o divulgazione. Il sito utilizza connessione HTTPS cifrata.' },
         ].map(s => (
