@@ -129,20 +129,24 @@ export default function Home() {
         <div style={{textAlign:'center'}}>
           <span style={{fontFamily:'Outfit,system-ui,sans-serif',fontSize:'10px',fontWeight:700,letterSpacing:'0.2em',textTransform:'uppercase',color:'rgba(255,255,255,0.25)',display:'block',marginBottom:'16px'}}>Cosa offriamo</span>
           <h2 style={{fontFamily:'Cormorant Garamond,serif',fontSize:'clamp(40px,5vw,64px)',fontWeight:700,lineHeight:0.92,letterSpacing:'-0.04em',color:'#fff'}}>
-            6 categorie.<br/><em style={{fontStyle:'italic',background:'linear-gradient(110deg,#4dd9c0,#a8f0e0)',WebkitBackgroundClip:'text',WebkitTextFillColor:'transparent',backgroundClip:'text'}}>35 prodotti.</em>
+            10 categorie.<br/><em style={{fontStyle:'italic',background:'linear-gradient(110deg,#4dd9c0,#a8f0e0)',WebkitBackgroundClip:'text',WebkitTextFillColor:'transparent',backgroundClip:'text'}}>30+ prodotti.</em>
           </h2>
         </div>
 
-        <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:'1px',background:'rgba(255,255,255,0.07)',border:'1px solid rgba(255,255,255,0.07)',borderRadius:'20px',overflow:'hidden',width:'100%',maxWidth:'1100px'}}>
+        <div style={{display:'grid',gridTemplateColumns:'repeat(5,1fr)',gap:'1px',background:'rgba(255,255,255,0.07)',border:'1px solid rgba(255,255,255,0.07)',borderRadius:'20px',overflow:'hidden',width:'100%',maxWidth:'1200px'}}>
           {[
-            {icon:'🌐',name:'Siti Web',price:'da €15',time:'Da 24h',slug:'siti-web',desc:'Landing page, portfolio, e-commerce',img:'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=600&q=70'},
-            {icon:'🍽️',name:'Menu Digitali',price:'da €9',time:'Da 24h',slug:'menu-digitali',desc:'QR code, allergenici, aggiornamenti',img:'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600&q=70'},
-            {icon:'🤖',name:'Automazioni',price:'da €14',time:'Da 48h',slug:'automazioni',desc:'WhatsApp bot, email, social media',img:'https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=600&q=70'},
-            {icon:'📊',name:'Fogli Excel',price:'da €7',time:'Immediato',slug:'fogli-excel',desc:'Inventario, fatturazione, CRM',img:'https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=600&q=70'},
-            {icon:'📱',name:'App Mobile',price:'da €22',time:'3-5 giorni',slug:'app-mobile',desc:'PWA installabile su iOS e Android',img:'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&q=70'},
-            {icon:'🎨',name:'Creatività',price:'da €9',time:'Da 24h',slug:'creativita',desc:'Logo, video, social kit, locandine',img:'https://images.unsplash.com/photo-1626785774573-4b799315345d?w=600&q=70'},
+            {icon:'🍽️',name:'Ristorazione',price:'da €13',time:'Da 24h',slug:'ristorazione',desc:'Ristoranti, bar, pizzerie e locali',img:'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=70'},
+            {icon:'🎉',name:'Locali & Discoteche',price:'da €11',time:'Da 24h',slug:'locali',desc:'Discoteche, club ed eventi',img:'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=600&q=70'},
+            {icon:'💈',name:'Bellezza & Cura',price:'da €9',time:'Da 24h',slug:'bellezza',desc:'Parrucchieri, estetiste e spa',img:'https://images.unsplash.com/photo-1560066984-138dadb4c035?w=600&q=70'},
+            {icon:'🏋️',name:'Sport & Fitness',price:'da €18',time:'Da 48h',slug:'sport',desc:'Palestre, PT e centri sportivi',img:'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600&q=70'},
+            {icon:'🏠',name:'Artigiani & Casa',price:'da €9',time:'Da 24h',slug:'artigiani',desc:'Idraulici, elettricisti, muratori',img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=70'},
+            {icon:'⚖️',name:'Professionisti',price:'da €22',time:'Da 48h',slug:'professionisti',desc:'Avvocati, medici, commercialisti',img:'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=70'},
+            {icon:'🛍️',name:'Negozi & Retail',price:'da €9',time:'Da 24h',slug:'negozi',desc:'E-commerce, boutique e negozi',img:'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=600&q=70'},
+            {icon:'🤖',name:'Automazioni AI',price:'da €18',time:'Da 48h',slug:'automazioni',desc:'WhatsApp bot, Instagram, email',img:'https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=600&q=70'},
+            {icon:'📊',name:'Strumenti Business',price:'da €9',time:'Immediato',slug:'business',desc:'Excel, CRM, fatturazione',img:'https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=600&q=70'},
+            {icon:'🎨',name:'Creatività',price:'da €12',time:'Da 24h',slug:'creativita',desc:'Logo, video, social kit',img:'https://images.unsplash.com/photo-1626785774573-4b799315345d?w=600&q=70'},
           ].map((cat,i) => (
-            <Link key={cat.slug} href={`/categoria/${cat.slug}`} className="cat-grid-item" style={{position:'relative',overflow:'hidden',textDecoration:'none',borderRight:i%3<2?'1px solid rgba(255,255,255,0.07)':'none',borderBottom:i<3?'1px solid rgba(255,255,255,0.07)':'none',minHeight:'200px',display:'flex',flexDirection:'column',justifyContent:'flex-end'}}>
+            <Link key={cat.slug} href={`/categoria/${cat.slug}`} className="cat-grid-item" style={{position:'relative',overflow:'hidden',textDecoration:'none',borderRight:i%5<4?'1px solid rgba(255,255,255,0.07)':'none',borderBottom:i<5?'1px solid rgba(255,255,255,0.07)':'none',minHeight:'180px',display:'flex',flexDirection:'column',justifyContent:'flex-end'}}>
               <img src={cat.img} alt={cat.name} style={{position:'absolute',inset:0,width:'100%',height:'100%',objectFit:'cover',filter:'brightness(0.3)',transition:'transform 0.6s cubic-bezier(0.16,1,0.3,1)',}}/>
               <div style={{position:'absolute',inset:0,background:'linear-gradient(to top,rgba(0,0,0,0.95) 0%,rgba(0,0,0,0.3) 60%,transparent 100%)'}}/>
               <div style={{position:'relative',zIndex:2,padding:'28px',display:'flex',flexDirection:'column',gap:'6px'}}>

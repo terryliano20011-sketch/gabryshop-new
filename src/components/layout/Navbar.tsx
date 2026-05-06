@@ -5,11 +5,16 @@ import { ShoppingCart, User, Menu, X } from 'lucide-react'
 import { useCart } from '@/hooks/useCart'
 
 const links = [
-  { href:'/categoria/siti-web',     label:'Siti Web',      emoji:'🌐' },
-  { href:'/categoria/menu-digitali',label:'Menu Digitali', emoji:'🍽️' },
-  { href:'/categoria/fogli-excel',  label:'Excel',         emoji:'📊' },
-  { href:'/categoria/automazioni',  label:'Automazioni',   emoji:'🤖' },
-  { href:'/categoria/app-mobile',   label:'App Mobile',    emoji:'📱' },
+  { href:'/categoria/ristorazione',  label:'Ristorazione',  emoji:'🍽️' },
+  { href:'/categoria/locali',        label:'Locali',         emoji:'🎉' },
+  { href:'/categoria/bellezza',      label:'Bellezza',       emoji:'💈' },
+  { href:'/categoria/sport',         label:'Sport',          emoji:'🏋️' },
+  { href:'/categoria/artigiani',     label:'Artigiani',      emoji:'🏠' },
+  { href:'/categoria/professionisti',label:'Professionisti', emoji:'⚖️' },
+  { href:'/categoria/negozi',        label:'Negozi',         emoji:'🛍️' },
+  { href:'/categoria/automazioni',   label:'Automazioni',    emoji:'🤖' },
+  { href:'/categoria/business',      label:'Business',       emoji:'📊' },
+  { href:'/categoria/creativita',    label:'Creatività',     emoji:'🎨' },
 ]
 
 export default function Navbar() {
