@@ -44,7 +44,6 @@ export async function POST(req: NextRequest) {
     const { error } = await resend.emails.send({
       from: 'GabryShop <onboarding@resend.dev>',
       to: ['gabryshop7@gmail.com'],
-      replyTo: form.email,
       subject: `🛒 Nuovo ordine €${total} da ${form.name}`,
       html: `
         <div style="font-family:Arial,sans-serif;max-width:520px;margin:0 auto;padding:24px">
