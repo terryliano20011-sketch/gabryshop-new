@@ -451,3 +451,14 @@ section { animation: fadeIn 0.6s ease both; }
     padding-right: 5% !important;
   }
 }
+
+/* ══ CHECKOUT MOBILE ══ */
+@media (max-width: 768px) {
+  .grid-checkout {
+    grid-template-columns: 1fr !important;
+  }
+  .checkout-sidebar {
+    position: static !important;
+    order: -1;
+  }
+}
