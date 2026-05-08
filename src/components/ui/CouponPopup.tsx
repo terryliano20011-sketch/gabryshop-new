@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import { X, Tag, Copy, Check } from 'lucide-react'
 
 const COUPONS = [
-  { code: 'GABRY10', label: '10% di sconto', desc: 'Su tutto il catalogo', color: '#c9a96e' },
+  { code: 'GABRY10', label: '10% di sconto', desc: 'Su tutto il catalogo', color: '#4dd9c0' },
   { code: 'WELCOME5', label: '€5 di sconto', desc: 'Ordine minimo €15', color: '#7c6af0' },
 ]
 
@@ -41,7 +41,7 @@ export default function CouponPopup() {
     }} onClick={close}>
       <div onClick={e => e.stopPropagation()} style={{
         background: '#0d0d18',
-        border: '1px solid rgba(201,169,110,0.2)',
+        border: '1px solid rgba(77,217,192,0.2)',
         borderRadius: '24px',
         padding: '32px',
         maxWidth: '420px',
@@ -123,15 +123,16 @@ export default function CouponPopup() {
         </div>
 
         {/* CTA */}
-        <button onClick={close} style={{
-          width: '100%', padding: '14px',
-          background: 'linear-gradient(135deg, #c9a96e, #b8924a)',
+        <a href="/categoria/ristorazione" onClick={close} style={{
+          display:'block', width: '100%', padding: '14px',
+          background: 'linear-gradient(135deg, #4dd9c0, #1a9e88)',
           color: '#08060a', fontFamily: 'Outfit, system-ui, sans-serif',
           fontSize: '14px', fontWeight: 700, border: 'none',
-          borderRadius: '12px', cursor: 'pointer'
+          borderRadius: '12px', cursor: 'pointer', textDecoration:'none',
+          textAlign:'center', boxSizing:'border-box'
         }}>
           Scopri i prodotti →
-        </button>
+        </a>
 
         <p style={{
           textAlign: 'center', marginTop: '12px',
