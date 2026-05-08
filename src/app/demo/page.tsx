@@ -39,8 +39,7 @@ export default function DemoPage() {
               transition:'all 0.3s ease',
               position:'relative',overflow:'hidden',
             }}
-            onMouseEnter={e=>{(e.currentTarget as HTMLElement).style.borderColor='rgba(77,217,192,0.3)';(e.currentTarget as HTMLElement).style.background='rgba(77,217,192,0.04)'}}
-            onMouseLeave={e=>{(e.currentTarget as HTMLElement).style.borderColor='rgba(255,255,255,0.07)';(e.currentTarget as HTMLElement).style.background='rgba(255,255,255,0.03)'}}>
+className='demo-card'>
               <div style={{fontSize:'36px'}}>{d.icon}</div>
               <div>
                 <div style={{fontFamily:'Cormorant Garamond,serif',color:'white',fontSize:'22px',fontWeight:700,marginBottom:'4px'}}>{d.name}</div>

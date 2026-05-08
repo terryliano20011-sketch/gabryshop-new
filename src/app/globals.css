@@ -462,3 +462,6 @@ section { animation: fadeIn 0.6s ease both; }
     order: -1;
   }
 }
+
+/* Demo cards hover */
+.demo-card:hover { border-color: rgba(77,217,192,0.3) !important; background: rgba(77,217,192,0.04) !important; }
