@@ -67,6 +67,7 @@ export default function Footer() {
             <h4 style={{color:'white',fontWeight:600,fontSize:'13px',letterSpacing:'0.08em',textTransform:'uppercase',marginBottom:'20px',fontFamily:'DM Sans,system-ui,sans-serif'}}>Info</h4>
             <div style={{display:'flex',flexDirection:'column',gap:'12px'}}>
               {[
+                ['/demo','🎯 Demo prodotti'],
                 ['/chi-siamo','Chi siamo'],
                 ['/faq','FAQ'],
                 ['/contatti','Contattaci'],
