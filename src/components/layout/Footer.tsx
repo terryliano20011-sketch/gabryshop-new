@@ -47,11 +47,16 @@ export default function Footer() {
             <h4 style={{color:'white',fontWeight:600,fontSize:'13px',letterSpacing:'0.08em',textTransform:'uppercase',marginBottom:'20px',fontFamily:'DM Sans,system-ui,sans-serif'}}>Servizi</h4>
             <div style={{display:'flex',flexDirection:'column',gap:'12px'}}>
               {[
-                ['/categoria/siti-web','🌐 Siti Web'],
-                ['/categoria/menu-digitali','🍽️ Menu Digitali'],
-                ['/categoria/fogli-excel','📊 Fogli Excel'],
-                ['/categoria/automazioni','🤖 Automazioni'],
-                ['/categoria/app-mobile','📱 App Mobile'],
+                ['/categoria/ristorazione','🍽️ Ristorazione'],
+                ['/categoria/locali','🎉 Locali & Discoteche'],
+                ['/categoria/bellezza','💈 Bellezza & Cura'],
+                ['/categoria/sport','🏋️ Sport & Fitness'],
+                ['/categoria/artigiani','🏠 Artigiani & Casa'],
+                ['/categoria/professionisti','⚖️ Professionisti'],
+                ['/categoria/negozi','🛍️ Negozi & Retail'],
+                ['/categoria/automazioni','💬 Auto Risponditore'],
+                ['/categoria/business','📊 Strumenti Business'],
+                ['/categoria/creativita','🎨 Creatività'],
               ].map(([href,label])=>(
                 <Link key={href} href={href} style={{color:'rgba(120,120,150,0.7)',fontSize:'13px',textDecoration:'none',fontFamily:'DM Sans,system-ui,sans-serif',transition:'color 0.2s'}}>{label}</Link>
               ))}
