@@ -144,8 +144,9 @@ const DEMOS: Record<string, {
   },
 }
 
-export default function DemoSlugPage({ params }: { params: { slug: string } }) {
-  const demo = DEMOS[params.slug]
+export default async function DemoSlugPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
+  const demo = DEMOS[slug]
   if (!demo) notFound()
 
   const renderMockup = () => {
