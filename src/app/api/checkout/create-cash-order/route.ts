@@ -61,15 +61,11 @@ export async function POST(req: NextRequest) {
       <p style="font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#94a3b8;margin:0 0 10px">👤 Cliente</p>
       <p style="font-size:16px;font-weight:700;color:#0f172a;margin:0 0 4px">${form.name}</p>
       <p style="font-size:13px;color:#64748b;margin:0">${form.email}</p>
-      ${form.vat ? \`<p style="font-size:12px;color:#94a3b8;margin:4px 0 0">P.IVA: \${form.vat}</p>\` : ''}
+      ${form.vat ? '<p style="font-size:12px;color:#94a3b8;margin:4px 0 0">P.IVA: ' + form.vat + '</p>' : ''}
     </div>
     <p style="font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#94a3b8;margin:0 0 10px">🛍️ Prodotti</p>
     <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:20px">
-      ${items.map((i: any) => \`
-      <tr>
-        <td style="padding:10px 0;border-bottom:1px solid #f1f5f9;font-size:14px;color:#1e293b;font-weight:500">\${i.product.name}</td>
-        <td style="padding:10px 0;border-bottom:1px solid #f1f5f9;font-size:14px;font-weight:700;text-align:right">€\${i.product.price}</td>
-      </tr>\`).join('')}
+      ${items.map((i: any) => '<tr><td style="padding:10px 0;border-bottom:1px solid #f1f5f9;font-size:14px;color:#1e293b;font-weight:500">' + i.product.name + '</td><td style="padding:10px 0;border-bottom:1px solid #f1f5f9;font-size:14px;font-weight:700;text-align:right">€' + i.product.price + '</td></tr>').join('')}
       <tr>
         <td style="padding:14px 0 0;font-size:14px;font-weight:700;color:#0f172a">Totale</td>
         <td style="padding:14px 0 0;font-size:22px;font-weight:800;color:#4dd9c0;text-align:right">€${total}</td>
