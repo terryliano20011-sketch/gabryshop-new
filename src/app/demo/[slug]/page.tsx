@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation'
 
 const DEMOS: Record<string, {
   name: string; icon: string; color: string;
+  categorySlug: string;
   headline: string; sub: string;
   mockup: { type: string; content: any };
   features: string[];
