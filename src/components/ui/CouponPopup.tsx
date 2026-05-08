@@ -36,7 +36,7 @@ export default function CouponPopup() {
     <div style={{
       position: 'fixed', inset: 0, zIndex: 99990,
       background: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(6px)',
-      display: 'flex', alignItems: 'flex-end', justifyContent: 'center',
+      display: 'flex', alignItems: 'center', justifyContent: 'center',
       padding: '24px', animation: 'fadeIn 0.3s ease'
     }} onClick={close}>
       <div onClick={e => e.stopPropagation()} style={{
@@ -48,7 +48,7 @@ export default function CouponPopup() {
         width: '100%',
         position: 'relative',
         boxShadow: '0 24px 80px rgba(0,0,0,0.6)',
-        animation: 'slideUp 0.4s cubic-bezier(0.16,1,0.3,1)'
+        animation: 'slideIn 0.4s cubic-bezier(0.16,1,0.3,1)'
       }}>
 
         {/* Close */}
@@ -144,7 +144,7 @@ export default function CouponPopup() {
 
       <style>{`
         @keyframes fadeIn { from{opacity:0} to{opacity:1} }
-        @keyframes slideUp { from{transform:translateY(40px);opacity:0} to{transform:translateY(0);opacity:1} }
+        @keyframes slideIn { from{transform:translateY(-20px) scale(0.97);opacity:0} to{transform:translateY(0) scale(1);opacity:1} }
       `}</style>
     </div>
   )
