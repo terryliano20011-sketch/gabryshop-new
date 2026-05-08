@@ -71,25 +71,15 @@ export async function POST(req: NextRequest) {
         <td style="padding:14px 0 0;font-size:22px;font-weight:800;color:#4dd9c0;text-align:right">€${total}</td>
       </tr>
     </table>
-    ${items.some((i: any) => i.briefing && Object.keys(i.briefing).length > 0) ? \`
-    <div style="background:#f8fafc;border-left:3px solid #4dd9c0;border-radius:0 10px 10px 0;padding:16px 20px;margin-bottom:24px">
-      <p style="font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#94a3b8;margin:0 0 12px">✏️ Briefing</p>
-      \${items.filter((i: any) => i.briefing && Object.keys(i.briefing).length > 0).map((i: any) => \`
-        <p style="font-size:13px;font-weight:700;color:#0f172a;margin:0 0 8px">\${i.product.name}</p>
-        \${Object.entries(i.briefing).map(([k,v]) => \`<div style="margin-bottom:4px"><span style="font-size:11px;color:#94a3b8;min-width:120px;display:inline-block;text-transform:capitalize">\${String(k).replace(/_/g,' ')}</span><span style="font-size:12px;color:#334155;font-weight:500">\${v}</span></div>\`).join('')}
-      \`).join('')}
-    </div>\` : ''}
-    <div style="text-align:center">
-      <a href="mailto:${form.email}" style="display:inline-block;padding:13px 28px;background:#4dd9c0;color:#0d1f2d;border-radius:100px;text-decoration:none;font-weight:700;font-size:14px">📧 Rispondi al cliente</a>
-    </div>
-  </td></tr>
-  <tr><td style="background:#0d1f2d;border-radius:0 0 16px 16px;padding:16px;text-align:center">
-    <p style="color:rgba(255,255,255,0.3);font-size:11px;margin:0">GABRYSHOP · gabryshop7@gmail.com</p>
-  </td></tr>
-</table>
-</td></tr>
-</table>
-</body></html>`
+    ${(() => {
+      const briefingItems = items.filter((i: any) => i.briefing && Object.keys(i.briefing).length > 0)
+      if (briefingItems.length === 0) return ''
+      const rows = briefingItems.map((i: any) => {
+        const fields = Object.entries(i.briefing).map(([k,v]) => '<div style="margin-bottom:4px"><span style="font-size:11px;color:#94a3b8;min-width:120px;display:inline-block;text-transform:capitalize">' + String(k).replace(/_/g,' ') + '</span><span style="font-size:12px;color:#334155;font-weight:500">' + String(v) + '</span></div>').join('')
+        return '<p style="font-size:13px;font-weight:700;color:#0f172a;margin:0 0 8px">' + i.product.name + '</p>' + fields
+      }).join('')
+      return '<div style="background:#f8fafc;border-left:3px solid #4dd9c0;border-radius:0 10px 10px 0;padding:16px 20px;margin-bottom:24px"><p style="font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#94a3b8;margin:0 0 12px">✏️ Briefing compilato</p>' + rows + '</div>'
+    })()}
     })
 
     if (error) console.error('Resend error:', error)
