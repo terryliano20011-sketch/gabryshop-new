@@ -5,7 +5,7 @@ export async function GET(req: NextRequest) {
   // Verifica auth
   const cookieStore = await cookies()
   const auth = cookieStore.get('admin_auth')
-  if (auth?.value !== 'gabry07_authenticated') {
+  if (auth?.value !== 'gbr_auth_2026_xK9mP') {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 

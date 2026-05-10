@@ -15,6 +15,7 @@ export default function CheckoutPage() {
   const [payMethod, setPayMethod] = useState<'paypal'|'card'|'cash'>('cash')
   const [loading, setLoading]   = useState(false)
   const [acceptedTerms, setAcceptedTerms] = useState(false)
+  const [honeypot, setHoneypot] = useState('')
   const [payInPerson, setPayInPerson] = useState(false)
   const final = Math.max(0, total - discount)
 

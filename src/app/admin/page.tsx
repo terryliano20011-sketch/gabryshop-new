@@ -7,7 +7,7 @@ export const dynamic = 'force-dynamic'
 export default async function AdminPage() {
   const cookieStore = await cookies()
   const auth = cookieStore.get('admin_auth')
-  if (auth?.value !== 'gabry07_authenticated') {
+  if (auth?.value !== 'gbr_auth_2026_xK9mP') {
     redirect('/admin/login')
   }
   return <AdminClient />

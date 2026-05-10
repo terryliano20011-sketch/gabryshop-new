@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { checkOrderRateLimit } from '@/lib/rateLimit'
 import { createClient } from '@supabase/supabase-js'
 import { Resend } from 'resend'
 
@@ -77,8 +78,29 @@ function buildEmailHtml(form: any, items: any[], total: number) {
 }
 
 export async function POST(req: NextRequest) {
+  // Rate limiting per IP
+  const ip = req.headers.get('x-forwarded-for')?.split(',')[0] || 'unknown'
+  if (!checkOrderRateLimit(ip)) {
+    return NextResponse.json({ error: 'Troppi ordini. Riprova tra un ora.' }, { status: 429 })
+  }
+
   try {
     const { items, form, total } = await req.json()
+
+    // Validazione input
+    if (!form?.name || form.name.length < 2 || form.name.length > 100) {
+      return NextResponse.json({ error: 'Nome non valido.' }, { status: 400 })
+    }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!form?.email || !emailRegex.test(form.email)) {
+      return NextResponse.json({ error: 'Email non valida.' }, { status: 400 })
+    }
+    if (!items || !Array.isArray(items) || items.length === 0) {
+      return NextResponse.json({ error: 'Carrello vuoto.' }, { status: 400 })
+    }
+    if (!total || total <= 0 || total > 500) {
+      return NextResponse.json({ error: 'Totale non valido.' }, { status: 400 })
+    }
 
     // 1. Salva su Supabase
     let orderId = 'CASH-' + Date.now()
